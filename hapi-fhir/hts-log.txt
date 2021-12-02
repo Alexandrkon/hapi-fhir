@@ -1,0 +1,27 @@
+HTTrack3.49-2+htsswf+htsjava launched on Thu, 02 Dec 2021 02:58:52 at https://hapifhir.io/hapi-fhir/docs/ +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar
+(winhttrack -qwC2%Ps2u1%s%uN0%I0p3DaK0H0%kf2A25000%f#f -F "Mozilla/4.5 (compatible; HTTrack 3.0x; Windows 98)" -%F "<!-- Mirrored from %s%s by HTTrack Website Copier/3.x [XR&CO'2014], %s -->" -%l "en, *" https://hapifhir.io/hapi-fhir/docs/ -O1 "C:\My Web Sites\hapi-fhir" +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+03:00:45	Error: 	"Not Found" (404) at link https://hapifhir.io/images/icons/link-grey.png (from https://hapifhir.io/hapi-fhir/docs/)
+03:00:45	Error: 	"Not Found" (404) at link https://hapifhir.io/images/icons/smiley-grey.png (from https://hapifhir.io/hapi-fhir/docs/)
+03:01:04	Warning: 	Warning: store application/octet-stream without scan: C:/My Web Sites/hapi-fhir/hapifhir.io/hapi-fhir/docs/images/hapi_authorizationinterceptor_read_normal.svg
+03:01:04	Warning: 	Warning: store application/octet-stream without scan: C:/My Web Sites/hapi-fhir/hapifhir.io/hapi-fhir/docs/images/hapi_authorizationinterceptor_write_normal.svg
+03:01:23	Warning: 	Link https://github.com/hapifhir/hapi-fhir/blob/1a1243db3473267076124f084916f1e85219372d/hapi-fhir-base/src/main/resources/ca/uhn/fhir/narrative/hapi-narrative.css not scanned (follow robots meta tag)
+03:01:23	Error: 	"Not Found" (404) at link https://github.com/hapifhir/hapi-fhir/blob/{{ urlEncodedRefName }}/hapi-fhir-base/src/main/resources/ca/uhn/fhir/narrative/hapi-narrative.css (from https://github.com/hapifhir/hapi-fhir/blob/master/hapi-fhir-base/src/main/resources/ca/uhn/fhir/narrative/hapi-narrative.css)
+03:01:36	Error: 	"Not Found" (404) at link https://github.com/hapifhir/hapi-fhir/blob/master/hapi-fhir-base/src/main/resources/ca/uhn/fhir/narrative/{{ revealButtonHref }} (from https://github.com/hapifhir/hapi-fhir/blob/master/hapi-fhir-base/src/main/resources/ca/uhn/fhir/narrative/hapi-narrative.css)
+03:01:36	Error: 	"Not Found" (404) at link https://github.com/hapifhir/hapi-fhir/blob/master/hapi-fhir-base/src/main/resources/ca/uhn/fhir/narrative/hapi-fhir-base/src/main/resources/ca/uhn/fhir/narrative/hapi-narrative.css (from https://github.com/hapifhir/hapi-fhir/blob/master/hapi-fhir-base/src/main/resources/ca/uhn/fhir/narrative/hapi-narrative.css)
+03:01:36	Warning: 	Link https://github.com/hapifhir/hapi-fhir/blame/1a1243db3473267076124f084916f1e85219372d/hapi-fhir-base/src/main/resources/ca/uhn/fhir/narrative/hapi-narrative.css not scanned (follow robots meta tag)
+03:01:52	Warning: 	Link https://github.com/hapifhir/hapi-fhir/blame/0b93dcc491b6c4d54ee16753a4c2de8b53f4ecc9/hapi-fhir-base/src/main/resources/ca/uhn/fhir/narrative/narrative.css not scanned (follow robots meta tag)
+03:01:52	Warning: 	Link https://github.com/hapifhir/hapi-fhir/blame/1b7b141396d540957d1806719d403181da741828/hapi-fhir-base/src/main/resources/ca/uhn/fhir/narrative/hapi-narrative.css not scanned (follow robots meta tag)
+03:01:53	Error: 	"Not Found" (404) at link https://github.com/email_validity_checks (from https://github.com/signup?return_to=https%3A%2F%2Fgithub.com%2Fhapifhir%2Fhapi-fhir%2Fblob%2Fmaster%2Fhapi-fhir-base%2Fsrc%2Fmain%2Fresources%2Fca%2Fuhn%2Ffhir%2Fnarrative%2Fhapi-narrative.css&source=login)
+03:01:53	Error: 	"Not Found" (404) at link https://github.com/password_validity_checks (from https://github.com/signup?return_to=https%3A%2F%2Fgithub.com%2Fhapifhir%2Fhapi-fhir%2Fblob%2Fmaster%2Fhapi-fhir-base%2Fsrc%2Fmain%2Fresources%2Fca%2Fuhn%2Ffhir%2Fnarrative%2Fhapi-narrative.css&source=login)
+03:01:53	Error: 	"Not Found" (404) at link https://github.com/signup_check/username (from https://github.com/signup?return_to=https%3A%2F%2Fgithub.com%2Fhapifhir%2Fhapi-fhir%2Fblob%2Fmaster%2Fhapi-fhir-base%2Fsrc%2Fmain%2Fresources%2Fca%2Fuhn%2Ffhir%2Fnarrative%2Fhapi-narrative.css&source=login)
+03:01:54	Warning: 	Link https://github.com/hapifhir/hapi-fhir/blob/28ebda71e18c788408dfa9276f3d3a28e93a9475/hapi-fhir-base/src/main/resources/ca/uhn/fhir/narrative/hapi-narrative.css not scanned (follow robots meta tag)
+03:01:54	Warning: 	Link https://github.com/hapifhir/hapi-fhir/blob/0484c6509ff616ee3858c767d0a9cf1f274cc57b/hapi-fhir-base/src/main/resources/ca/uhn/fhir/narrative/hapi-narrative.css not scanned (follow robots meta tag)
+
+HTTrack Website Copier/3.49-2 mirror complete in 3 minutes 3 seconds : 239 links scanned, 229 files written (15187581 bytes overall) [6548508 bytes received at 35784 bytes/sec], 13549653 bytes transferred using HTTP compression in 186 files, ratio 23%, 4.4 requests per connection
+(8 errors, 8 warnings, 0 messages)

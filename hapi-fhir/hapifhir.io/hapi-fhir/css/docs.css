@@ -1,0 +1,151 @@
+
+.active-side {
+    border-left: 2px solid #ED3E1E;
+    padding-left: 4px;
+}
+
+DIV#leftTocView {
+    margin-top: 1rem;
+}
+
+DIV#leftTocView H3 {
+    font-size: 1.0em;
+    color: #ED3E1E;
+    text-transform: uppercase;
+    font-weight: bold;}
+
+.primaryColumn {
+    height: calc(100vh - 53px);
+}
+
+.index-sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.index-sidebar ul li.active-side a {
+    color: #333;
+    font-weight: normal;
+}
+
+.index-sidebar ul li a {
+    font-size: 1.0em;
+    font-weight: lighter;
+    letter-spacing: 0.01rem;
+    color: #333;
+}
+
+.index-sidebar ul li a:HOVER {
+    text-decoration-color: #ED3E1E;
+}
+
+#button-ftsearch-clear {
+    color: #888;
+    border-color: #888;
+}
+
+#button-ftsearch-clear:HOVER {
+    color: #FFF;
+    background-color: #888;
+}
+
+.helpSectionLink {
+    top: -43px;
+}
+
+.noPageNav#tocscroll {
+    padding-right: 0px !important;
+}
+.noPageNav#pageNav {
+    display: none;
+}
+
+.helpHeaderSectionNumberBadge {
+    padding-right: 0.5em;
+}
+
+.docs-content > SECTION {
+    box-shadow: 0 2px 6px 0 rgba(176, 176, 176, 0.5);
+    border-radius: 4px;
+}
+
+.docs-content H1 {
+
+    font-family: InterUI;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.45;
+    letter-spacing: -0.4px;
+    color: #ed3e1e !important;
+    font-size: 1.8em !important;
+
+
+    /*font-family: AmaticSC;*/
+    /*letter-spacing: 0.4px;*/
+    /*font-size: 2.2em !important;*/
+}
+
+.docs-content .helpHeaderSectionNumberBadge {
+    color: #ed3e1e !important;
+}
+
+.modules-table {
+    width: 100%;
+}
+
+.modules-table TD, .modules-table TH {
+    padding: .75rem;
+    vertical-align: top;
+}
+
+.modules-section-row {
+    text-align: left;
+    font-size: 1.2em;
+    padding: 3px;
+    font-family: InterUI, sans-serif;
+    font-weight: bold;
+    color: #ed3e1e;
+    border-bottom: 0.3px solid #979797;
+}
+
+footer.page-footer ul.list-unstyled li a {
+    line-height: normal;
+}
+
+footer.page-footer ul.list-unstyled li {
+    margin-bottom: 10px;
+}
+
+#toc A.active {
+    font-weight: bold;
+    border-left: #ed3e1e 1px solid;
+    color: #ed3e1e !important;
+}
+
+#toc A {
+    border-left: rgba(42, 42, 42, 0.18) 1px solid;
+    color: rgba(42, 42, 42, 0.18);
+    border-radius: 0px;
+}
+
+.versions-table td, .versions-table th {
+    border: none;
+}
+
+.versions-table tbody tr:nth-of-type(2n+1) {
+    background-color: rgba(0, 0, 0, .03);
+}
+
+.versions-table-cell-empty {
+}
+
+.versions-table-cell-draft {
+    background-color: #7ed32144;
+}
+
+.versions-table-cell-release {
+    background-color: #f8e71c44;
+}
+
+

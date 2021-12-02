@@ -1,0 +1,1958 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from hapifhir.io/hapi-fhir/docs/server_jpa/schema.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 02 Dec 2021 00:00:30 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+	<title>Database Schema - HAPI FHIR Documentation</title>
+
+	
+
+	<!-- required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- objectgraph -->
+	
+
+	<!-- Favicon -->
+	<link rel="icon" href="https://smilecdr.com/favicon.ico">
+
+	<!-- font, icons -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+	<!-- jquery, bootstrap script for dropdown and hover-->
+	<script src="../../resources/jquery/dist/jquery.min.js"></script>
+	<script src="../../resources/popper.js/dist/umd/popper.min.js"></script>
+	<script src="../../resources/bootstrap/dist/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="../../resources/bootstrap/dist/css/bootstrap.min.css"/>
+
+	<!-- fontawesome -->
+	<script src="../../resources/font-awesome/js/all.min.js" data-auto-replace-svg="nest"></script>
+	<link rel="stylesheet" media="screen" href="../../resources/font-awesome/css/fontawesome.min.css" />
+
+	<!-- Clipboard.js -->
+	<script src="../../resources/clipboard.js/clipboard.min.js"></script>
+
+	
+	<script src="../../resources/prismjs/prism.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-bash.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-http.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-java.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-javascript.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-json.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-nginx.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-properties.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-sql.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/plugins/toolbar/prism-toolbar.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/plugins/command-line/prism-command-line.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/plugins/line-numbers/prism-line-numbers.js" type="text/javascript"></script>
+	<link href="../../resources/prismjs/themes/prism.css" rel="stylesheet" type="text/css"/>
+	<link href="../../resources/prismjs/themes/prism-coy.css" rel="stylesheet" type="text/css"/>
+	<link href="../../resources/prismjs/plugins/toolbar/prism-toolbar.css" rel="stylesheet" type="text/css"/>
+	<link href="../../resources/prismjs/plugins/line-numbers/prism-line-numbers.css" rel="stylesheet" type="text/css"/>
+
+	<link rel="stylesheet" type="text/css" href="../../css/hapifhir.css">
+
+
+
+
+	<!-- css sheet -->
+	<link href="../../resources/cdr-web-resources/css/help-common.css" rel="stylesheet" type="text/css"/>
+	<link href="../../css/pages.css" rel="stylesheet" type="text/css"/>
+	<link href="../../css/docs.css" rel="stylesheet" type="text/css"/>
+
+</head>
+
+<body>
+
+	
+	<header class="header" id="header">
+		<nav class="navbar fixed-top navbar-expand-sm navbar-light navbar-greyshadow">
+			<a class="navbar-brand text-center" href="https://hapifhir.io/hapi-fhir/" title="Home">
+				
+				<img src="../../images/logos/small-logo.png" alt="HAPI FHIR logo" width="156" id="collapsed-logo">
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<script type="application/javascript">
+				$(function(){
+					$(".dropdown").hover(
+						function() {
+							if ($( window ).width() >= 960) {
+								$('.dropdown-menu', this).stop(true, true).fadeIn("fast");
+								$(this).toggleClass('open');
+								$('b', this).toggleClass("caret caret-up");
+							} else {
+								$('.dropdown-menu', this).css("display", "");
+							}
+						},
+						function() {
+							if ($( window ).width() >= 960) {
+								$('.dropdown-menu', this).stop(true, true).fadeOut("fast");
+								$(this).toggleClass('open');
+								$('b', this).toggleClass("caret caret-up");
+							}
+						});
+				});
+			</script>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="nav navbar-nav ml-auto nav-text">
+					<li class="nav-item"><a class="nav-link" href="https://smilecdr.com/">Support</a></li>
+					<li class="nav-item"><a class="nav-link" target="_blank" href="https://github.com/jamesagnew/hapi-fhir">Github</a></li>
+					<li class="nav-item"><a class="nav-link" href="https://hapifhir.io/hapi-fhir/blog/">News</a></li>
+					<li class="nav-item"><a class="nav-link" href="../index.html">Documentation</a></li>
+					<li class="nav-item dropdown">
+						<a class="nav-link nav-link-dropdown" data-toggle="dropdown" id="navbarGETHELP" href="#">Get Help <i class="nav-chevron fas fa-chevron-down"></i></a>
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarGETHELP" id="navbarGETHELPDIV">
+							<a href="https://github.com/jamesagnew/hapi-fhir/wiki/Getting-Help" class="dropdown-item">Getting Help (read this first!)</a>
+							<a href="https://groups.google.com/d/forum/hapi-fhir" class="dropdown-item">Google Group (ask questions)</a>
+							<a href="https://github.com/jamesagnew/hapi-fhir/issues" class="dropdown-item">Issue Tracker (report bugs/request features)</a>
+							<a href="https://chat.fhir.org/" class="dropdown-item">chat.fhir.org (live chat with FHIR implementers)</a>
+							<a href="../appendix/faq.html" class="dropdown-item">Frequently Asked Questions (FAQ)</a>
+						</div>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link nav-link-dropdown" data-toggle="dropdown" id="navbarTESTSERVERS" href="#">Test Server <i class="nav-chevron fas fa-chevron-down"></i></a>
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarTESTSERVERS" id="navbarTESTSERVERSDIV">
+							<a href="http://hapi.fhir.org/" class="dropdown-item">HAPI FHIR Public Test Server</a>
+						</div>
+					</li>
+
+				</ul>
+			</div>
+		</nav>
+	</header>
+
+	
+	<script>
+		var scrollAfter = 10;
+	</script>
+
+	
+
+
+
+	<!-- "Scroll up the the search box" button -->
+	<button class="btn btn-secondary hide-sm-and-below button-scroll-up-to-search"
+			  onclick="$('#navcolumn').scrollTop(0); $('#button-ftsearch').focus();">
+		Search&nbsp;<i class="fa fa-search"></i>
+	</button>
+
+	<!-- Right column with the in-page TOC (not visible on mobile) -->
+	<div class="rightNavContainer hide-sm-and-below" id="pageNav">
+		<nav id="toc"></nav>
+	</div>
+
+	<div class="container-fluid grid">
+		<div class="row">
+			
+			<div class="hide-sm-and-below col-md-3 primaryColumn" id="navcolumn">
+				<div>
+					<div class="index-sidebar" id="side-nav">
+
+						<!-- Fullltext Search box -->
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Search" aria-label="Search"
+									 aria-describedby="button-ftsearch-clear" style="margin-top: 0px;" id="button-ftsearch">
+							<div class="input-group-append">
+								<button class="btn btn-outline-info" type="button" id="button-ftsearch-clear"
+										  onclick="javascript: $('#button-ftsearch').val(''); delayFunction(updateSearchFunction, 500);">
+									<i class="fa fa-times-circle"></i>
+								</button>
+							</div>
+							<script type="application/javascript">
+								var delayFunction = (function () {
+									var timer = 0;
+									return function (callback, ms) {
+										if (!$('#button-ftsearch').val()) {
+											$('#leftTocSearchResults').hide();
+											$('#leftTocView').show();
+										} else {
+											$('#leftTocView').hide();
+											$('#leftTocSearchResults').show();
+											$('#leftTocSearchResults').empty();
+											$('#leftTocSearchResults').append($('<i class="fa fa-spinner fa-spin" style="margin-top: 20px; font-size:24px;"></i>'));
+										}
+										clearTimeout(timer);
+										timer = setTimeout(callback, ms);
+									};
+								})();
+
+								function updateSearchFunction() {
+									if (!$('#button-ftsearch').val()) {
+										$('#leftTocSearchResults').hide();
+										$('#leftTocView').show();
+									} else {
+										$('#leftTocView').hide();
+										$('#leftTocSearchResults').show();
+										$.get("/hapi-fhir/docsearch", {
+											term: $('#button-ftsearch').val()
+										}, function (data) {
+											$('#leftTocSearchResults').empty();
+
+											let leftTocUl = null;
+											let leftTocHeader = null;
+											for (var idx = 0; idx < data.length; idx++) {
+												if (leftTocHeader == null || leftTocHeader.text() !== data[idx].sectionTitle) {
+													leftTocHeader = $('<h3>');
+													leftTocHeader.text(data[idx].sectionTitle);
+													$('#leftTocSearchResults').append(leftTocHeader);
+													leftTocUl = $('<ul>');
+													$('#leftTocSearchResults').append(leftTocUl);
+												}
+												let nextLink = $('<a>', {
+													href: "/hapi-fhir/docs/" + data[idx].page + ".html"
+												});
+												nextLink.text(data[idx].title);
+
+												let nextLinkLi = $('<li>').append(nextLink);
+												leftTocUl.append(nextLinkLi);
+											}
+										}, 'json');
+									}
+								}
+
+								$('#button-ftsearch').keyup(function () {
+									delayFunction(updateSearchFunction, 500);
+								});
+
+								// Clear the search box if the page is reloaded
+								$(function () {
+									$('#button-ftsearch').val('');
+								});
+
+							</script>
+						</div>
+
+						<div id="leftTocView">
+							
+								<h3>
+									Welcome to HAPI FHIR
+								</h3>
+								<ul>
+									<li>
+										<a href="../introduction/table_of_contents.html">
+											<span class="pull-left">Table of Contents</span>
+											<span class="pull-right">1.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog.html">
+											<span class="pull-left">Changelog: 2021</span>
+											<span class="pull-right">1.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog_2020.html">
+											<span class="pull-left">Changelog: 2020</span>
+											<span class="pull-right">1.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog_2019.html">
+											<span class="pull-left">Changelog: 2019</span>
+											<span class="pull-right">1.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog_2018.html">
+											<span class="pull-left">Changelog: 2018</span>
+											<span class="pull-right">1.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog_2017.html">
+											<span class="pull-left">Changelog: 2017</span>
+											<span class="pull-right">1.5</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog_2016.html">
+											<span class="pull-left">Changelog: 2016</span>
+											<span class="pull-right">1.6</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog_2015.html">
+											<span class="pull-left">Changelog: 2015</span>
+											<span class="pull-right">1.7</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog_2014.html">
+											<span class="pull-left">Changelog: 2014</span>
+											<span class="pull-right">1.8</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Getting Started
+								</h3>
+								<ul>
+									<li>
+										<a href="../getting_started/introduction.html">
+											<span class="pull-left">Introduction</span>
+											<span class="pull-right">2.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../getting_started/versions.html">
+											<span class="pull-left">FHIR and HAPI FHIR Versions</span>
+											<span class="pull-right">2.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../getting_started/modules.html">
+											<span class="pull-left">HAPI FHIR Modules</span>
+											<span class="pull-right">2.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../getting_started/downloading_and_importing.html">
+											<span class="pull-left">Downloading and Importing</span>
+											<span class="pull-right">2.3</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Working With The FHIR Model
+								</h3>
+								<ul>
+									<li>
+										<a href="../model/working_with_resources.html">
+											<span class="pull-left">Working With Resources</span>
+											<span class="pull-right">3.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../model/parsers.html">
+											<span class="pull-left">Parsing and Serializing</span>
+											<span class="pull-right">3.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../model/references.html">
+											<span class="pull-left">Resource References</span>
+											<span class="pull-right">3.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../model/profiles_and_extensions.html">
+											<span class="pull-left">Profiles and Extensions</span>
+											<span class="pull-right">3.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../model/converter.html">
+											<span class="pull-left">Version Converters</span>
+											<span class="pull-right">3.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../model/custom_structures.html">
+											<span class="pull-left">Custom Structures</span>
+											<span class="pull-right">3.5</span>
+										</a>
+									</li>
+									<li>
+										<a href="../model/narrative_generation.html">
+											<span class="pull-left">Narrative Generation</span>
+											<span class="pull-right">3.6</span>
+										</a>
+									</li>
+									<li>
+										<a href="../model/bundle_builder.html">
+											<span class="pull-left">Bundle Builder</span>
+											<span class="pull-right">3.7</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Client
+								</h3>
+								<ul>
+									<li>
+										<a href="../client/introduction.html">
+											<span class="pull-left">Introduction</span>
+											<span class="pull-right">4.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../client/get_started.html">
+											<span class="pull-left">Get Started ⚡</span>
+											<span class="pull-right">4.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../client/generic_client.html">
+											<span class="pull-left">Generic (Fluent) Client</span>
+											<span class="pull-right">4.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../client/annotation_client.html">
+											<span class="pull-left">Annotation Client</span>
+											<span class="pull-right">4.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../client/client_configuration.html">
+											<span class="pull-left">Client Configuration</span>
+											<span class="pull-right">4.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../client/examples.html">
+											<span class="pull-left">Client Examples</span>
+											<span class="pull-right">4.5</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Plain Server
+								</h3>
+								<ul>
+									<li>
+										<a href="../server_plain/server_types.html">
+											<span class="pull-left">REST Server Types</span>
+											<span class="pull-right">5.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/introduction.html">
+											<span class="pull-left">Plain Server Introduction</span>
+											<span class="pull-right">5.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/get_started.html">
+											<span class="pull-left">Get Started ⚡</span>
+											<span class="pull-right">5.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/resource_providers.html">
+											<span class="pull-left">Resource Providers and Plain Providers</span>
+											<span class="pull-right">5.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/rest_operations.html">
+											<span class="pull-left">REST Operations: Overview</span>
+											<span class="pull-right">5.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/rest_operations_search.html">
+											<span class="pull-left">REST Operations: Search</span>
+											<span class="pull-right">5.5</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/rest_operations_operations.html">
+											<span class="pull-left">REST Operations: Extended Operations</span>
+											<span class="pull-right">5.6</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/paging.html">
+											<span class="pull-left">Paging Search Results</span>
+											<span class="pull-right">5.7</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/web_testpage_overlay.html">
+											<span class="pull-left">Web Testpage Overlay</span>
+											<span class="pull-right">5.8</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/multitenancy.html">
+											<span class="pull-left">Multitenancy</span>
+											<span class="pull-right">5.9</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/jax_rs.html">
+											<span class="pull-left">JAX-RS Support</span>
+											<span class="pull-right">5.10</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/customizing_the_capabilitystatement.html">
+											<span class="pull-left">Customizing the CapabilityStatement</span>
+											<span class="pull-right">5.11</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/openapi.html">
+											<span class="pull-left">OpenAPI / Swagger</span>
+											<span class="pull-right">5.12</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3 class="activechapter">
+									JPA Server
+								</h3>
+								<ul>
+									<li>
+										<a href="introduction.html">
+											<span class="pull-left">Introduction</span>
+											<span class="pull-right">6.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="get_started.html">
+											<span class="pull-left">Get Started ⚡</span>
+											<span class="pull-right">6.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="architecture.html">
+											<span class="pull-left">Architecture</span>
+											<span class="pull-right">6.2</span>
+										</a>
+									</li>
+									<li class="active-side">
+										<a href="schema.html">
+											<span class="pull-left">Database Schema</span>
+											<span class="pull-right">6.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="configuration.html">
+											<span class="pull-left">Configuration</span>
+											<span class="pull-right">6.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="search.html">
+											<span class="pull-left">Search</span>
+											<span class="pull-right">6.5</span>
+										</a>
+									</li>
+									<li>
+										<a href="performance.html">
+											<span class="pull-left">Performance</span>
+											<span class="pull-right">6.6</span>
+										</a>
+									</li>
+									<li>
+										<a href="upgrading.html">
+											<span class="pull-left">Upgrade Guide</span>
+											<span class="pull-right">6.7</span>
+										</a>
+									</li>
+									<li>
+										<a href="diff.html">
+											<span class="pull-left">Diff Operation</span>
+											<span class="pull-right">6.8</span>
+										</a>
+									</li>
+									<li>
+										<a href="lastn.html">
+											<span class="pull-left">LastN Operation</span>
+											<span class="pull-right">6.9</span>
+										</a>
+									</li>
+									<li>
+										<a href="elastic.html">
+											<span class="pull-left">Lucene/Elasticsearch Indexing</span>
+											<span class="pull-right">6.10</span>
+										</a>
+									</li>
+									<li>
+										<a href="terminology.html">
+											<span class="pull-left">Terminology</span>
+											<span class="pull-right">6.11</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									JPA Server: MDM
+								</h3>
+								<ul>
+									<li>
+										<a href="../server_jpa_mdm/mdm.html">
+											<span class="pull-left">MDM Getting Started</span>
+											<span class="pull-right">7.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_mdm/mdm_rules.html">
+											<span class="pull-left">MDM Rules</span>
+											<span class="pull-right">7.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_mdm/mdm_eid.html">
+											<span class="pull-left">MDM Enterprise Identifiers</span>
+											<span class="pull-right">7.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_mdm/mdm_operations.html">
+											<span class="pull-left">MDM Operations</span>
+											<span class="pull-right">7.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_mdm/mdm_details.html">
+											<span class="pull-left">MDM Technical Details</span>
+											<span class="pull-right">7.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_mdm/mdm_expansion.html">
+											<span class="pull-left">MDM Search Expansion</span>
+											<span class="pull-right">7.5</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									JPA Server: CQL
+								</h3>
+								<ul>
+									<li>
+										<a href="../server_jpa_cql/cql.html">
+											<span class="pull-left">CQL Getting Started</span>
+											<span class="pull-right">8.0</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									JPA Server: Partitioning and Multitenancy
+								</h3>
+								<ul>
+									<li>
+										<a href="../server_jpa_partitioning/partitioning.html">
+											<span class="pull-left">Partitioning and Multitenancy</span>
+											<span class="pull-right">9.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_partitioning/partition_interceptor_examples.html">
+											<span class="pull-left">Partition Interceptor Examples</span>
+											<span class="pull-right">9.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_partitioning/partitioning_management_operations.html">
+											<span class="pull-left">Partitioning Management Operations</span>
+											<span class="pull-right">9.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_partitioning/enabling_in_hapi_fhir.html">
+											<span class="pull-left">Enabling Partitioning in HAPI FHIR</span>
+											<span class="pull-right">9.3</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Interceptors
+								</h3>
+								<ul>
+									<li>
+										<a href="../interceptors/interceptors.html">
+											<span class="pull-left">Interceptors Overview</span>
+											<span class="pull-right">10.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../interceptors/client_interceptors.html">
+											<span class="pull-left">Client Interceptors</span>
+											<span class="pull-right">10.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../interceptors/client_pointcuts.html">
+											<span class="pull-left">Client Pointcuts</span>
+											<span class="pull-right">10.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../interceptors/built_in_client_interceptors.html">
+											<span class="pull-left">Built-In Client Interceptors</span>
+											<span class="pull-right">10.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../interceptors/server_interceptors.html">
+											<span class="pull-left">Server Interceptors</span>
+											<span class="pull-right">10.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../interceptors/server_pointcuts.html">
+											<span class="pull-left">Server Pointcuts</span>
+											<span class="pull-right">10.5</span>
+										</a>
+									</li>
+									<li>
+										<a href="../interceptors/built_in_server_interceptors.html">
+											<span class="pull-left">Built-In Server Interceptors</span>
+											<span class="pull-right">10.6</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Security
+								</h3>
+								<ul>
+									<li>
+										<a href="../security/introduction.html">
+											<span class="pull-left">Introduction</span>
+											<span class="pull-right">11.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../security/authorization_interceptor.html">
+											<span class="pull-left">Authorization Interceptor</span>
+											<span class="pull-right">11.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../security/consent_interceptor.html">
+											<span class="pull-left">Consent Interceptor</span>
+											<span class="pull-right">11.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../security/search_narrowing_interceptor.html">
+											<span class="pull-left">Search Narrowing Interceptor</span>
+											<span class="pull-right">11.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../security/cors.html">
+											<span class="pull-left">CORS</span>
+											<span class="pull-right">11.4</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Validation
+								</h3>
+								<ul>
+									<li>
+										<a href="../validation/introduction.html">
+											<span class="pull-left">Introduction</span>
+											<span class="pull-right">12.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../validation/parser_error_handler.html">
+											<span class="pull-left">Parser Error Handler</span>
+											<span class="pull-right">12.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../validation/instance_validator.html">
+											<span class="pull-left">Instance Validator</span>
+											<span class="pull-right">12.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../validation/validation_support_modules.html">
+											<span class="pull-left">Validation Support Modules</span>
+											<span class="pull-right">12.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../validation/schema_validator.html">
+											<span class="pull-left">Schema/Schematron Validator</span>
+											<span class="pull-right">12.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../validation/repository_validating_interceptor.html">
+											<span class="pull-left">Repository Validating Interceptor</span>
+											<span class="pull-right">12.5</span>
+										</a>
+									</li>
+									<li>
+										<a href="../validation/examples.html">
+											<span class="pull-left">Validation Examples</span>
+											<span class="pull-right">12.6</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Android
+								</h3>
+								<ul>
+									<li>
+										<a href="../android/client.html">
+											<span class="pull-left">Android Client</span>
+											<span class="pull-right">13.0</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Tools
+								</h3>
+								<ul>
+									<li>
+										<a href="../tools/hapi_fhir_cli.html">
+											<span class="pull-left">Command Line Interface (CLI) Tool</span>
+											<span class="pull-right">14.0</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Contributing to HAPI FHIR
+								</h3>
+								<ul>
+									<li>
+										<a href="../contributing/hacking_guide.html">
+											<span class="pull-left">Hacking Guide</span>
+											<span class="pull-right">15.0</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Appendix
+								</h3>
+								<ul>
+									<li>
+										<a href="../appendix/logging.html">
+											<span class="pull-left">Logging</span>
+											<span class="pull-right">16.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../appendix/faq.html">
+											<span class="pull-left">FAQ</span>
+											<span class="pull-right">16.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../appendix/javadocs.html">
+											<span class="pull-left">JavaDocs</span>
+											<span class="pull-right">16.2</span>
+										</a>
+									</li>
+								</ul>
+							
+						</div>
+						<div id="leftTocSearchResults">
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			
+			<div class="col-xs-12 col-md-9 primaryColumn" id="tocscroll">
+
+				<!-- Pager -->
+				<div class="hide-sm-and-below"><div class="marg-btm-20 docs-inpage-nav-container">
+	<div class="docs-inpage-nav-row">
+		<span class="docs-inpage-nav-cell">
+			<a href="architecture.html" class="btn docs-inpage-nav-link">
+				<i class="fa fa-arrow-left"></i>
+				&nbsp;&nbsp;
+				6.2
+				&nbsp;&nbsp;
+				Architecture
+			</a>
+		</span>
+		<span class="docs-inpage-nav-cell">
+
+			<div class="dropdown">
+			  <button class="btn btn-outline-info dropdown-toggle" role="button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+				  6.3
+				  &nbsp;&nbsp;
+				  Database Schema
+			  </button>
+			  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				  <li class="dropdown-header" style="text-align: center;">
+					  JPA Server
+				  </li>
+				  <li role="separator" class="divider"></li>
+				  
+					  <li>
+						  <a href="introduction.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  6.0
+							  </span>
+							  Introduction
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="get_started.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  6.1
+							  </span>
+							  Get Started ⚡
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="architecture.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  6.2
+							  </span>
+							  Architecture
+						  </a>
+					  </li>
+				  
+					  <li style="background-color: #F0F0F0;">
+						  <a href="schema.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  6.3
+							  </span>
+							  Database Schema
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="configuration.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  6.4
+							  </span>
+							  Configuration
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="search.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  6.5
+							  </span>
+							  Search
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="performance.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  6.6
+							  </span>
+							  Performance
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="upgrading.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  6.7
+							  </span>
+							  Upgrade Guide
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="diff.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  6.8
+							  </span>
+							  Diff Operation
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="lastn.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  6.9
+							  </span>
+							  LastN Operation
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="elastic.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  6.10
+							  </span>
+							  Lucene/Elasticsearch Indexing
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="terminology.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  6.11
+							  </span>
+							  Terminology
+						  </a>
+					  </li>
+				  
+			  </div>
+			</div>
+		</span>
+		<span class="docs-inpage-nav-cell">
+			<a href="configuration.html" class="btn docs-inpage-nav-link">
+				6.4
+				&nbsp;&nbsp;
+				Configuration
+				&nbsp;&nbsp;
+				<i class="fa fa-arrow-right"></i>
+			</a>
+		</span>
+	</div>
+</div>
+</div>
+
+				<div class="hide-md-and-above mobile-header-links">
+					<a href="../introduction/table_of_contents.html" class="btn btn-primary">
+						<i class="fa fa-arrow-left"></i>
+						&nbsp;&nbsp;
+						Table of Contents
+					</a>
+					<p>Database Schema</p>
+				</div>
+
+				<div class="docs-content">
+					<a name="hapi-fhir-jpa-schema"></a>
+<section id="section0"><h1 data-toc-text="HAPI FHIR JPA Schema"><span class="helpHeaderSectionNumberBadge">6.3</span>HAPI FHIR JPA Schema</h1><a href="schema.html#hapi-fhir-jpa-schema" class="helpSectionLink">&nbsp;</a>
+<p><strong>This page is a work in progress. It is not yet comprehensive.</strong></p>
+<p>It contains a description of the tables within the HAPI FHIR JPA database. Note that columns are shown using Java datatypes as opposed to SQL datatypes, because the exact SQL datatype used will vary depending on the underlying database platform. The schema creation scripts can be used to determine the underlying column types.</p>
+</section>
+
+<a name="background-persistent-ids-pids"></a>
+<section id="section1"><h1 data-toc-text="Background: Persistent IDs (PIDs)"><span class="helpHeaderSectionNumberBadge">6.3.1</span>Background: Persistent IDs (PIDs)</h1><a href="schema.html#background-persistent-ids-pids" class="helpSectionLink">&nbsp;</a>
+<p>The HAPI FHIR JPA schema relies heavily on the concept of internal persistent IDs on tables, using a Java type of Long (8-byte integer, which translates to an <em>int8</em> or <em>number(19)</em> on various database platforms).</p>
+<p>Many tables use an internal persistent ID as their primary key, allowing the flexibility for other more complex business identifiers to be changed and minimizing the amount of data consumed by foreign key relationships. These persistent ID columns are generally assigned using a dedicated database sequence on platforms which support sequences.</p>
+<p>The persistent ID column is generally called <code>PID</code> in the database schema, although there are exceptions.</p>
+<a name="HFJ_RESOURCE"/>
+</section>
+
+<a name="HFJ_RESOURCE"></a>
+<section id="section2"><h1 data-toc-text="HFJ_RESOURCE: Resource Master Table"><span class="helpHeaderSectionNumberBadge">6.3.2</span>HFJ_RESOURCE: Resource Master Table</h1><a href="schema.html#HFJ_RESOURCE" class="helpSectionLink">&nbsp;</a>
+<img src="../images/jpa_erd_resources.svg" alt="Resources" style="width: 100%; max-width: 600px;"/>
+<p>The HFJ_RESOURCE table indicates a single resource of any type in the database. For example, the resource <code>Patient/1</code> will have exactly one row in this table, representing all versions of the resource.</p>
+<a name="columns"></a>
+<h2>Columns</h2>
+<table class="table table-striped table-condensed">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Relationships</th>
+            <th>Datatype</th>
+            <th>Nullable</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>PARTITION_ID</td>
+            <td></td>
+            <td>Integer</td>
+            <td>Nullable</td>
+            <td>
+                This is the optional partition ID, if the resource is in a partition. See <a href="../server_jpa_partitioning/partitioning.html">Partitioning</a>.  
+            </td>        
+        </tr>
+        <tr>
+            <td>PARTITION_DATE</td>
+            <td></td>
+            <td>Timestamp</td>
+            <td>Nullable</td>
+            <td>
+                This is the optional partition date, if the resource is in a partition. See <a href="../server_jpa_partitioning/partitioning.html">Partitioning</a>.  
+            </td>        
+        </tr>
+        <tr>
+            <td>RES_VER</td>
+            <td></td>
+            <td>Long</td>
+            <td></td>
+            <td>
+                This is the current version ID of the resource. Will contain <code>1</code> when the resource is first
+                created, <code>2</code> the first time it is updated, etc.  
+                This column is equivalent to the <b>HFJ_RES_VER.RES_VER</b>
+                column, although it does not have a foreign-key dependency in order to allow selective expunge of versions
+                when necessary. Not to be confused with <b>RES_VERSION</b> below.   
+            </td>
+        </tr>
+        <tr>
+            <td>RES_VERSION</td>
+            <td></td>
+            <td>String</td>
+            <td></td>
+            <td>
+                This column contains the FHIR version associated with this resource, using a constant drawn
+                from <a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/ca/uhn/fhir/context/FhirVersionEnum.html">FhirVersionEnum</a>.
+                Not to be confused with <b>RES_VER</b> above.
+            </td>
+        </tr>
+        <tr>
+            <td>RES_TYPE</td>
+            <td></td>
+            <td>String</td>
+            <td></td>
+            <td>
+                Contains the resource type (e.g. <code>Patient</code>) 
+            </td>        
+        </tr>
+        <tr>
+            <td>HASH_SHA256</td>
+            <td></td>
+            <td>Long</td>
+            <td></td>
+            <td>
+                This column contains a SHA-256 hash of the current resource contents, exclusive of resource metadata.
+                This is used in order to detect NO-OP writes to the resource. 
+            </td>        
+        </tr>
+        <tr>
+            <td>RES_PUBLISHED</td>
+            <td></td>
+            <td>Timestamp</td>
+            <td></td>
+            <td>
+                Contains the date that the first version of the resource was created. 
+            </td>        
+        </tr>
+        <tr>
+            <td>RES_UPDATED</td>
+            <td></td>
+            <td>Timestamp</td>
+            <td></td>
+            <td>
+                Contains the date that the most recent version of the resource was created. 
+            </td>        
+        </tr>
+        <tr>
+            <td>RES_DELETED_AT</td>
+            <td></td>
+            <td>Timestamp</td>
+            <td>Nullable</td>
+            <td>
+                If the most recent version of the resource is a delete, this contains the timestamp at which 
+                the resource was deleted. Otherwise, contains <i>NULL</i>. 
+            </td>        
+        </tr>
+    </tbody>
+</table>
+<a name="HFJ_RES_VER"/>
+</section>
+
+<a name="HFJ_RES_VER"></a>
+<section id="section3"><h1 data-toc-text="HFJ_RES_VER: Resource Versions and Contents"><span class="helpHeaderSectionNumberBadge">6.3.3</span>HFJ_RES_VER: Resource Versions and Contents</h1><a href="schema.html#HFJ_RES_VER" class="helpSectionLink">&nbsp;</a>
+<p>The HFJ_RES_VER table contains individual versions of a resource. If the resource <code>Patient/1</code> has 3 versions, there will be 3 rows in this table.</p>
+<p>The complete raw contents of the resource is stored in the <code>RES_TEXT</code> column, using the encoding specified in the <code>RES_ENCODING</code> column.</p>
+<a name="columns-1"></a>
+<h2>Columns</h2>
+<table class="table table-striped table-condensed">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Relationships</th>
+            <th>Datatype</th>
+            <th>Nullable</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>PARTITION_ID</td>
+            <td></td>
+            <td>Integer</td>
+            <td>Nullable</td>
+            <td>
+                This is the optional partition ID, if the resource is in a partition. See <a href="../server_jpa_partitioning/partitioning.html">Partitioning</a>.  
+            </td>        
+        </tr>
+        <tr>
+            <td>PARTITION_DATE</td>
+            <td></td>
+            <td>Timestamp</td>
+            <td>Nullable</td>
+            <td>
+                This is the optional partition date, if the resource is in a partition. See <a href="../server_jpa_partitioning/partitioning.html">Partitioning</a>.  
+            </td>        
+        </tr>
+        <tr>
+            <td>PID</td>
+            <td>PK</td>
+            <td>Long</td>
+            <td></td>
+            <td>
+                This is the row persistent ID.  
+            </td>        
+        </tr>
+        <tr>
+            <td>RES_ID</td>
+            <td>FK to <a href="#HFJ_RESOURCE">HFJ_RESOURCE</a></td>
+            <td>Long</td>
+            <td></td>
+            <td>
+                This is the persistent ID of the resource being versioned.
+            </td>        
+        </tr>
+        <tr>
+            <td>RES_VER</td>
+            <td></td>
+            <td>Long</td>
+            <td></td>
+            <td>
+                Contains the specific version (starting with 1) of the resource that this row corresponds to. 
+            </td>        
+        </tr>
+        <tr>
+            <td>RES_ENCODING</td>
+            <td></td>
+            <td>String</td>
+            <td></td>
+            <td>
+                Describes the encoding of the resource being used to store this resource in <b>RES_TEXT</b>. See
+                <i>Encodings</i> below for allowable values. 
+            </td>        
+        </tr>
+        <tr>
+            <td>RES_TEXT</td>
+            <td></td>
+            <td>byte[]</td>
+            <td></td>
+            <td>
+                Contains the actual full text of the resource being stored. 
+            </td>        
+        </tr>
+    </tbody>
+</table>
+<a name="encodings"></a>
+<h2>Encodings</h2>
+<table class="table table-striped table-condensed">
+    <thead>
+        <tr>
+            <th>Value</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>JSONC</td>
+            <td>
+                The resource is serialized using FHIR JSON encoding, and then compressed into a byte stream using GZIP compression. 
+            </td>        
+        </tr>
+    </tbody>
+</table>     
+<a name="HFJ_FORCED_ID"/>
+</section>
+
+<a name="HFJ_FORCED_ID"></a>
+<section id="section4"><h1 data-toc-text="HFJ_FORCED_ID: Client Assigned/Visible Resource IDs"><span class="helpHeaderSectionNumberBadge">6.3.4</span>HFJ_FORCED_ID: Client Assigned/Visible Resource IDs</h1><a href="schema.html#HFJ_FORCED_ID" class="helpSectionLink">&nbsp;</a>
+<p>By default, the <strong>HFJ_RESOURCE.RES_ID</strong> column is used as the resource ID for all server-assigned IDs. For example, if a Patient resource is created in a completely empty database, it will be assigned the ID <code>Patient/1</code> by the server and RES_ID will have a value of 1.</p>
+<p>However, when client-assigned IDs are used, these may contain text values to allow a client to create an ID such as <code>Patient/ABC</code>. When a client-assigned ID is given to a resource, a row is created in the <strong>HFJ_RESOURCE</strong> table. When an <strong>HFJ_FORCED_ID</strong> row exists corresponding to the equivalent <strong>HFJ_RESOURCE</strong> row, the RES_ID value is no longer visible or usable by FHIR clients and it becomes purely an internal ID to the JPA server.</p>
+<p>If the server has been configured with a <a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-storage/undefined/ca/uhn/fhir/jpa/api/config/DaoConfig.html#setResourceServerIdStrategy(ca.uhn.fhir.jpa.api.config.DaoConfig.IdStrategyEnum)">Resource Server ID Strategy</a> of <a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-storage/undefined/ca/uhn/fhir/jpa/api/config/DaoConfig.IdStrategyEnum.html#UUID">UUID</a>, or the server has been configured with a <a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-storage/undefined/ca/uhn/fhir/jpa/api/config/DaoConfig.html#setResourceClientIdStrategy(ca.uhn.fhir.jpa.api.config.DaoConfig.ClientIdStrategyEnum)">Resource Client ID Strategy</a> of <a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-storage/undefined/ca/uhn/fhir/jpa/api/config/DaoConfig.ClientIdStrategyEnum.html#ANY">ANY</a> the server will create a Forced ID for all resources (not only resources having textual IDs).</p>
+<a name="columns-2"></a>
+<h2>Columns</h2>
+<table class="table table-striped table-condensed">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Relationships</th>
+            <th>Datatype</th>
+            <th>Nullable</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>PARTITION_ID</td>
+            <td></td>
+            <td>Integer</td>
+            <td>Nullable</td>
+            <td>
+                This is the optional partition ID, if the resource is in a partition. See <a href="../server_jpa_partitioning/partitioning.html">Partitioning</a>.  
+            </td>        
+        </tr>
+        <tr>
+            <td>PARTITION_DATE</td>
+            <td></td>
+            <td>Timestamp</td>
+            <td>Nullable</td>
+            <td>
+                This is the optional partition date, if the resource is in a partition. See <a href="../server_jpa_partitioning/partitioning.html">Partitioning</a>.  
+            </td>        
+        </tr>
+        <tr>
+            <td>PID</td>
+            <td>PK</td>
+            <td>Long</td>
+            <td></td>
+            <td>
+                This is the row persistent ID.  
+            </td>        
+        </tr>
+        <tr>
+            <td>RESOURCE_PID</td>
+            <td>FK to <a href="#HFJ_RESOURCE">HFJ_RESOURCE</a></td>
+            <td>Long</td>
+            <td></td>
+            <td>
+                This is the persistent ID of the resource being versioned.
+            </td>        
+        </tr>
+        <tr>
+            <td>FORCED_ID</td>
+            <td></td>
+            <td>String</td>
+            <td></td>
+            <td>
+                Contains the specific version (starting with 1) of the resource that this row corresponds to. 
+            </td>        
+        </tr>
+        <tr>
+            <td>RESOURCE_TYPE</td>
+            <td></td>
+            <td>String</td>
+            <td>
+                Contains the string specifying the type of the resource (Patient, Observation, etc).
+            </td>
+        </tr>
+    </tbody>
+</table>
+<a name="HFJ_RES_LINK"/>
+</section>
+
+<a name="HFJ_RES_LINK"></a>
+<section id="section5"><h1 data-toc-text="HFJ_RES_LINK: Search Links"><span class="helpHeaderSectionNumberBadge">6.3.5</span>HFJ_RES_LINK: Search Links</h1><a href="schema.html#HFJ_RES_LINK" class="helpSectionLink">&nbsp;</a>
+<img src="../images/jpa_erd_resource_links.svg" alt="Resources" style="width: 100%; max-width: 600px;"/>
+<p>When a resource is created or updated, it is indexed for searching. Any search parameters of type <a href="http://hl7.org/fhir/search.html#reference" target="_blank">Reference</a> are resolved, and one or more rows may be created in the <strong>HFJ_RES_LINK</strong> table.</p>
+<a name="columns-3"></a>
+<h2>Columns</h2>
+<table class="table table-striped table-condensed">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Relationships</th>
+            <th>Datatype</th>
+            <th>Nullable</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>PARTITION_ID</td>
+            <td></td>
+            <td>Integer</td>
+            <td>Nullable</td>
+            <td>
+                This is the optional partition ID, if the resource is in a partition. See <a href="../server_jpa_partitioning/partitioning.html">Partitioning</a>.
+                Note that the partition indicated by the <b>PARTITION_ID</b> and <b>PARTITION_DATE</b> columns refers to the partition
+                of the <i>SOURCE</i> resource, and not necessarily the <i>TARGET</i>.  
+            </td>
+        </tr>
+        <tr>
+            <td>PARTITION_DATE</td>
+            <td></td>
+            <td>Timestamp</td>
+            <td>Nullable</td>
+            <td>
+                This is the optional partition date, if the resource is in a partition. See <a href="../server_jpa_partitioning/partitioning.html">Partitioning</a>.  
+                Note that the partition indicated by the <b>PARTITION_ID</b> and <b>PARTITION_DATE</b> columns refers to the partition
+                of the <i>SOURCE</i> resource, and not necessarily the <i>TARGET</i>.  
+            </td>        
+        </tr>
+        <tr>
+            <td>PID</td>
+            <td></td>
+            <td>Long</td>
+            <td></td>
+            <td>
+                Holds the persistent ID 
+            </td>        
+        </tr>
+        <tr>
+            <td>SRC_PATH</td>
+            <td></td>
+            <td>String</td>
+            <td></td>
+            <td>
+                Contains the FHIRPath expression within the source resource containing the path to the target resource, as supplied by the SearchParameter resource that defined the link.  
+            </td>        
+        </tr>
+        <tr>
+            <td>SRC_RESOURCE_ID</td>
+            <td></td>
+            <td>Long</td>
+            <td></td>
+            <td>
+                Contains a FK reference to the resource containing the link to the target resource. 
+            </td>        
+        </tr>
+        <tr>
+            <td>TARGET_RESOURCE_ID</td>
+            <td></td>
+            <td>Long</td>
+            <td>Nullable</td>
+            <td>
+                Contains a FK reference to the resource that is the target resource. Will not be populated if the link contains
+                a reference to an external resource, or a canonical reference.
+            </td>        
+        </tr>
+        <tr>
+            <td>TARGET_RESOURCE_URL</td>
+            <td></td>
+            <td>String</td>
+            <td>Nullable</td>
+            <td>
+                If this row contains a reference to an external resource or a canonical reference, this column will contain
+                the absolute URL.  
+            </td>        
+        </tr>
+        <tr>
+            <td>SP_UPDATED</td>
+            <td></td>
+            <td>Timestamp</td>
+            <td></td>
+            <td>
+                Contains the last updated timestamp for this row.  
+            </td>        
+        </tr>
+    </tbody>
+</table>     
+<a name="search-indexes"/>
+</section>
+
+<a name="search-indexes"></a>
+<section id="section6"><h1 data-toc-text="Background: Search Indexes"><span class="helpHeaderSectionNumberBadge">6.3.6</span>Background: Search Indexes</h1><a href="schema.html#search-indexes" class="helpSectionLink">&nbsp;</a>
+<p>The HFJ_SPIDX (Search Parameter Index) tables are used to index resources for searching. When a resource is created or updated, a set of rows in these tables will be added. These are used for finding appropriate rows to return when performing FHIR searches. There are dedicated tables for supporting each of the non-reference <a href="http://hl7.org/fhir/search.html" target="_blank">FHIR Search Datatypes</a>: Date, Number, Quantity, String, Token, and URI. Note that Reference search parameters are implemented using the <a href="#HFJ_RES_LINK">HFJ_RES_LINK</a> table above.</p>
+<a name="search-hashes"/>
+<a name="search-hashes"></a>
+<h2>Search Hashes</h2>
+<p>The SPIDX tables leverage &quot;hash columns&quot;, which contain a hash of multiple columns in order to reduce index size and improve search performance. Hashes currently use the <a href="https://en.wikipedia.org/wiki/MurmurHash" target="_blank">MurmurHash3_x64_128</a> hash algorithm, keeping only the first 64 bits in order to produce a LongInt value.</p>
+<p>For example, all search index tables have columns for storing the search parameter name (<strong>SP_NAME</strong>) and resource type (<strong>RES_TYPE</strong>). An additional column which hashes these two values is provided, called <strong>HASH_IDENTITY</strong>.</p>
+<p>In some configurations, the partition ID is also factored into the hashes.</p>
+<a name="tables"></a>
+<h2>Tables</h2>
+<img src="../images/jpa_erd_search_indexes.svg" alt="Search Indexes" style="width: 100%; max-width: 900px;"/>
+<a name="columns-4"></a>
+<h2>Columns</h2>
+<p>The following columns are common to <strong>all HFJ_SPIDX_xxx tables</strong>.</p>
+<table class="table table-striped table-condensed">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Relationships</th>
+            <th>Datatype</th>
+            <th>Nullable</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>PARTITION_ID</td>
+            <td></td>
+            <td>Integer</td>
+            <td>Nullable</td>
+            <td>
+                This is the optional partition ID, if the resource is in a partition. See <a href="../server_jpa_partitioning/partitioning.html">Partitioning</a>.
+                Note that the partition indicated by the <b>PARTITION_ID</b> and <b>PARTITION_DATE</b> columns refers to the partition
+                of the <i>SOURCE</i> resource, and not necessarily the <i>TARGET</i>.  
+            </td>
+        </tr>
+        <tr>
+            <td>PARTITION_DATE</td>
+            <td></td>
+            <td>Timestamp</td>
+            <td>Nullable</td>
+            <td>
+                This is the optional partition date, if the resource is in a partition. See <a href="../server_jpa_partitioning/partitioning.html">Partitioning</a>.  
+                Note that the partition indicated by the <b>PARTITION_ID</b> and <b>PARTITION_DATE</b> columns refers to the partition
+                of the <i>SOURCE</i> resource, and not necessarily the <i>TARGET</i>.  
+            </td>        
+        </tr>
+        <tr>
+            <td>SP_ID</td>
+            <td></td>
+            <td>Long</td>
+            <td></td>
+            <td>
+                Holds the persistent ID 
+            </td>        
+        </tr>
+        <tr>
+            <td>RES_ID</td>
+            <td>FK to <a href="#HFJ_RESOURCE">HFJ_RESOURCE</a></td>
+            <td>Long</td>
+            <td></td>
+            <td>
+                Contains the PID of the resource being indexed.  
+            </td>        
+        </tr>
+        <tr>
+            <td>SP_NAME</td>
+            <td></td>
+            <td>String</td>
+            <td></td>
+            <td>
+                This is the name of the search parameter being indexed. 
+            </td>        
+        </tr>
+        <tr>
+            <td>RES_TYPE</td>
+            <td></td>
+            <td>String</td>
+            <td></td>
+            <td>
+                This is the name of the resource being indexed.
+            </td>        
+        </tr>
+        <tr>
+            <td>SP_UPDATED</td>
+            <td></td>
+            <td>Timestamp</td>
+            <td></td>
+            <td>
+                This is the time that this row was last updated.
+            </td>        
+        </tr>
+        <tr>
+            <td>SP_MISSING</td>
+            <td></td>
+            <td>boolean</td>
+            <td></td>
+            <td>
+                If this row represents a search parameter that is **not** populated at all in the resource being indexed,
+                this will be populated with the value `true`. Otherwise it will be populated with `false`.
+            </td>        
+        </tr>
+    </tbody>
+</table>
+</section>
+
+<a name="hfj-spidx-date-date-search-parameters"></a>
+<section id="section7"><h1 data-toc-text="HFJ_SPIDX_DATE: Date Search Parameters"><span class="helpHeaderSectionNumberBadge">6.3.7</span>HFJ_SPIDX_DATE: Date Search Parameters</h1><a href="schema.html#hfj-spidx-date-date-search-parameters" class="helpSectionLink">&nbsp;</a>
+<p>For any FHIR Search Parameter of type <em>date</em> that generates a database index, a row in the <em>HFJ_SPIDX_DATE</em> table will be created.</p>
+<a name="columns-5"></a>
+<h2>Columns</h2>
+<p>The following columns are common to <strong>all HFJ_SPIDX_xxx tables</strong>.</p>
+<table class="table table-striped table-condensed">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Relationships</th>
+            <th>Datatype</th>
+            <th>Nullable</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>SP_VALUE_LOW</td>
+            <td></td>
+            <td>Timestamp</td>
+            <td>Nullable</td>
+            <td>
+                This is the lower bound of the date in question. 
+                <ul>
+                    <li>For a point in time date to millisecond precision (such as an Instant with a value of <code>2020-05-26T15:00:00.000</code>) this represents the exact value.</li>
+                    <li>For an instant value with lower precision, this represents the start of the possible range denoted by the value. For example, for a value of <code>2020-05-26</code> this represents <code>2020-05-26T00:00:00.000</code>.</li>
+                    <li>For a Period with a lower (start) value present, this column contains that value.</li>
+                    <li>For a Period with no lower (start) value present, this column contains a timestamp representing the "start of time".</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>SP_VALUE_HIGH</td>
+            <td></td>
+            <td>Timestamp</td>
+            <td>Nullable</td>
+            <td>
+                This is the upper bound of the date in question. 
+                <ul>
+                    <li>For a point in time date to millisecond precision (such as an Instant with a value of <code>2020-05-26T15:00:00.000</code>) this represents the exact value.</li>
+                    <li>For an instant value with lower precision, this represents the start of the possible range denoted by the value. For example, for a value of <code>2020-05-26</code> this represents <code>2020-05-26T23:59:59.999</code>.</li>
+                    <li>For a Period with an upper (end) value present, this column contains that value.</li>
+                    <li>For a Period with no upper (end) value present, this column contains a timestamp representing the "end of time".</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>SP_VALUE_LOW_DATE_ORDINAL</td>
+            <td></td>
+            <td>Integer</td>
+            <td>Nullable</td>
+            <td>
+                This column contains the same Timestamp as <code>SP_VALUE_LOW</code>, but truncated to Date precision and formatted as an integer in the format "YYYYMMDD".
+            </td>
+        </tr>
+        <tr>
+            <td>SP_VALUE_HIGH_DATE_ORDINAL</td>
+            <td></td>
+            <td>Integer</td>
+            <td>Nullable</td>
+            <td>
+                This column contains the same Timestamp as <code>SP_VALUE_HIGH</code>, but truncated to Date precision and formatted as an integer in the format "YYYYMMDD".
+            </td>
+        </tr>
+    </tbody>
+</table>
+</section>
+
+
+				</div>
+
+				<div class="hide-sm-and-below"><div class="marg-btm-20 docs-inpage-nav-container">
+	<div class="docs-inpage-nav-row">
+		<span class="docs-inpage-nav-cell">
+			<a href="architecture.html" class="btn docs-inpage-nav-link">
+				<i class="fa fa-arrow-left"></i>
+				&nbsp;&nbsp;
+				6.2
+				&nbsp;&nbsp;
+				Architecture
+			</a>
+		</span>
+		<span class="docs-inpage-nav-cell">
+
+			<div class="dropdown">
+			  <button class="btn btn-outline-info dropdown-toggle" role="button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+				  6.3
+				  &nbsp;&nbsp;
+				  Database Schema
+			  </button>
+			  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				  <li class="dropdown-header" style="text-align: center;">
+					  JPA Server
+				  </li>
+				  <li role="separator" class="divider"></li>
+				  
+					  <li>
+						  <a href="introduction.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  6.0
+							  </span>
+							  Introduction
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="get_started.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  6.1
+							  </span>
+							  Get Started ⚡
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="architecture.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  6.2
+							  </span>
+							  Architecture
+						  </a>
+					  </li>
+				  
+					  <li style="background-color: #F0F0F0;">
+						  <a href="schema.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  6.3
+							  </span>
+							  Database Schema
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="configuration.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  6.4
+							  </span>
+							  Configuration
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="search.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  6.5
+							  </span>
+							  Search
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="performance.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  6.6
+							  </span>
+							  Performance
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="upgrading.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  6.7
+							  </span>
+							  Upgrade Guide
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="diff.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  6.8
+							  </span>
+							  Diff Operation
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="lastn.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  6.9
+							  </span>
+							  LastN Operation
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="elastic.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  6.10
+							  </span>
+							  Lucene/Elasticsearch Indexing
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="terminology.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  6.11
+							  </span>
+							  Terminology
+						  </a>
+					  </li>
+				  
+			  </div>
+			</div>
+		</span>
+		<span class="docs-inpage-nav-cell">
+			<a href="configuration.html" class="btn docs-inpage-nav-link">
+				6.4
+				&nbsp;&nbsp;
+				Configuration
+				&nbsp;&nbsp;
+				<i class="fa fa-arrow-right"></i>
+			</a>
+		</span>
+	</div>
+</div>
+</div>
+				
+
+	<!-- footer -->
+	<footer class="page-footer">
+		<div class="container-fluid text-center text-md-left">
+			<hr class="bottom-hr">
+			<div class="row pt-3 pb-3">
+				<div class="col-md-3 text-center">
+					<img src="../../images/logos/raccoon-forwards.png" alt="raccoon logo without text" width="100">
+				</div>
+				<div class="col-md-2">
+					<p class="footer-heading">HAPI HAPI</p>
+					<ul class="list-unstyled">
+						<li><a href="https://hapifhir.io/hapi-fhir/">Home</a></li>
+						<li><a href="../getting_started/downloading_and_importing.html">Download</a></li>
+						<li><a href="../introduction/changelog.html">Changelog</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/license.html">License</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/blog/">News</a></li>
+					</ul>
+					<p class="footer-heading">TEST SERVER</p>
+					<ul class="list-unstyled">
+						<li><a href="http://hapi.fhir.org/" target="_blank">Public Test Server</a></li>
+					</ul>
+					<p class="footer-heading">SUPPORT</p>
+					<ul class="list-unstyled">
+						<li><a href="https://smilecdr.com/" target="_blank">Smile CDR</a></li>
+					</ul>
+				</div>
+				<div class="col-md-2">
+					<p class="footer-heading">USING HAPI</p>
+					<ul class="list-unstyled">
+						<li><a href="../index.html">Documentation</a></li>
+						<li><a href="#">Command Line Tool (cli)</a></li>
+					</ul>
+					<p class="footer-heading">STARTER PROJECTS</p>
+					<ul class="list-unstyled">
+						<li><a href="https://github.com/FirelyTeam/fhirstarters/tree/master/java/hapi-fhirstarters-client-skeleton">Client</a></li>
+						<li><a href="https://github.com/FirelyTeam/fhirstarters/tree/master/java/hapi-fhirstarters-rest-server-skeleton">Plain Server</a></li>
+						<li><a href="https://github.com/hapifhir/hapi-fhir-jpaserver-starter">JPA Server</a></li>
+					</ul>
+				</div>
+				<div class="col-md-2">
+					<p class="footer-heading">JAVADOCS</p>
+					<ul class="list-unstyled">
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/">Core API</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-structures-dstu2/">Model API (DSTU2)</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-structures-dstu3/">Model API (DSTU3)</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-structures-r4/">Model API (R4)</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-structures-r5/">Model API (R5)</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-client/">Client API</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-server/">Plain Server - API</a></li>
+                  <li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-server-mdm/">Plain Server - MDM API</a></li>
+                  <li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-server-openapi/">Plain Server - OpenAPI</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-storage/">JPA Server - API</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-jpaserver-model/">JPA Server - Model</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-jpaserver-searchparam/">JPA Server - Search Param Support</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-jpaserver-subscription/">JPA Server - Subscription</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-jpaserver-base/">JPA Server - Base</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-validation/">Validation API</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-converter/">Version Converter API</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-jaxrsserver-base/">Server API (JAX-RS)</a></li>
+					</ul>
+				</div>
+				<div class="col-md-3">
+					<p class="footer-heading">GET HELP</p>
+					<ul class="list-unstyled">
+						<li><a href="https://github.com/jamesagnew/hapi-fhir/wiki/Getting-Help" target="_blank">How to Ask for Help (read this first!)</a></li>
+						<li><a href="https://groups.google.com/d/forum/hapi-fhir" target="_blank">Google Group (Ask Questions)</a></li>
+						<li><a href="https://github.com/jamesagnew/hapi-fhir/issues" target="_blank">Issue Tracker (Report Bugs/Request Features)</a></li>
+						<li><a href="https://chat.fhir.org/" target="_blank">FHIR.org Chat (Live Chat with FHIR Implementors)</a></li>
+						<li><a href="../appendix/faq.html">Frequently Asked Questions (FAQ)</a></li>
+					</ul>
+					<p class="footer-heading">CONTRIBUTE</p>
+					<ul class="list-unstyled">
+						<li><a href="../contributing/hacking_guide.html">Guide to Hacking HAPI</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/contributors.html">Contributors</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<!-- footer copyright -->
+		<div class="footer-copyright text-center py-3">
+			<p>Updated: 2021-11-23T14:49:28.319Z — Made with <i style="color: #FF6600;" class="fas fa-heart"></i> in <a href="https://www.cbc.ca/news/canada/toronto/raccoon-city-wildlife-in-toronto-1.2742231"><img src="https://hapifhir.io/hapi-fhir/images/icons/raccoon.svg" alt="Raccoon" width="20"></a>
+		</div>
+
+	</footer>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-1395874-5"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-1395874-5');
+	</script>
+
+
+			</div>
+
+		</div>
+
+	</div>
+
+
+<script type="application/javascript">
+
+	$(function () {
+
+		/*
+		 * Build the TOC links on the right hand side by
+		 * scanning all of the sections in the documentation
+		 */
+		const sections = [];
+		const navLinks = [];
+		var nav = $('<ul class="nav flex-column">');
+		$('#toc').append(nav);
+
+		$('#tocscroll section').each(function () {
+			sections.push($(this));
+			let sectionName = $(this).find('h1').first().attr('data-toc-text');
+			let sectionId = $(this).prevAll('a').attr('name');
+			let navLink = $('<a class="nav-link" href="#' + sectionId + '">' + sectionName + '</a>');
+			navLinks.push(navLink);
+			nav.append($('<li class="nav-item">').append(navLink));
+		});
+
+		/*
+		 * Update the active link on the right hand side TOC when the
+		 * user scrolls up and down the page. Create a function for this,
+		 * then call the function once and register it to call again
+		 * any time the user scrolls
+		 */
+		function updateTocScroll() {
+			const sectionOffset = $('#tocscroll').offset().top;
+			let visible = false;
+			for (var idx = 0; idx < sections.length; idx++) {
+				var sectionTop = sections[idx].offset().top - sectionOffset + 20;
+				if (sectionTop >= 0 && !visible || (idx == sections.length -1 && !visible)) {
+					navLinks[idx].addClass('active');
+					visible = true;
+				} else {
+					navLinks[idx].removeClass('active');
+				}
+			}
+
+		}
+
+		$('#tocscroll').scroll(updateTocScroll);
+		updateTocScroll();
+
+		/*
+	    * When the page first loads, automatically scroll the left docs TOC
+	    * scroller to the actively displayed page.
+	    */
+		var activetop = $('.activechapter').offset().top - $('#tocscroll').offset().top - 30;
+		if (activetop < 100) {
+			activetop = 0;
+		}
+		$('#navcolumn').scrollTop(activetop);
+
+		function updateNavScroll() {
+			if ($('#navcolumn').scrollTop() < 100) {
+				$('.button-scroll-up-to-search').fadeOut(500);
+			} else {
+				$('.button-scroll-up-to-search').fadeIn(500);
+			}
+		}
+
+		updateNavScroll();
+		$('#navcolumn').scroll(updateNavScroll);
+
+	});
+</script>
+
+
+
+<script type="application/javascript">
+	function hover(element) {
+		element.setAttribute('src', '../../../images/icons/link-grey.html');
+	}
+
+	function unhover(element) {
+		element.setAttribute('src', '../../../images/icons/smiley-grey.html');
+	}
+
+   new ClipboardJS('.clipboardCopyBtn');
+
+</script>
+</body>
+
+
+<!-- Mirrored from hapifhir.io/hapi-fhir/docs/server_jpa/schema.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 02 Dec 2021 00:00:31 GMT -->
+</html>
+

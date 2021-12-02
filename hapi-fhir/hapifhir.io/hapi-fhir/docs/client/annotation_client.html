@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from hapifhir.io/hapi-fhir/docs/client/annotation_client.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 02 Dec 2021 00:00:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+	<title>Annotation Client - HAPI FHIR Documentation</title>
+
+	
+
+	<!-- required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- objectgraph -->
+	
+
+	<!-- Favicon -->
+	<link rel="icon" href="https://smilecdr.com/favicon.ico">
+
+	<!-- font, icons -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+	<!-- jquery, bootstrap script for dropdown and hover-->
+	<script src="../../resources/jquery/dist/jquery.min.js"></script>
+	<script src="../../resources/popper.js/dist/umd/popper.min.js"></script>
+	<script src="../../resources/bootstrap/dist/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="../../resources/bootstrap/dist/css/bootstrap.min.css"/>
+
+	<!-- fontawesome -->
+	<script src="../../resources/font-awesome/js/all.min.js" data-auto-replace-svg="nest"></script>
+	<link rel="stylesheet" media="screen" href="../../resources/font-awesome/css/fontawesome.min.css" />
+
+	<!-- Clipboard.js -->
+	<script src="../../resources/clipboard.js/clipboard.min.js"></script>
+
+	
+	<script src="../../resources/prismjs/prism.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-bash.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-http.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-java.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-javascript.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-json.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-nginx.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-properties.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-sql.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/plugins/toolbar/prism-toolbar.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/plugins/command-line/prism-command-line.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/plugins/line-numbers/prism-line-numbers.js" type="text/javascript"></script>
+	<link href="../../resources/prismjs/themes/prism.css" rel="stylesheet" type="text/css"/>
+	<link href="../../resources/prismjs/themes/prism-coy.css" rel="stylesheet" type="text/css"/>
+	<link href="../../resources/prismjs/plugins/toolbar/prism-toolbar.css" rel="stylesheet" type="text/css"/>
+	<link href="../../resources/prismjs/plugins/line-numbers/prism-line-numbers.css" rel="stylesheet" type="text/css"/>
+
+	<link rel="stylesheet" type="text/css" href="../../css/hapifhir.css">
+
+
+
+
+	<!-- css sheet -->
+	<link href="../../resources/cdr-web-resources/css/help-common.css" rel="stylesheet" type="text/css"/>
+	<link href="../../css/pages.css" rel="stylesheet" type="text/css"/>
+	<link href="../../css/docs.css" rel="stylesheet" type="text/css"/>
+
+</head>
+
+<body>
+
+	
+	<header class="header" id="header">
+		<nav class="navbar fixed-top navbar-expand-sm navbar-light navbar-greyshadow">
+			<a class="navbar-brand text-center" href="https://hapifhir.io/hapi-fhir/" title="Home">
+				
+				<img src="../../images/logos/small-logo.png" alt="HAPI FHIR logo" width="156" id="collapsed-logo">
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<script type="application/javascript">
+				$(function(){
+					$(".dropdown").hover(
+						function() {
+							if ($( window ).width() >= 960) {
+								$('.dropdown-menu', this).stop(true, true).fadeIn("fast");
+								$(this).toggleClass('open');
+								$('b', this).toggleClass("caret caret-up");
+							} else {
+								$('.dropdown-menu', this).css("display", "");
+							}
+						},
+						function() {
+							if ($( window ).width() >= 960) {
+								$('.dropdown-menu', this).stop(true, true).fadeOut("fast");
+								$(this).toggleClass('open');
+								$('b', this).toggleClass("caret caret-up");
+							}
+						});
+				});
+			</script>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="nav navbar-nav ml-auto nav-text">
+					<li class="nav-item"><a class="nav-link" href="https://smilecdr.com/">Support</a></li>
+					<li class="nav-item"><a class="nav-link" target="_blank" href="https://github.com/jamesagnew/hapi-fhir">Github</a></li>
+					<li class="nav-item"><a class="nav-link" href="https://hapifhir.io/hapi-fhir/blog/">News</a></li>
+					<li class="nav-item"><a class="nav-link" href="../index.html">Documentation</a></li>
+					<li class="nav-item dropdown">
+						<a class="nav-link nav-link-dropdown" data-toggle="dropdown" id="navbarGETHELP" href="#">Get Help <i class="nav-chevron fas fa-chevron-down"></i></a>
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarGETHELP" id="navbarGETHELPDIV">
+							<a href="https://github.com/jamesagnew/hapi-fhir/wiki/Getting-Help" class="dropdown-item">Getting Help (read this first!)</a>
+							<a href="https://groups.google.com/d/forum/hapi-fhir" class="dropdown-item">Google Group (ask questions)</a>
+							<a href="https://github.com/jamesagnew/hapi-fhir/issues" class="dropdown-item">Issue Tracker (report bugs/request features)</a>
+							<a href="https://chat.fhir.org/" class="dropdown-item">chat.fhir.org (live chat with FHIR implementers)</a>
+							<a href="../appendix/faq.html" class="dropdown-item">Frequently Asked Questions (FAQ)</a>
+						</div>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link nav-link-dropdown" data-toggle="dropdown" id="navbarTESTSERVERS" href="#">Test Server <i class="nav-chevron fas fa-chevron-down"></i></a>
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarTESTSERVERS" id="navbarTESTSERVERSDIV">
+							<a href="http://hapi.fhir.org/" class="dropdown-item">HAPI FHIR Public Test Server</a>
+						</div>
+					</li>
+
+				</ul>
+			</div>
+		</nav>
+	</header>
+
+	
+	<script>
+		var scrollAfter = 10;
+	</script>
+
+	
+
+
+
+	<!-- "Scroll up the the search box" button -->
+	<button class="btn btn-secondary hide-sm-and-below button-scroll-up-to-search"
+			  onclick="$('#navcolumn').scrollTop(0); $('#button-ftsearch').focus();">
+		Search&nbsp;<i class="fa fa-search"></i>
+	</button>
+
+	<!-- Right column with the in-page TOC (not visible on mobile) -->
+	<div class="rightNavContainer hide-sm-and-below noPageNav" id="pageNav">
+		<nav id="toc"></nav>
+	</div>
+
+	<div class="container-fluid grid">
+		<div class="row">
+			
+			<div class="hide-sm-and-below col-md-3 primaryColumn" id="navcolumn">
+				<div>
+					<div class="index-sidebar" id="side-nav">
+
+						<!-- Fullltext Search box -->
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Search" aria-label="Search"
+									 aria-describedby="button-ftsearch-clear" style="margin-top: 0px;" id="button-ftsearch">
+							<div class="input-group-append">
+								<button class="btn btn-outline-info" type="button" id="button-ftsearch-clear"
+										  onclick="javascript: $('#button-ftsearch').val(''); delayFunction(updateSearchFunction, 500);">
+									<i class="fa fa-times-circle"></i>
+								</button>
+							</div>
+							<script type="application/javascript">
+								var delayFunction = (function () {
+									var timer = 0;
+									return function (callback, ms) {
+										if (!$('#button-ftsearch').val()) {
+											$('#leftTocSearchResults').hide();
+											$('#leftTocView').show();
+										} else {
+											$('#leftTocView').hide();
+											$('#leftTocSearchResults').show();
+											$('#leftTocSearchResults').empty();
+											$('#leftTocSearchResults').append($('<i class="fa fa-spinner fa-spin" style="margin-top: 20px; font-size:24px;"></i>'));
+										}
+										clearTimeout(timer);
+										timer = setTimeout(callback, ms);
+									};
+								})();
+
+								function updateSearchFunction() {
+									if (!$('#button-ftsearch').val()) {
+										$('#leftTocSearchResults').hide();
+										$('#leftTocView').show();
+									} else {
+										$('#leftTocView').hide();
+										$('#leftTocSearchResults').show();
+										$.get("/hapi-fhir/docsearch", {
+											term: $('#button-ftsearch').val()
+										}, function (data) {
+											$('#leftTocSearchResults').empty();
+
+											let leftTocUl = null;
+											let leftTocHeader = null;
+											for (var idx = 0; idx < data.length; idx++) {
+												if (leftTocHeader == null || leftTocHeader.text() !== data[idx].sectionTitle) {
+													leftTocHeader = $('<h3>');
+													leftTocHeader.text(data[idx].sectionTitle);
+													$('#leftTocSearchResults').append(leftTocHeader);
+													leftTocUl = $('<ul>');
+													$('#leftTocSearchResults').append(leftTocUl);
+												}
+												let nextLink = $('<a>', {
+													href: "/hapi-fhir/docs/" + data[idx].page + ".html"
+												});
+												nextLink.text(data[idx].title);
+
+												let nextLinkLi = $('<li>').append(nextLink);
+												leftTocUl.append(nextLinkLi);
+											}
+										}, 'json');
+									}
+								}
+
+								$('#button-ftsearch').keyup(function () {
+									delayFunction(updateSearchFunction, 500);
+								});
+
+								// Clear the search box if the page is reloaded
+								$(function () {
+									$('#button-ftsearch').val('');
+								});
+
+							</script>
+						</div>
+
+						<div id="leftTocView">
+							
+								<h3>
+									Welcome to HAPI FHIR
+								</h3>
+								<ul>
+									<li>
+										<a href="../introduction/table_of_contents.html">
+											<span class="pull-left">Table of Contents</span>
+											<span class="pull-right">1.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog.html">
+											<span class="pull-left">Changelog: 2021</span>
+											<span class="pull-right">1.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog_2020.html">
+											<span class="pull-left">Changelog: 2020</span>
+											<span class="pull-right">1.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog_2019.html">
+											<span class="pull-left">Changelog: 2019</span>
+											<span class="pull-right">1.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog_2018.html">
+											<span class="pull-left">Changelog: 2018</span>
+											<span class="pull-right">1.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog_2017.html">
+											<span class="pull-left">Changelog: 2017</span>
+											<span class="pull-right">1.5</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog_2016.html">
+											<span class="pull-left">Changelog: 2016</span>
+											<span class="pull-right">1.6</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog_2015.html">
+											<span class="pull-left">Changelog: 2015</span>
+											<span class="pull-right">1.7</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog_2014.html">
+											<span class="pull-left">Changelog: 2014</span>
+											<span class="pull-right">1.8</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Getting Started
+								</h3>
+								<ul>
+									<li>
+										<a href="../getting_started/introduction.html">
+											<span class="pull-left">Introduction</span>
+											<span class="pull-right">2.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../getting_started/versions.html">
+											<span class="pull-left">FHIR and HAPI FHIR Versions</span>
+											<span class="pull-right">2.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../getting_started/modules.html">
+											<span class="pull-left">HAPI FHIR Modules</span>
+											<span class="pull-right">2.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../getting_started/downloading_and_importing.html">
+											<span class="pull-left">Downloading and Importing</span>
+											<span class="pull-right">2.3</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Working With The FHIR Model
+								</h3>
+								<ul>
+									<li>
+										<a href="../model/working_with_resources.html">
+											<span class="pull-left">Working With Resources</span>
+											<span class="pull-right">3.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../model/parsers.html">
+											<span class="pull-left">Parsing and Serializing</span>
+											<span class="pull-right">3.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../model/references.html">
+											<span class="pull-left">Resource References</span>
+											<span class="pull-right">3.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../model/profiles_and_extensions.html">
+											<span class="pull-left">Profiles and Extensions</span>
+											<span class="pull-right">3.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../model/converter.html">
+											<span class="pull-left">Version Converters</span>
+											<span class="pull-right">3.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../model/custom_structures.html">
+											<span class="pull-left">Custom Structures</span>
+											<span class="pull-right">3.5</span>
+										</a>
+									</li>
+									<li>
+										<a href="../model/narrative_generation.html">
+											<span class="pull-left">Narrative Generation</span>
+											<span class="pull-right">3.6</span>
+										</a>
+									</li>
+									<li>
+										<a href="../model/bundle_builder.html">
+											<span class="pull-left">Bundle Builder</span>
+											<span class="pull-right">3.7</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3 class="activechapter">
+									Client
+								</h3>
+								<ul>
+									<li>
+										<a href="introduction.html">
+											<span class="pull-left">Introduction</span>
+											<span class="pull-right">4.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="get_started.html">
+											<span class="pull-left">Get Started ⚡</span>
+											<span class="pull-right">4.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="generic_client.html">
+											<span class="pull-left">Generic (Fluent) Client</span>
+											<span class="pull-right">4.2</span>
+										</a>
+									</li>
+									<li class="active-side">
+										<a href="annotation_client.html">
+											<span class="pull-left">Annotation Client</span>
+											<span class="pull-right">4.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="client_configuration.html">
+											<span class="pull-left">Client Configuration</span>
+											<span class="pull-right">4.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="examples.html">
+											<span class="pull-left">Client Examples</span>
+											<span class="pull-right">4.5</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Plain Server
+								</h3>
+								<ul>
+									<li>
+										<a href="../server_plain/server_types.html">
+											<span class="pull-left">REST Server Types</span>
+											<span class="pull-right">5.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/introduction.html">
+											<span class="pull-left">Plain Server Introduction</span>
+											<span class="pull-right">5.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/get_started.html">
+											<span class="pull-left">Get Started ⚡</span>
+											<span class="pull-right">5.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/resource_providers.html">
+											<span class="pull-left">Resource Providers and Plain Providers</span>
+											<span class="pull-right">5.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/rest_operations.html">
+											<span class="pull-left">REST Operations: Overview</span>
+											<span class="pull-right">5.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/rest_operations_search.html">
+											<span class="pull-left">REST Operations: Search</span>
+											<span class="pull-right">5.5</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/rest_operations_operations.html">
+											<span class="pull-left">REST Operations: Extended Operations</span>
+											<span class="pull-right">5.6</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/paging.html">
+											<span class="pull-left">Paging Search Results</span>
+											<span class="pull-right">5.7</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/web_testpage_overlay.html">
+											<span class="pull-left">Web Testpage Overlay</span>
+											<span class="pull-right">5.8</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/multitenancy.html">
+											<span class="pull-left">Multitenancy</span>
+											<span class="pull-right">5.9</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/jax_rs.html">
+											<span class="pull-left">JAX-RS Support</span>
+											<span class="pull-right">5.10</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/customizing_the_capabilitystatement.html">
+											<span class="pull-left">Customizing the CapabilityStatement</span>
+											<span class="pull-right">5.11</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/openapi.html">
+											<span class="pull-left">OpenAPI / Swagger</span>
+											<span class="pull-right">5.12</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									JPA Server
+								</h3>
+								<ul>
+									<li>
+										<a href="../server_jpa/introduction.html">
+											<span class="pull-left">Introduction</span>
+											<span class="pull-right">6.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/get_started.html">
+											<span class="pull-left">Get Started ⚡</span>
+											<span class="pull-right">6.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/architecture.html">
+											<span class="pull-left">Architecture</span>
+											<span class="pull-right">6.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/schema.html">
+											<span class="pull-left">Database Schema</span>
+											<span class="pull-right">6.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/configuration.html">
+											<span class="pull-left">Configuration</span>
+											<span class="pull-right">6.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/search.html">
+											<span class="pull-left">Search</span>
+											<span class="pull-right">6.5</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/performance.html">
+											<span class="pull-left">Performance</span>
+											<span class="pull-right">6.6</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/upgrading.html">
+											<span class="pull-left">Upgrade Guide</span>
+											<span class="pull-right">6.7</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/diff.html">
+											<span class="pull-left">Diff Operation</span>
+											<span class="pull-right">6.8</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/lastn.html">
+											<span class="pull-left">LastN Operation</span>
+											<span class="pull-right">6.9</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/elastic.html">
+											<span class="pull-left">Lucene/Elasticsearch Indexing</span>
+											<span class="pull-right">6.10</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/terminology.html">
+											<span class="pull-left">Terminology</span>
+											<span class="pull-right">6.11</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									JPA Server: MDM
+								</h3>
+								<ul>
+									<li>
+										<a href="../server_jpa_mdm/mdm.html">
+											<span class="pull-left">MDM Getting Started</span>
+											<span class="pull-right">7.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_mdm/mdm_rules.html">
+											<span class="pull-left">MDM Rules</span>
+											<span class="pull-right">7.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_mdm/mdm_eid.html">
+											<span class="pull-left">MDM Enterprise Identifiers</span>
+											<span class="pull-right">7.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_mdm/mdm_operations.html">
+											<span class="pull-left">MDM Operations</span>
+											<span class="pull-right">7.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_mdm/mdm_details.html">
+											<span class="pull-left">MDM Technical Details</span>
+											<span class="pull-right">7.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_mdm/mdm_expansion.html">
+											<span class="pull-left">MDM Search Expansion</span>
+											<span class="pull-right">7.5</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									JPA Server: CQL
+								</h3>
+								<ul>
+									<li>
+										<a href="../server_jpa_cql/cql.html">
+											<span class="pull-left">CQL Getting Started</span>
+											<span class="pull-right">8.0</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									JPA Server: Partitioning and Multitenancy
+								</h3>
+								<ul>
+									<li>
+										<a href="../server_jpa_partitioning/partitioning.html">
+											<span class="pull-left">Partitioning and Multitenancy</span>
+											<span class="pull-right">9.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_partitioning/partition_interceptor_examples.html">
+											<span class="pull-left">Partition Interceptor Examples</span>
+											<span class="pull-right">9.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_partitioning/partitioning_management_operations.html">
+											<span class="pull-left">Partitioning Management Operations</span>
+											<span class="pull-right">9.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_partitioning/enabling_in_hapi_fhir.html">
+											<span class="pull-left">Enabling Partitioning in HAPI FHIR</span>
+											<span class="pull-right">9.3</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Interceptors
+								</h3>
+								<ul>
+									<li>
+										<a href="../interceptors/interceptors.html">
+											<span class="pull-left">Interceptors Overview</span>
+											<span class="pull-right">10.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../interceptors/client_interceptors.html">
+											<span class="pull-left">Client Interceptors</span>
+											<span class="pull-right">10.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../interceptors/client_pointcuts.html">
+											<span class="pull-left">Client Pointcuts</span>
+											<span class="pull-right">10.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../interceptors/built_in_client_interceptors.html">
+											<span class="pull-left">Built-In Client Interceptors</span>
+											<span class="pull-right">10.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../interceptors/server_interceptors.html">
+											<span class="pull-left">Server Interceptors</span>
+											<span class="pull-right">10.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../interceptors/server_pointcuts.html">
+											<span class="pull-left">Server Pointcuts</span>
+											<span class="pull-right">10.5</span>
+										</a>
+									</li>
+									<li>
+										<a href="../interceptors/built_in_server_interceptors.html">
+											<span class="pull-left">Built-In Server Interceptors</span>
+											<span class="pull-right">10.6</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Security
+								</h3>
+								<ul>
+									<li>
+										<a href="../security/introduction.html">
+											<span class="pull-left">Introduction</span>
+											<span class="pull-right">11.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../security/authorization_interceptor.html">
+											<span class="pull-left">Authorization Interceptor</span>
+											<span class="pull-right">11.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../security/consent_interceptor.html">
+											<span class="pull-left">Consent Interceptor</span>
+											<span class="pull-right">11.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../security/search_narrowing_interceptor.html">
+											<span class="pull-left">Search Narrowing Interceptor</span>
+											<span class="pull-right">11.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../security/cors.html">
+											<span class="pull-left">CORS</span>
+											<span class="pull-right">11.4</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Validation
+								</h3>
+								<ul>
+									<li>
+										<a href="../validation/introduction.html">
+											<span class="pull-left">Introduction</span>
+											<span class="pull-right">12.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../validation/parser_error_handler.html">
+											<span class="pull-left">Parser Error Handler</span>
+											<span class="pull-right">12.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../validation/instance_validator.html">
+											<span class="pull-left">Instance Validator</span>
+											<span class="pull-right">12.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../validation/validation_support_modules.html">
+											<span class="pull-left">Validation Support Modules</span>
+											<span class="pull-right">12.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../validation/schema_validator.html">
+											<span class="pull-left">Schema/Schematron Validator</span>
+											<span class="pull-right">12.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../validation/repository_validating_interceptor.html">
+											<span class="pull-left">Repository Validating Interceptor</span>
+											<span class="pull-right">12.5</span>
+										</a>
+									</li>
+									<li>
+										<a href="../validation/examples.html">
+											<span class="pull-left">Validation Examples</span>
+											<span class="pull-right">12.6</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Android
+								</h3>
+								<ul>
+									<li>
+										<a href="../android/client.html">
+											<span class="pull-left">Android Client</span>
+											<span class="pull-right">13.0</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Tools
+								</h3>
+								<ul>
+									<li>
+										<a href="../tools/hapi_fhir_cli.html">
+											<span class="pull-left">Command Line Interface (CLI) Tool</span>
+											<span class="pull-right">14.0</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Contributing to HAPI FHIR
+								</h3>
+								<ul>
+									<li>
+										<a href="../contributing/hacking_guide.html">
+											<span class="pull-left">Hacking Guide</span>
+											<span class="pull-right">15.0</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Appendix
+								</h3>
+								<ul>
+									<li>
+										<a href="../appendix/logging.html">
+											<span class="pull-left">Logging</span>
+											<span class="pull-right">16.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../appendix/faq.html">
+											<span class="pull-left">FAQ</span>
+											<span class="pull-right">16.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../appendix/javadocs.html">
+											<span class="pull-left">JavaDocs</span>
+											<span class="pull-right">16.2</span>
+										</a>
+									</li>
+								</ul>
+							
+						</div>
+						<div id="leftTocSearchResults">
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			
+			<div class="col-xs-12 col-md-9 primaryColumn noPageNav" id="tocscroll">
+
+				<!-- Pager -->
+				<div class="hide-sm-and-below"><div class="marg-btm-20 docs-inpage-nav-container">
+	<div class="docs-inpage-nav-row">
+		<span class="docs-inpage-nav-cell">
+			<a href="generic_client.html" class="btn docs-inpage-nav-link">
+				<i class="fa fa-arrow-left"></i>
+				&nbsp;&nbsp;
+				4.2
+				&nbsp;&nbsp;
+				Generic (Fluent) Client
+			</a>
+		</span>
+		<span class="docs-inpage-nav-cell">
+
+			<div class="dropdown">
+			  <button class="btn btn-outline-info dropdown-toggle" role="button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+				  4.3
+				  &nbsp;&nbsp;
+				  Annotation Client
+			  </button>
+			  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				  <li class="dropdown-header" style="text-align: center;">
+					  Client
+				  </li>
+				  <li role="separator" class="divider"></li>
+				  
+					  <li>
+						  <a href="introduction.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  4.0
+							  </span>
+							  Introduction
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="get_started.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  4.1
+							  </span>
+							  Get Started ⚡
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="generic_client.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  4.2
+							  </span>
+							  Generic (Fluent) Client
+						  </a>
+					  </li>
+				  
+					  <li style="background-color: #F0F0F0;">
+						  <a href="annotation_client.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  4.3
+							  </span>
+							  Annotation Client
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="client_configuration.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  4.4
+							  </span>
+							  Client Configuration
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="examples.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  4.5
+							  </span>
+							  Client Examples
+						  </a>
+					  </li>
+				  
+			  </div>
+			</div>
+		</span>
+		<span class="docs-inpage-nav-cell">
+			<a href="client_configuration.html" class="btn docs-inpage-nav-link">
+				4.4
+				&nbsp;&nbsp;
+				Client Configuration
+				&nbsp;&nbsp;
+				<i class="fa fa-arrow-right"></i>
+			</a>
+		</span>
+	</div>
+</div>
+</div>
+
+				<div class="hide-md-and-above mobile-header-links">
+					<a href="../introduction/table_of_contents.html" class="btn btn-primary">
+						<i class="fa fa-arrow-left"></i>
+						&nbsp;&nbsp;
+						Table of Contents
+					</a>
+					<p>Annotation Client</p>
+				</div>
+
+				<div class="docs-content">
+					<a name="annotation-client"></a>
+<section id="section0"><h1 data-toc-text="Annotation Client"><span class="helpHeaderSectionNumberBadge">4.3</span>Annotation Client</h1><a href="annotation_client.html#annotation-client" class="helpSectionLink">&nbsp;</a>
+<p>HAPI also provides a second style of client, called the <em>annotation-driven</em> client. If you are using the  <a href="generic_client.html">Generic (Fluent) Client</a> do not necessarily need to read this page.</p>
+<p>The design of the annotation-driven client is intended to be similar to that of JAX-WS, so users of that specification should be comfortable with this one. It uses a user-defined interface containing special annotated methods which HAPI binds to calls against a server.</p>
+<p>The annotation-driven client is particularly useful if you have a server that exposes a set of specific operations (search parameter combinations, named queries, etc.) and you want to let developers have a strongly/statically typed interface to that server.</p>
+<p>There is no difference in terms of capability between the two styles of client. There is simply a difference in programming style and complexity. It is probably safe to say that the generic client is easier to use and leads to more readable code, at the expense of not giving any visibility into the specific capabilities of the server you are interacting with.</p>
+<a name="defining-a-restful-client-interface"></a>
+<h2>Defining A Restful Client Interface</h2>
+<p>The first step in creating an annotation-driven client is to define a restful client interface.</p>
+<p>A restful client interface class must extend the <a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/ca/uhn/fhir/rest/client/api/IRestfulClient.html">IRestfulClient</a> interface, and will contain one or more methods which have been annotated with special annotations indicating which REST operation that method supports.</p>
+<p>Below is a simple example of a resource provider which supports the <a href="http://hl7.org/implement/standards/fhir/http.html#read" target="_blank">read</a> operation (i.e. retrieve a single resource by ID) as well as the <a href="http://hl7.org/implement/standards/fhir/http.html#search" target="_blank">search</a> operation (i.e. find any resources matching a given criteria) for a specific search criteria.</p>
+<p>You may notice that this interface looks a lot like the Resource Provider which is defined for use by the RESTful server. In fact, it supports all of the same annotations and is essentially identical, other than the fact that for a client you must use an interface but for a server you must use a concrete class with method implementations.</p>
+<pre><code class="language-java">/**
+ * All RESTful clients must be an interface which extends IBasicClient
+ */
+public interface IRestfulClient extends IBasicClient {
+
+   /**
+    * The &quot;@Read&quot; annotation indicates that this method supports the
+    * read operation. Read operations should return a single resource
+    * instance. 
+    * 
+    * @param theId
+    *    The read operation takes one parameter, which must be of type
+    *    IdType and must be annotated with the &quot;@Read.IdParam&quot; annotation.
+    * @return 
+    *    Returns a resource matching this identifier, or null if none exists.
+    */
+   @Read()
+   Patient getResourceById(@IdParam IIdType theId);
+
+   /**
+    * The &quot;@Read&quot; annotation indicates that this method supports the
+    * read operation. Read operations should return a single resource
+    * instance.
+    *
+    * @param theId
+    *    The read operation takes one parameter, which must be of type
+    *    IdType and must be annotated with the &quot;@Read.IdParam&quot; annotation.
+    * @return
+    *    Returns a resource matching this identifier, or null if none exists.
+    */
+   @Read()
+   Organization getOrganizationById(@IdParam IIdType theId);
+
+   /**
+    * The &quot;@Search&quot; annotation indicates that this method supports the 
+    * search operation. You may have many different methods annotated with
+    * this annotation, to support many different search criteria. This
+    * example searches by family name.
+    * 
+    * @param theFamilyName
+    *    This operation takes one parameter which is the search criteria. It is
+    *    annotated with the &quot;@Required&quot; annotation. This annotation takes one argument,
+    *    a string containing the name of the search criteria. The datatype here
+    *    is StringDt, but there are other possible parameter types depending on the
+    *    specific search criteria.
+    * @return
+    *    This method returns a list of Patients. This list may contain multiple
+    *    matching resources, or it may also be empty.
+    */
+   @Search()
+   List&lt;Patient&gt; getPatient(@RequiredParam(name = Patient.SP_FAMILY) StringType theFamilyName);
+
+}
+</code></pre>
+<p>You will probably want to add more methods to your client interface.</p>
+<p>See the <a href="../server_plain/rest_operations.html">REST Operations</a> page in the server documentation section to see examples of how these methods should look.</p>
+<a name="instantiating-the-client"></a>
+<h2>Instantiating the Client</h2>
+<p>Once your client interface is created, all that is left is to create a FhirContext and instantiate the client and you are ready to start using it.</p>
+<pre><code class="language-java">public static void main(String[] args) {
+   FhirContext ctx = FhirContext.forDstu2();
+   String serverBase = &quot;http://foo.com/fhirServerBase&quot;;
+   
+   // Create the client
+   IRestfulClient client = ctx.newRestfulClient(IRestfulClient.class, serverBase);
+   
+   // Try the client out! This method will invoke the server
+   List&lt;Patient&gt; patients = client.getPatient(new StringType(&quot;SMITH&quot;));
+   
+}
+</code></pre>
+</section>
+
+<a name="configuring-encoding-jsonxml"></a>
+<section id="section1"><h1 data-toc-text="Configuring Encoding (JSON/XML)"><span class="helpHeaderSectionNumberBadge">4.3.1</span>Configuring Encoding (JSON/XML)</h1><a href="annotation_client.html#configuring-encoding-jsonxml" class="helpSectionLink">&nbsp;</a>
+<p>Restful client interfaces that you create will also extend the interface <a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/ca/uhn/fhir/rest/client/api/IRestfulClient.html">IRestfulClient</a>, which comes with some helpful methods for configuring the way that the client will interact with the server.</p>
+<p>The following snippet shows how to configure the client to explicitly request JSON or XML responses, and how to request &quot;pretty printed&quot; responses on servers that support this (HAPI based servers currently).</p>
+<pre><code class="language-java">// Create a client
+FhirContext ctx = FhirContext.forR4();
+IPatientClient client = ctx.newRestfulClient(IPatientClient.class, &quot;http://localhost:9999/&quot;);
+
+// Request JSON encoding from the server (_format=json)
+client.setEncoding(EncodingEnum.JSON);
+
+// Request pretty printing from the server (_pretty=true)
+client.setPrettyPrint(true);
+</code></pre>
+<a name="a-complete-example"></a>
+<h2>A Complete Example</h2>
+<p>The following is a complete example showing a RESTful client using HAPI FHIR.</p>
+<pre><code class="language-java">import ca.uhn.fhir.context.FhirContext;
+import ca.uhn.fhir.rest.annotation.RequiredParam;
+import ca.uhn.fhir.rest.annotation.Search;
+import org.hl7.fhir.r4.model.Identifier;
+import org.hl7.fhir.r4.model.Organization;
+import org.hl7.fhir.r4.model.Patient;
+import org.hl7.fhir.r4.model.Reference;
+
+import java.io.IOException;
+import java.util.List;
+
+public class CompleteExampleClient {
+
+   /**
+    * This is a simple client interface. It can have many methods for various
+    * searches but in this case it has only 1.
+    */
+   public interface ClientInterface extends IRestfulClient {
+
+      /**
+       * This is translated into a URL similar to the following:
+       * http://fhir.healthintersections.com.au/open/Patient?identifier=urn:oid:1.2.36.146.595.217.0.1%7C12345
+       */
+      @Search
+      List&lt;Patient&gt; findPatientsForMrn(@RequiredParam(name = Patient.SP_IDENTIFIER) Identifier theIdentifier);
+
+   }
+
+   /**
+    * The main method here will directly call an open FHIR server and retrieve a
+    * list of resources matching a given criteria, then load a linked resource.
+    */
+   public static void main(String[] args) throws IOException {
+
+      // Create a client factory
+      FhirContext ctx = FhirContext.forDstu2();
+
+      // Create the client
+      String serverBase = &quot;http://fhir.healthintersections.com.au/open&quot;;
+      ClientInterface client = ctx.newRestfulClient(ClientInterface.class, serverBase);
+
+      // Invoke the client to search for patient
+      Identifier identifier = new Identifier().setSystem(&quot;urn:oid:1.2.36.146.595.217.0.1&quot;).setValue(&quot;12345&quot;);
+      List&lt;Patient&gt; patients = client.findPatientsForMrn(identifier);
+
+      System.out.println(&quot;Found &quot; + patients.size() + &quot; patients&quot;);
+
+      // Print a value from the loaded resource
+      Patient patient = patients.get(0);
+      System.out.println(&quot;Patient Last Name: &quot; + patient.getName().get(0).getFamily());
+
+      // Load a referenced resource
+      Reference managingRef = patient.getManagingOrganization();
+      Organization org = client.getOrganizationById(managingRef.getReferenceElement());
+
+      // Print organization name
+      System.out.println(org.getName());
+
+   }
+
+}
+</code></pre>
+</section>
+
+
+				</div>
+
+				<div class="hide-sm-and-below"><div class="marg-btm-20 docs-inpage-nav-container">
+	<div class="docs-inpage-nav-row">
+		<span class="docs-inpage-nav-cell">
+			<a href="generic_client.html" class="btn docs-inpage-nav-link">
+				<i class="fa fa-arrow-left"></i>
+				&nbsp;&nbsp;
+				4.2
+				&nbsp;&nbsp;
+				Generic (Fluent) Client
+			</a>
+		</span>
+		<span class="docs-inpage-nav-cell">
+
+			<div class="dropdown">
+			  <button class="btn btn-outline-info dropdown-toggle" role="button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+				  4.3
+				  &nbsp;&nbsp;
+				  Annotation Client
+			  </button>
+			  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				  <li class="dropdown-header" style="text-align: center;">
+					  Client
+				  </li>
+				  <li role="separator" class="divider"></li>
+				  
+					  <li>
+						  <a href="introduction.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  4.0
+							  </span>
+							  Introduction
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="get_started.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  4.1
+							  </span>
+							  Get Started ⚡
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="generic_client.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  4.2
+							  </span>
+							  Generic (Fluent) Client
+						  </a>
+					  </li>
+				  
+					  <li style="background-color: #F0F0F0;">
+						  <a href="annotation_client.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  4.3
+							  </span>
+							  Annotation Client
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="client_configuration.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  4.4
+							  </span>
+							  Client Configuration
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="examples.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  4.5
+							  </span>
+							  Client Examples
+						  </a>
+					  </li>
+				  
+			  </div>
+			</div>
+		</span>
+		<span class="docs-inpage-nav-cell">
+			<a href="client_configuration.html" class="btn docs-inpage-nav-link">
+				4.4
+				&nbsp;&nbsp;
+				Client Configuration
+				&nbsp;&nbsp;
+				<i class="fa fa-arrow-right"></i>
+			</a>
+		</span>
+	</div>
+</div>
+</div>
+				
+
+	<!-- footer -->
+	<footer class="page-footer">
+		<div class="container-fluid text-center text-md-left">
+			<hr class="bottom-hr">
+			<div class="row pt-3 pb-3">
+				<div class="col-md-3 text-center">
+					<img src="../../images/logos/raccoon-forwards.png" alt="raccoon logo without text" width="100">
+				</div>
+				<div class="col-md-2">
+					<p class="footer-heading">HAPI HAPI</p>
+					<ul class="list-unstyled">
+						<li><a href="https://hapifhir.io/hapi-fhir/">Home</a></li>
+						<li><a href="../getting_started/downloading_and_importing.html">Download</a></li>
+						<li><a href="../introduction/changelog.html">Changelog</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/license.html">License</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/blog/">News</a></li>
+					</ul>
+					<p class="footer-heading">TEST SERVER</p>
+					<ul class="list-unstyled">
+						<li><a href="http://hapi.fhir.org/" target="_blank">Public Test Server</a></li>
+					</ul>
+					<p class="footer-heading">SUPPORT</p>
+					<ul class="list-unstyled">
+						<li><a href="https://smilecdr.com/" target="_blank">Smile CDR</a></li>
+					</ul>
+				</div>
+				<div class="col-md-2">
+					<p class="footer-heading">USING HAPI</p>
+					<ul class="list-unstyled">
+						<li><a href="../index.html">Documentation</a></li>
+						<li><a href="#">Command Line Tool (cli)</a></li>
+					</ul>
+					<p class="footer-heading">STARTER PROJECTS</p>
+					<ul class="list-unstyled">
+						<li><a href="https://github.com/FirelyTeam/fhirstarters/tree/master/java/hapi-fhirstarters-client-skeleton">Client</a></li>
+						<li><a href="https://github.com/FirelyTeam/fhirstarters/tree/master/java/hapi-fhirstarters-rest-server-skeleton">Plain Server</a></li>
+						<li><a href="https://github.com/hapifhir/hapi-fhir-jpaserver-starter">JPA Server</a></li>
+					</ul>
+				</div>
+				<div class="col-md-2">
+					<p class="footer-heading">JAVADOCS</p>
+					<ul class="list-unstyled">
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/">Core API</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-structures-dstu2/">Model API (DSTU2)</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-structures-dstu3/">Model API (DSTU3)</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-structures-r4/">Model API (R4)</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-structures-r5/">Model API (R5)</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-client/">Client API</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-server/">Plain Server - API</a></li>
+                  <li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-server-mdm/">Plain Server - MDM API</a></li>
+                  <li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-server-openapi/">Plain Server - OpenAPI</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-storage/">JPA Server - API</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-jpaserver-model/">JPA Server - Model</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-jpaserver-searchparam/">JPA Server - Search Param Support</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-jpaserver-subscription/">JPA Server - Subscription</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-jpaserver-base/">JPA Server - Base</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-validation/">Validation API</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-converter/">Version Converter API</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-jaxrsserver-base/">Server API (JAX-RS)</a></li>
+					</ul>
+				</div>
+				<div class="col-md-3">
+					<p class="footer-heading">GET HELP</p>
+					<ul class="list-unstyled">
+						<li><a href="https://github.com/jamesagnew/hapi-fhir/wiki/Getting-Help" target="_blank">How to Ask for Help (read this first!)</a></li>
+						<li><a href="https://groups.google.com/d/forum/hapi-fhir" target="_blank">Google Group (Ask Questions)</a></li>
+						<li><a href="https://github.com/jamesagnew/hapi-fhir/issues" target="_blank">Issue Tracker (Report Bugs/Request Features)</a></li>
+						<li><a href="https://chat.fhir.org/" target="_blank">FHIR.org Chat (Live Chat with FHIR Implementors)</a></li>
+						<li><a href="../appendix/faq.html">Frequently Asked Questions (FAQ)</a></li>
+					</ul>
+					<p class="footer-heading">CONTRIBUTE</p>
+					<ul class="list-unstyled">
+						<li><a href="../contributing/hacking_guide.html">Guide to Hacking HAPI</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/contributors.html">Contributors</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<!-- footer copyright -->
+		<div class="footer-copyright text-center py-3">
+			<p>Updated: 2021-11-23T14:49:28.319Z — Made with <i style="color: #FF6600;" class="fas fa-heart"></i> in <a href="https://www.cbc.ca/news/canada/toronto/raccoon-city-wildlife-in-toronto-1.2742231"><img src="https://hapifhir.io/hapi-fhir/images/icons/raccoon.svg" alt="Raccoon" width="20"></a>
+		</div>
+
+	</footer>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-1395874-5"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-1395874-5');
+	</script>
+
+
+			</div>
+
+		</div>
+
+	</div>
+
+
+<script type="application/javascript">
+
+	$(function () {
+
+		/*
+		 * Build the TOC links on the right hand side by
+		 * scanning all of the sections in the documentation
+		 */
+		const sections = [];
+		const navLinks = [];
+		var nav = $('<ul class="nav flex-column">');
+		$('#toc').append(nav);
+
+		$('#tocscroll section').each(function () {
+			sections.push($(this));
+			let sectionName = $(this).find('h1').first().attr('data-toc-text');
+			let sectionId = $(this).prevAll('a').attr('name');
+			let navLink = $('<a class="nav-link" href="#' + sectionId + '">' + sectionName + '</a>');
+			navLinks.push(navLink);
+			nav.append($('<li class="nav-item">').append(navLink));
+		});
+
+		/*
+		 * Update the active link on the right hand side TOC when the
+		 * user scrolls up and down the page. Create a function for this,
+		 * then call the function once and register it to call again
+		 * any time the user scrolls
+		 */
+		function updateTocScroll() {
+			const sectionOffset = $('#tocscroll').offset().top;
+			let visible = false;
+			for (var idx = 0; idx < sections.length; idx++) {
+				var sectionTop = sections[idx].offset().top - sectionOffset + 20;
+				if (sectionTop >= 0 && !visible || (idx == sections.length -1 && !visible)) {
+					navLinks[idx].addClass('active');
+					visible = true;
+				} else {
+					navLinks[idx].removeClass('active');
+				}
+			}
+
+		}
+
+		$('#tocscroll').scroll(updateTocScroll);
+		updateTocScroll();
+
+		/*
+	    * When the page first loads, automatically scroll the left docs TOC
+	    * scroller to the actively displayed page.
+	    */
+		var activetop = $('.activechapter').offset().top - $('#tocscroll').offset().top - 30;
+		if (activetop < 100) {
+			activetop = 0;
+		}
+		$('#navcolumn').scrollTop(activetop);
+
+		function updateNavScroll() {
+			if ($('#navcolumn').scrollTop() < 100) {
+				$('.button-scroll-up-to-search').fadeOut(500);
+			} else {
+				$('.button-scroll-up-to-search').fadeIn(500);
+			}
+		}
+
+		updateNavScroll();
+		$('#navcolumn').scroll(updateNavScroll);
+
+	});
+</script>
+
+
+
+<script type="application/javascript">
+	function hover(element) {
+		element.setAttribute('src', '../../../images/icons/link-grey.html');
+	}
+
+	function unhover(element) {
+		element.setAttribute('src', '../../../images/icons/smiley-grey.html');
+	}
+
+   new ClipboardJS('.clipboardCopyBtn');
+
+</script>
+</body>
+
+
+<!-- Mirrored from hapifhir.io/hapi-fhir/docs/client/annotation_client.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 02 Dec 2021 00:00:28 GMT -->
+</html>
+

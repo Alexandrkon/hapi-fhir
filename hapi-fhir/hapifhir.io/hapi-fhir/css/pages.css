@@ -1,0 +1,11 @@
+
+BODY {
+    height: 100%;
+    font-size: 14px;
+    padding-top: 53px;
+}
+
+SPAN.download-version-hash {
+    font-size: 0.7em;
+    color: #444;
+}

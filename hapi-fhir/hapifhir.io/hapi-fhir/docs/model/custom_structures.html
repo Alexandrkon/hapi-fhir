@@ -1,0 +1,1813 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from hapifhir.io/hapi-fhir/docs/model/custom_structures.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 02 Dec 2021 00:00:27 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+	<title>Custom Structures - HAPI FHIR Documentation</title>
+
+	
+
+	<!-- required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- objectgraph -->
+	
+
+	<!-- Favicon -->
+	<link rel="icon" href="https://smilecdr.com/favicon.ico">
+
+	<!-- font, icons -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+	<!-- jquery, bootstrap script for dropdown and hover-->
+	<script src="../../resources/jquery/dist/jquery.min.js"></script>
+	<script src="../../resources/popper.js/dist/umd/popper.min.js"></script>
+	<script src="../../resources/bootstrap/dist/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="../../resources/bootstrap/dist/css/bootstrap.min.css"/>
+
+	<!-- fontawesome -->
+	<script src="../../resources/font-awesome/js/all.min.js" data-auto-replace-svg="nest"></script>
+	<link rel="stylesheet" media="screen" href="../../resources/font-awesome/css/fontawesome.min.css" />
+
+	<!-- Clipboard.js -->
+	<script src="../../resources/clipboard.js/clipboard.min.js"></script>
+
+	
+	<script src="../../resources/prismjs/prism.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-bash.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-http.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-java.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-javascript.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-json.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-nginx.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-properties.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-sql.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/plugins/toolbar/prism-toolbar.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/plugins/command-line/prism-command-line.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/plugins/line-numbers/prism-line-numbers.js" type="text/javascript"></script>
+	<link href="../../resources/prismjs/themes/prism.css" rel="stylesheet" type="text/css"/>
+	<link href="../../resources/prismjs/themes/prism-coy.css" rel="stylesheet" type="text/css"/>
+	<link href="../../resources/prismjs/plugins/toolbar/prism-toolbar.css" rel="stylesheet" type="text/css"/>
+	<link href="../../resources/prismjs/plugins/line-numbers/prism-line-numbers.css" rel="stylesheet" type="text/css"/>
+
+	<link rel="stylesheet" type="text/css" href="../../css/hapifhir.css">
+
+
+
+
+	<!-- css sheet -->
+	<link href="../../resources/cdr-web-resources/css/help-common.css" rel="stylesheet" type="text/css"/>
+	<link href="../../css/pages.css" rel="stylesheet" type="text/css"/>
+	<link href="../../css/docs.css" rel="stylesheet" type="text/css"/>
+
+</head>
+
+<body>
+
+	
+	<header class="header" id="header">
+		<nav class="navbar fixed-top navbar-expand-sm navbar-light navbar-greyshadow">
+			<a class="navbar-brand text-center" href="https://hapifhir.io/hapi-fhir/" title="Home">
+				
+				<img src="../../images/logos/small-logo.png" alt="HAPI FHIR logo" width="156" id="collapsed-logo">
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<script type="application/javascript">
+				$(function(){
+					$(".dropdown").hover(
+						function() {
+							if ($( window ).width() >= 960) {
+								$('.dropdown-menu', this).stop(true, true).fadeIn("fast");
+								$(this).toggleClass('open');
+								$('b', this).toggleClass("caret caret-up");
+							} else {
+								$('.dropdown-menu', this).css("display", "");
+							}
+						},
+						function() {
+							if ($( window ).width() >= 960) {
+								$('.dropdown-menu', this).stop(true, true).fadeOut("fast");
+								$(this).toggleClass('open');
+								$('b', this).toggleClass("caret caret-up");
+							}
+						});
+				});
+			</script>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="nav navbar-nav ml-auto nav-text">
+					<li class="nav-item"><a class="nav-link" href="https://smilecdr.com/">Support</a></li>
+					<li class="nav-item"><a class="nav-link" target="_blank" href="https://github.com/jamesagnew/hapi-fhir">Github</a></li>
+					<li class="nav-item"><a class="nav-link" href="https://hapifhir.io/hapi-fhir/blog/">News</a></li>
+					<li class="nav-item"><a class="nav-link" href="../index.html">Documentation</a></li>
+					<li class="nav-item dropdown">
+						<a class="nav-link nav-link-dropdown" data-toggle="dropdown" id="navbarGETHELP" href="#">Get Help <i class="nav-chevron fas fa-chevron-down"></i></a>
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarGETHELP" id="navbarGETHELPDIV">
+							<a href="https://github.com/jamesagnew/hapi-fhir/wiki/Getting-Help" class="dropdown-item">Getting Help (read this first!)</a>
+							<a href="https://groups.google.com/d/forum/hapi-fhir" class="dropdown-item">Google Group (ask questions)</a>
+							<a href="https://github.com/jamesagnew/hapi-fhir/issues" class="dropdown-item">Issue Tracker (report bugs/request features)</a>
+							<a href="https://chat.fhir.org/" class="dropdown-item">chat.fhir.org (live chat with FHIR implementers)</a>
+							<a href="../appendix/faq.html" class="dropdown-item">Frequently Asked Questions (FAQ)</a>
+						</div>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link nav-link-dropdown" data-toggle="dropdown" id="navbarTESTSERVERS" href="#">Test Server <i class="nav-chevron fas fa-chevron-down"></i></a>
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarTESTSERVERS" id="navbarTESTSERVERSDIV">
+							<a href="http://hapi.fhir.org/" class="dropdown-item">HAPI FHIR Public Test Server</a>
+						</div>
+					</li>
+
+				</ul>
+			</div>
+		</nav>
+	</header>
+
+	
+	<script>
+		var scrollAfter = 10;
+	</script>
+
+	
+
+
+
+	<!-- "Scroll up the the search box" button -->
+	<button class="btn btn-secondary hide-sm-and-below button-scroll-up-to-search"
+			  onclick="$('#navcolumn').scrollTop(0); $('#button-ftsearch').focus();">
+		Search&nbsp;<i class="fa fa-search"></i>
+	</button>
+
+	<!-- Right column with the in-page TOC (not visible on mobile) -->
+	<div class="rightNavContainer hide-sm-and-below" id="pageNav">
+		<nav id="toc"></nav>
+	</div>
+
+	<div class="container-fluid grid">
+		<div class="row">
+			
+			<div class="hide-sm-and-below col-md-3 primaryColumn" id="navcolumn">
+				<div>
+					<div class="index-sidebar" id="side-nav">
+
+						<!-- Fullltext Search box -->
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Search" aria-label="Search"
+									 aria-describedby="button-ftsearch-clear" style="margin-top: 0px;" id="button-ftsearch">
+							<div class="input-group-append">
+								<button class="btn btn-outline-info" type="button" id="button-ftsearch-clear"
+										  onclick="javascript: $('#button-ftsearch').val(''); delayFunction(updateSearchFunction, 500);">
+									<i class="fa fa-times-circle"></i>
+								</button>
+							</div>
+							<script type="application/javascript">
+								var delayFunction = (function () {
+									var timer = 0;
+									return function (callback, ms) {
+										if (!$('#button-ftsearch').val()) {
+											$('#leftTocSearchResults').hide();
+											$('#leftTocView').show();
+										} else {
+											$('#leftTocView').hide();
+											$('#leftTocSearchResults').show();
+											$('#leftTocSearchResults').empty();
+											$('#leftTocSearchResults').append($('<i class="fa fa-spinner fa-spin" style="margin-top: 20px; font-size:24px;"></i>'));
+										}
+										clearTimeout(timer);
+										timer = setTimeout(callback, ms);
+									};
+								})();
+
+								function updateSearchFunction() {
+									if (!$('#button-ftsearch').val()) {
+										$('#leftTocSearchResults').hide();
+										$('#leftTocView').show();
+									} else {
+										$('#leftTocView').hide();
+										$('#leftTocSearchResults').show();
+										$.get("/hapi-fhir/docsearch", {
+											term: $('#button-ftsearch').val()
+										}, function (data) {
+											$('#leftTocSearchResults').empty();
+
+											let leftTocUl = null;
+											let leftTocHeader = null;
+											for (var idx = 0; idx < data.length; idx++) {
+												if (leftTocHeader == null || leftTocHeader.text() !== data[idx].sectionTitle) {
+													leftTocHeader = $('<h3>');
+													leftTocHeader.text(data[idx].sectionTitle);
+													$('#leftTocSearchResults').append(leftTocHeader);
+													leftTocUl = $('<ul>');
+													$('#leftTocSearchResults').append(leftTocUl);
+												}
+												let nextLink = $('<a>', {
+													href: "/hapi-fhir/docs/" + data[idx].page + ".html"
+												});
+												nextLink.text(data[idx].title);
+
+												let nextLinkLi = $('<li>').append(nextLink);
+												leftTocUl.append(nextLinkLi);
+											}
+										}, 'json');
+									}
+								}
+
+								$('#button-ftsearch').keyup(function () {
+									delayFunction(updateSearchFunction, 500);
+								});
+
+								// Clear the search box if the page is reloaded
+								$(function () {
+									$('#button-ftsearch').val('');
+								});
+
+							</script>
+						</div>
+
+						<div id="leftTocView">
+							
+								<h3>
+									Welcome to HAPI FHIR
+								</h3>
+								<ul>
+									<li>
+										<a href="../introduction/table_of_contents.html">
+											<span class="pull-left">Table of Contents</span>
+											<span class="pull-right">1.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog.html">
+											<span class="pull-left">Changelog: 2021</span>
+											<span class="pull-right">1.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog_2020.html">
+											<span class="pull-left">Changelog: 2020</span>
+											<span class="pull-right">1.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog_2019.html">
+											<span class="pull-left">Changelog: 2019</span>
+											<span class="pull-right">1.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog_2018.html">
+											<span class="pull-left">Changelog: 2018</span>
+											<span class="pull-right">1.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog_2017.html">
+											<span class="pull-left">Changelog: 2017</span>
+											<span class="pull-right">1.5</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog_2016.html">
+											<span class="pull-left">Changelog: 2016</span>
+											<span class="pull-right">1.6</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog_2015.html">
+											<span class="pull-left">Changelog: 2015</span>
+											<span class="pull-right">1.7</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog_2014.html">
+											<span class="pull-left">Changelog: 2014</span>
+											<span class="pull-right">1.8</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Getting Started
+								</h3>
+								<ul>
+									<li>
+										<a href="../getting_started/introduction.html">
+											<span class="pull-left">Introduction</span>
+											<span class="pull-right">2.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../getting_started/versions.html">
+											<span class="pull-left">FHIR and HAPI FHIR Versions</span>
+											<span class="pull-right">2.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../getting_started/modules.html">
+											<span class="pull-left">HAPI FHIR Modules</span>
+											<span class="pull-right">2.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../getting_started/downloading_and_importing.html">
+											<span class="pull-left">Downloading and Importing</span>
+											<span class="pull-right">2.3</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3 class="activechapter">
+									Working With The FHIR Model
+								</h3>
+								<ul>
+									<li>
+										<a href="working_with_resources.html">
+											<span class="pull-left">Working With Resources</span>
+											<span class="pull-right">3.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="parsers.html">
+											<span class="pull-left">Parsing and Serializing</span>
+											<span class="pull-right">3.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="references.html">
+											<span class="pull-left">Resource References</span>
+											<span class="pull-right">3.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="profiles_and_extensions.html">
+											<span class="pull-left">Profiles and Extensions</span>
+											<span class="pull-right">3.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="converter.html">
+											<span class="pull-left">Version Converters</span>
+											<span class="pull-right">3.4</span>
+										</a>
+									</li>
+									<li class="active-side">
+										<a href="custom_structures.html">
+											<span class="pull-left">Custom Structures</span>
+											<span class="pull-right">3.5</span>
+										</a>
+									</li>
+									<li>
+										<a href="narrative_generation.html">
+											<span class="pull-left">Narrative Generation</span>
+											<span class="pull-right">3.6</span>
+										</a>
+									</li>
+									<li>
+										<a href="bundle_builder.html">
+											<span class="pull-left">Bundle Builder</span>
+											<span class="pull-right">3.7</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Client
+								</h3>
+								<ul>
+									<li>
+										<a href="../client/introduction.html">
+											<span class="pull-left">Introduction</span>
+											<span class="pull-right">4.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../client/get_started.html">
+											<span class="pull-left">Get Started ⚡</span>
+											<span class="pull-right">4.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../client/generic_client.html">
+											<span class="pull-left">Generic (Fluent) Client</span>
+											<span class="pull-right">4.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../client/annotation_client.html">
+											<span class="pull-left">Annotation Client</span>
+											<span class="pull-right">4.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../client/client_configuration.html">
+											<span class="pull-left">Client Configuration</span>
+											<span class="pull-right">4.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../client/examples.html">
+											<span class="pull-left">Client Examples</span>
+											<span class="pull-right">4.5</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Plain Server
+								</h3>
+								<ul>
+									<li>
+										<a href="../server_plain/server_types.html">
+											<span class="pull-left">REST Server Types</span>
+											<span class="pull-right">5.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/introduction.html">
+											<span class="pull-left">Plain Server Introduction</span>
+											<span class="pull-right">5.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/get_started.html">
+											<span class="pull-left">Get Started ⚡</span>
+											<span class="pull-right">5.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/resource_providers.html">
+											<span class="pull-left">Resource Providers and Plain Providers</span>
+											<span class="pull-right">5.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/rest_operations.html">
+											<span class="pull-left">REST Operations: Overview</span>
+											<span class="pull-right">5.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/rest_operations_search.html">
+											<span class="pull-left">REST Operations: Search</span>
+											<span class="pull-right">5.5</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/rest_operations_operations.html">
+											<span class="pull-left">REST Operations: Extended Operations</span>
+											<span class="pull-right">5.6</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/paging.html">
+											<span class="pull-left">Paging Search Results</span>
+											<span class="pull-right">5.7</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/web_testpage_overlay.html">
+											<span class="pull-left">Web Testpage Overlay</span>
+											<span class="pull-right">5.8</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/multitenancy.html">
+											<span class="pull-left">Multitenancy</span>
+											<span class="pull-right">5.9</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/jax_rs.html">
+											<span class="pull-left">JAX-RS Support</span>
+											<span class="pull-right">5.10</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/customizing_the_capabilitystatement.html">
+											<span class="pull-left">Customizing the CapabilityStatement</span>
+											<span class="pull-right">5.11</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/openapi.html">
+											<span class="pull-left">OpenAPI / Swagger</span>
+											<span class="pull-right">5.12</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									JPA Server
+								</h3>
+								<ul>
+									<li>
+										<a href="../server_jpa/introduction.html">
+											<span class="pull-left">Introduction</span>
+											<span class="pull-right">6.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/get_started.html">
+											<span class="pull-left">Get Started ⚡</span>
+											<span class="pull-right">6.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/architecture.html">
+											<span class="pull-left">Architecture</span>
+											<span class="pull-right">6.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/schema.html">
+											<span class="pull-left">Database Schema</span>
+											<span class="pull-right">6.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/configuration.html">
+											<span class="pull-left">Configuration</span>
+											<span class="pull-right">6.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/search.html">
+											<span class="pull-left">Search</span>
+											<span class="pull-right">6.5</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/performance.html">
+											<span class="pull-left">Performance</span>
+											<span class="pull-right">6.6</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/upgrading.html">
+											<span class="pull-left">Upgrade Guide</span>
+											<span class="pull-right">6.7</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/diff.html">
+											<span class="pull-left">Diff Operation</span>
+											<span class="pull-right">6.8</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/lastn.html">
+											<span class="pull-left">LastN Operation</span>
+											<span class="pull-right">6.9</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/elastic.html">
+											<span class="pull-left">Lucene/Elasticsearch Indexing</span>
+											<span class="pull-right">6.10</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/terminology.html">
+											<span class="pull-left">Terminology</span>
+											<span class="pull-right">6.11</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									JPA Server: MDM
+								</h3>
+								<ul>
+									<li>
+										<a href="../server_jpa_mdm/mdm.html">
+											<span class="pull-left">MDM Getting Started</span>
+											<span class="pull-right">7.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_mdm/mdm_rules.html">
+											<span class="pull-left">MDM Rules</span>
+											<span class="pull-right">7.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_mdm/mdm_eid.html">
+											<span class="pull-left">MDM Enterprise Identifiers</span>
+											<span class="pull-right">7.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_mdm/mdm_operations.html">
+											<span class="pull-left">MDM Operations</span>
+											<span class="pull-right">7.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_mdm/mdm_details.html">
+											<span class="pull-left">MDM Technical Details</span>
+											<span class="pull-right">7.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_mdm/mdm_expansion.html">
+											<span class="pull-left">MDM Search Expansion</span>
+											<span class="pull-right">7.5</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									JPA Server: CQL
+								</h3>
+								<ul>
+									<li>
+										<a href="../server_jpa_cql/cql.html">
+											<span class="pull-left">CQL Getting Started</span>
+											<span class="pull-right">8.0</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									JPA Server: Partitioning and Multitenancy
+								</h3>
+								<ul>
+									<li>
+										<a href="../server_jpa_partitioning/partitioning.html">
+											<span class="pull-left">Partitioning and Multitenancy</span>
+											<span class="pull-right">9.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_partitioning/partition_interceptor_examples.html">
+											<span class="pull-left">Partition Interceptor Examples</span>
+											<span class="pull-right">9.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_partitioning/partitioning_management_operations.html">
+											<span class="pull-left">Partitioning Management Operations</span>
+											<span class="pull-right">9.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_partitioning/enabling_in_hapi_fhir.html">
+											<span class="pull-left">Enabling Partitioning in HAPI FHIR</span>
+											<span class="pull-right">9.3</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Interceptors
+								</h3>
+								<ul>
+									<li>
+										<a href="../interceptors/interceptors.html">
+											<span class="pull-left">Interceptors Overview</span>
+											<span class="pull-right">10.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../interceptors/client_interceptors.html">
+											<span class="pull-left">Client Interceptors</span>
+											<span class="pull-right">10.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../interceptors/client_pointcuts.html">
+											<span class="pull-left">Client Pointcuts</span>
+											<span class="pull-right">10.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../interceptors/built_in_client_interceptors.html">
+											<span class="pull-left">Built-In Client Interceptors</span>
+											<span class="pull-right">10.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../interceptors/server_interceptors.html">
+											<span class="pull-left">Server Interceptors</span>
+											<span class="pull-right">10.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../interceptors/server_pointcuts.html">
+											<span class="pull-left">Server Pointcuts</span>
+											<span class="pull-right">10.5</span>
+										</a>
+									</li>
+									<li>
+										<a href="../interceptors/built_in_server_interceptors.html">
+											<span class="pull-left">Built-In Server Interceptors</span>
+											<span class="pull-right">10.6</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Security
+								</h3>
+								<ul>
+									<li>
+										<a href="../security/introduction.html">
+											<span class="pull-left">Introduction</span>
+											<span class="pull-right">11.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../security/authorization_interceptor.html">
+											<span class="pull-left">Authorization Interceptor</span>
+											<span class="pull-right">11.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../security/consent_interceptor.html">
+											<span class="pull-left">Consent Interceptor</span>
+											<span class="pull-right">11.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../security/search_narrowing_interceptor.html">
+											<span class="pull-left">Search Narrowing Interceptor</span>
+											<span class="pull-right">11.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../security/cors.html">
+											<span class="pull-left">CORS</span>
+											<span class="pull-right">11.4</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Validation
+								</h3>
+								<ul>
+									<li>
+										<a href="../validation/introduction.html">
+											<span class="pull-left">Introduction</span>
+											<span class="pull-right">12.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../validation/parser_error_handler.html">
+											<span class="pull-left">Parser Error Handler</span>
+											<span class="pull-right">12.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../validation/instance_validator.html">
+											<span class="pull-left">Instance Validator</span>
+											<span class="pull-right">12.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../validation/validation_support_modules.html">
+											<span class="pull-left">Validation Support Modules</span>
+											<span class="pull-right">12.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../validation/schema_validator.html">
+											<span class="pull-left">Schema/Schematron Validator</span>
+											<span class="pull-right">12.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../validation/repository_validating_interceptor.html">
+											<span class="pull-left">Repository Validating Interceptor</span>
+											<span class="pull-right">12.5</span>
+										</a>
+									</li>
+									<li>
+										<a href="../validation/examples.html">
+											<span class="pull-left">Validation Examples</span>
+											<span class="pull-right">12.6</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Android
+								</h3>
+								<ul>
+									<li>
+										<a href="../android/client.html">
+											<span class="pull-left">Android Client</span>
+											<span class="pull-right">13.0</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Tools
+								</h3>
+								<ul>
+									<li>
+										<a href="../tools/hapi_fhir_cli.html">
+											<span class="pull-left">Command Line Interface (CLI) Tool</span>
+											<span class="pull-right">14.0</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Contributing to HAPI FHIR
+								</h3>
+								<ul>
+									<li>
+										<a href="../contributing/hacking_guide.html">
+											<span class="pull-left">Hacking Guide</span>
+											<span class="pull-right">15.0</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Appendix
+								</h3>
+								<ul>
+									<li>
+										<a href="../appendix/logging.html">
+											<span class="pull-left">Logging</span>
+											<span class="pull-right">16.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../appendix/faq.html">
+											<span class="pull-left">FAQ</span>
+											<span class="pull-right">16.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../appendix/javadocs.html">
+											<span class="pull-left">JavaDocs</span>
+											<span class="pull-right">16.2</span>
+										</a>
+									</li>
+								</ul>
+							
+						</div>
+						<div id="leftTocSearchResults">
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			
+			<div class="col-xs-12 col-md-9 primaryColumn" id="tocscroll">
+
+				<!-- Pager -->
+				<div class="hide-sm-and-below"><div class="marg-btm-20 docs-inpage-nav-container">
+	<div class="docs-inpage-nav-row">
+		<span class="docs-inpage-nav-cell">
+			<a href="converter.html" class="btn docs-inpage-nav-link">
+				<i class="fa fa-arrow-left"></i>
+				&nbsp;&nbsp;
+				3.4
+				&nbsp;&nbsp;
+				Version Converters
+			</a>
+		</span>
+		<span class="docs-inpage-nav-cell">
+
+			<div class="dropdown">
+			  <button class="btn btn-outline-info dropdown-toggle" role="button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+				  3.5
+				  &nbsp;&nbsp;
+				  Custom Structures
+			  </button>
+			  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				  <li class="dropdown-header" style="text-align: center;">
+					  Working With The FHIR Model
+				  </li>
+				  <li role="separator" class="divider"></li>
+				  
+					  <li>
+						  <a href="working_with_resources.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  3.0
+							  </span>
+							  Working With Resources
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="parsers.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  3.1
+							  </span>
+							  Parsing and Serializing
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="references.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  3.2
+							  </span>
+							  Resource References
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="profiles_and_extensions.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  3.3
+							  </span>
+							  Profiles and Extensions
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="converter.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  3.4
+							  </span>
+							  Version Converters
+						  </a>
+					  </li>
+				  
+					  <li style="background-color: #F0F0F0;">
+						  <a href="custom_structures.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  3.5
+							  </span>
+							  Custom Structures
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="narrative_generation.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  3.6
+							  </span>
+							  Narrative Generation
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="bundle_builder.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  3.7
+							  </span>
+							  Bundle Builder
+						  </a>
+					  </li>
+				  
+			  </div>
+			</div>
+		</span>
+		<span class="docs-inpage-nav-cell">
+			<a href="narrative_generation.html" class="btn docs-inpage-nav-link">
+				3.6
+				&nbsp;&nbsp;
+				Narrative Generation
+				&nbsp;&nbsp;
+				<i class="fa fa-arrow-right"></i>
+			</a>
+		</span>
+	</div>
+</div>
+</div>
+
+				<div class="hide-md-and-above mobile-header-links">
+					<a href="../introduction/table_of_contents.html" class="btn btn-primary">
+						<i class="fa fa-arrow-left"></i>
+						&nbsp;&nbsp;
+						Table of Contents
+					</a>
+					<p>Custom Structures</p>
+				</div>
+
+				<div class="docs-content">
+					<a name="custom-structures"></a>
+<section id="section0"><h1 data-toc-text="Custom Structures"><span class="helpHeaderSectionNumberBadge">3.5</span>Custom Structures</h1><a href="custom_structures.html#custom-structures" class="helpSectionLink">&nbsp;</a>
+<p>Typically, when working with FHIR the right way to provide your own extensions is to work with existing resource types and simply add your own extensions and/or constrain out fields you don't need.</p>
+<p>This process is described on the <a href="profiles_and_extensions.html">Profiles &amp; Extensions</a> page.</p>
+<p>There are situations however when you might want to create an entirely custom resource type. This feature should be used only if there is no other option, since it means you are creating a resource type that will not be interoperable with other FHIR implementations.</p>
+<p class="doc_info_bubble">
+This is an advanced features and isn't needed for most uses of HAPI FHIR. Feel free to skip this page. For a simpler way of interacting with resource extensions, see <a href="profiles_and_extensions.html">Profiles &amp; Extensions</a>.
+</p>
+</section>
+
+<a name="extending-fhir-resource-classes"></a>
+<section id="section1"><h1 data-toc-text="Extending FHIR Resource Classes"><span class="helpHeaderSectionNumberBadge">3.5.1</span>Extending FHIR Resource Classes</h1><a href="custom_structures.html#extending-fhir-resource-classes" class="helpSectionLink">&nbsp;</a>
+<p>The most elegant way of adding extensions to a resource is through the use of custom fields. The following example shows a custom type which extends the FHIR Patient resource definition through two extensions.</p>
+<pre><code class="language-java">import ca.uhn.fhir.model.api.annotation.Child;
+import ca.uhn.fhir.model.api.annotation.Description;
+import ca.uhn.fhir.model.api.annotation.Extension;
+import ca.uhn.fhir.model.api.annotation.ResourceDef;
+import ca.uhn.fhir.util.ElementUtil;
+import org.hl7.fhir.r4.model.DateTimeType;
+import org.hl7.fhir.r4.model.Patient;
+import org.hl7.fhir.r4.model.StringType;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Definition class for adding extensions to the built-in
+ * Patient resource type.
+ * 
+ * Note the &quot;profile&quot; attribute below, which indicates the URL/ID of the
+ * profile implemented by this resource. You are not required to supply this,
+ * but if you do it will be automatically populated in the resource meta
+ * tag if the resource is returned by a server.
+ */
+@ResourceDef(name=&quot;Patient&quot;, profile=&quot;http://example.com/StructureDefinition/mypatient&quot;)
+public class MyPatient extends Patient {
+
+   private static final long serialVersionUID = 1L;
+
+   /**
+    * Each extension is defined in a field. Any valid HAPI Data Type
+    * can be used for the field type. Note that the [name=&quot;&quot;] attribute
+    * in the @Child annotation needs to match the name for the bean accessor
+    * and mutator methods.
+    */
+   @Child(name=&quot;petName&quot;)   
+   @Extension(url=&quot;http://example.com/dontuse#petname&quot;, definedLocally=false, isModifier=false)
+   @Description(shortDefinition=&quot;The name of the patient's favourite pet&quot;)
+   private StringType myPetName;
+
+   /**
+    * The second example extension uses a List type to provide
+    * repeatable values. Note that a [max=] value has been placed in
+    * the @Child annotation.
+    * 
+    * Note also that this extension is a modifier extension
+    */
+   @Child(name=&quot;importantDates&quot;, max=Child.MAX_UNLIMITED)   
+   @Extension(url=&quot;http://example.com/dontuse#importantDates&quot;, definedLocally=false, isModifier=true)
+   @Description(shortDefinition=&quot;Some dates of note for this patient&quot;)
+   private List&lt;DateTimeType&gt; myImportantDates;
+
+   /**
+    * It is important to override the isEmpty() method, adding a check for any
+    * newly added fields. 
+    */
+   @Override
+   public boolean isEmpty() {
+      return super.isEmpty() &amp;&amp; ElementUtil.isEmpty(myPetName, myImportantDates);
+   }
+   
+   /********
+    * Accessors and mutators follow
+    * 
+    * IMPORTANT:
+    * Each extension is required to have an getter/accessor and a setter/mutator.
+    * You are highly recommended to create getters which create instances if they
+    * do not already exist, since this is how the rest of the HAPI FHIR API works. 
+    ********/
+   
+   /** Getter for important dates */
+   public List&lt;DateTimeType&gt; getImportantDates() {
+      if (myImportantDates==null) {
+         myImportantDates = new ArrayList&lt;DateTimeType&gt;();
+      }
+      return myImportantDates;
+   }
+
+   /** Getter for pet name */
+   public StringType getPetName() {
+      if (myPetName == null) {
+         myPetName = new StringType();
+      }
+      return myPetName;
+   }
+
+   /** Setter for important dates */
+   public void setImportantDates(List&lt;DateTimeType&gt; theImportantDates) {
+      myImportantDates = theImportantDates;
+   }
+
+   /** Setter for pet name */
+   public void setPetName(StringType thePetName) {
+      myPetName = thePetName;
+   }
+
+}
+</code></pre>
+<p>Using this custom type is as simple as instantiating the type and working with the new fields.</p>
+<pre><code class="language-java">MyPatient patient = new MyPatient();
+patient.setPetName(new StringType(&quot;Fido&quot;));
+patient.getImportantDates().add(new DateTimeType(&quot;2010-01-02&quot;));
+patient.getImportantDates().add(new DateTimeType(&quot;2014-01-26T11:11:11&quot;));
+
+patient.addName().setFamily(&quot;Smith&quot;).addGiven(&quot;John&quot;).addGiven(&quot;Quincy&quot;).addSuffix(&quot;Jr&quot;);
+
+IParser p = FhirContext.forDstu2().newXmlParser().setPrettyPrint(true);
+String messageString = p.encodeResourceToString(patient);
+
+System.out.println(messageString);
+</code></pre>
+<p>This example produces the following output:</p>
+<pre><code class="language-xml">&lt;Patient xmlns=&quot;http://hl7.org/fhir&quot;&gt;
+   &lt;modifierExtension url=&quot;http://example.com/dontuse#importantDates&quot;&gt;
+      &lt;valueDateTime value=&quot;2010-01-02&quot;/&gt;
+   &lt;/modifierExtension&gt;
+   &lt;modifierExtension url=&quot;http://example.com/dontuse#importantDates&quot;&gt;
+      &lt;valueDateTime value=&quot;2014-01-26T11:11:11&quot;/&gt;
+   &lt;/modifierExtension&gt;
+   &lt;extension url=&quot;http://example.com/dontuse#petname&quot;&gt;
+      &lt;valueString value=&quot;Fido&quot;/&gt;
+   &lt;/extension&gt;
+   &lt;name&gt;
+      &lt;family value=&quot;Smith&quot;/&gt;
+      &lt;given value=&quot;John&quot;/&gt;
+      &lt;given value=&quot;Quincy&quot;/&gt;
+      &lt;suffix value=&quot;Jr&quot;/&gt;
+   &lt;/name&gt;
+&lt;/Patient&gt;
+</code></pre>
+<p>Parsing messages using your new custom type is equally simple. These types can also be used as method return types in clients and servers.</p>
+<pre><code class="language-java">IParser parser = FhirContext.forDstu2().newXmlParser();
+MyPatient newPatient = parser.parseResource(MyPatient.class, messageString);
+</code></pre>
+</section>
+
+<a name="using-custom-types-in-a-client"></a>
+<section id="section2"><h1 data-toc-text="Using Custom Types in a Client"><span class="helpHeaderSectionNumberBadge">3.5.2</span>Using Custom Types in a Client</h1><a href="custom_structures.html#using-custom-types-in-a-client" class="helpSectionLink">&nbsp;</a>
+<p>If you are using a client and wish to use a specific custom structure, you may simply use the custom structure as you would a build in HAPI type.</p>
+<pre><code class="language-java">// Create an example patient
+MyPatient custPatient = new MyPatient();
+custPatient.addName().setFamily(&quot;Smith&quot;).addGiven(&quot;John&quot;);
+custPatient.setPetName(new StringType(&quot;Rover&quot;)); // populate the extension
+
+// Create the resource like normal
+client.create().resource(custPatient).execute();
+
+// You can also read the resource back like normal
+custPatient = client.read().resource(MyPatient.class).withId(&quot;123&quot;).execute();
+</code></pre>
+<p>You may also explicitly use custom types in searches and other operations which return resources.</p>
+<pre><code class="language-java">// Perform the search using the custom type
+Bundle bundle = client
+   .search()
+   .forResource(MyPatient.class)
+   .returnBundle(Bundle.class)
+   .execute();
+
+// Entries in the return bundle will use the given type
+MyPatient pat0 = (MyPatient) bundle.getEntry().get(0).getResource();
+</code></pre>
+<p>You can also explicitly declare a preferred response resource custom type. This is useful for some operations that do not otherwise declare their resource types in the method signature.</p>
+<pre><code class="language-java">//Perform the search using the custom type
+bundle = client
+   .history()
+   .onInstance(new IdType(&quot;Patient/123&quot;))
+   .andReturnBundle(Bundle.class)
+   .preferResponseType(MyPatient.class)
+   .execute();
+
+//Entries in the return bundle will use the given type
+MyPatient historyPatient0 = (MyPatient) bundle.getEntry().get(0).getResource();
+</code></pre>
+<a name="using-multiple-custom-types-in-a-client"></a>
+<h2>Using Multiple Custom Types in a Client</h2>
+<p>Sometimes you may not know in advance exactly which type you will be receiving. For example, there are Patient resources which conform to several different profiles on a server and you aren't sure which profile you will get back for a specific read, you can declare the &quot;primary&quot; type for a given profile.</p>
+<p>This is declared at the FhirContext level, and will apply to any clients created from this context (including clients created before the default was set).</p>
+<pre><code class="language-java">FhirContext ctx = FhirContext.forDstu3();
+
+// Instruct the context that if it receives a resource which
+// claims to conform to the given profile (by URL), it should
+// use the MyPatient type to parse this resource
+ctx.setDefaultTypeForProfile(&quot;http://example.com/StructureDefinition/mypatient&quot;, MyPatient.class);
+
+// You can declare as many default types as you like
+ctx.setDefaultTypeForProfile(&quot;http://foo.com/anotherProfile&quot;, CustomObservation.class);
+
+// Create a client
+IGenericClient client = ctx.newRestfulGenericClient(&quot;http://fhirtest.uhn.ca/baseDstu3&quot;);
+
+// You can also read the resource back like normal
+Patient patient = client.read().resource(Patient.class).withId(&quot;123&quot;).execute();
+if (patient instanceof MyPatient) {
+   // If the server supplied a resource which declared to conform
+   // to the given profile, MyPatient will have been returned so
+   // process it differently..
+}
+</code></pre>
+</section>
+
+<a name="using-custom-types-in-a-server"></a>
+<section id="section3"><h1 data-toc-text="Using Custom Types in a Server"><span class="helpHeaderSectionNumberBadge">3.5.3</span>Using Custom Types in a Server</h1><a href="custom_structures.html#using-custom-types-in-a-server" class="helpSectionLink">&nbsp;</a>
+<p>If you are using a client and wish to use a specific custom structure, you may simply use the custom structure as you would a build in HAPI type.</p>
+<pre><code class="language-java">// Create an example patient
+MyPatient custPatient = new MyPatient();
+custPatient.addName().setFamily(&quot;Smith&quot;).addGiven(&quot;John&quot;);
+custPatient.setPetName(new StringType(&quot;Rover&quot;)); // populate the extension
+
+// Create the resource like normal
+client.create().resource(custPatient).execute();
+
+// You can also read the resource back like normal
+custPatient = client.read().resource(MyPatient.class).withId(&quot;123&quot;).execute();
+</code></pre>
+</section>
+
+<a name="custom-composite-extension-classes"></a>
+<section id="section4"><h1 data-toc-text="Custom Composite Extension Classes"><span class="helpHeaderSectionNumberBadge">3.5.4</span>Custom Composite Extension Classes</h1><a href="custom_structures.html#custom-composite-extension-classes" class="helpSectionLink">&nbsp;</a>
+<p>The following example shows a resource containing a composite extension.</p>
+<pre><code class="language-java">@ResourceDef(name = &quot;Patient&quot;)
+public class CustomCompositeExtension extends Patient {
+
+   private static final long serialVersionUID = 1L;
+
+   /**
+    * A custom extension
+    */
+   @Child(name = &quot;foo&quot;)
+   @Extension(url=&quot;http://acme.org/fooParent&quot;, definedLocally = false, isModifier = false)
+   protected FooParentExtension fooParentExtension;
+
+   public FooParentExtension getFooParentExtension() {
+      return fooParentExtension;
+   }
+
+   @Override
+   public boolean isEmpty() {
+      return super.isEmpty() &amp;&amp; ElementUtil.isEmpty(fooParentExtension);
+   }
+
+   public void setFooParentExtension(FooParentExtension theFooParentExtension) {
+      fooParentExtension = theFooParentExtension;
+   }
+
+   @Block
+   public static class FooParentExtension extends BackboneElement {
+
+      private static final long serialVersionUID = 4522090347756045145L;
+
+      @Child(name = &quot;childA&quot;)
+      @Extension(url = &quot;http://acme.org/fooChildA&quot;, definedLocally = false, isModifier = false)
+      private StringType myChildA;
+
+      @Child(name = &quot;childB&quot;)
+      @Extension(url = &quot;http://acme.org/fooChildB&quot;, definedLocally = false, isModifier = false)
+      private StringType myChildB;
+
+      @Override
+      public FooParentExtension copy() {
+         FooParentExtension copy = new FooParentExtension();
+         copy.myChildA = myChildA;
+         copy.myChildB = myChildB;
+         return copy;
+      }
+
+      @Override
+      public boolean isEmpty() {
+         return super.isEmpty() &amp;&amp; ElementUtil.isEmpty(myChildA, myChildB);
+      }
+
+      public StringType getChildA() {
+         return myChildA;
+      }
+
+      public StringType getChildB() {
+         return myChildB;
+      }
+
+      public void setChildA(StringType theChildA) {
+         myChildA = theChildA;
+      }
+
+      public void setChildB(StringType theChildB) {
+         myChildB = theChildB;
+      }
+
+   }
+
+}
+</code></pre>
+<p>This could be used to create a resource such as the	following:</p>
+<pre><code class="language-xml">&lt;Patient xmlns=&quot;http://hl7.org/fhir&quot;&gt;
+   &lt;id value=&quot;123&quot;/&gt;
+   &lt;extension url=&quot;http://acme.org/fooParent&quot;&gt;
+      &lt;extension url=&quot;http://acme.org/fooChildA&quot;&gt;
+         &lt;valueString value=&quot;ValueA&quot;/&gt;
+      &lt;/extension&gt;
+      &lt;extension url=&quot;http://acme.org/fooChildB&quot;&gt;
+         &lt;valueString value=&quot;ValueB&quot;/&gt;
+      &lt;/extension&gt;
+   &lt;/extension&gt;
+&lt;/Patient&gt;
+</code></pre>
+</section>
+
+<a name="custom-resource-structure"></a>
+<section id="section5"><h1 data-toc-text="Custom Resource Structure"><span class="helpHeaderSectionNumberBadge">3.5.5</span>Custom Resource Structure</h1><a href="custom_structures.html#custom-resource-structure" class="helpSectionLink">&nbsp;</a>
+<p>The following example shows a custom resource structure class creating an entirely new resource type as opposed to simply extending an existing one. Note that this is allowable in FHIR, but is <strong>highly discouraged</strong> as they are by definition not good for interoperability.</p>
+<pre><code class="language-java">import ca.uhn.fhir.context.FhirVersionEnum;
+import ca.uhn.fhir.model.api.annotation.Child;
+import ca.uhn.fhir.model.api.annotation.ResourceDef;
+import ca.uhn.fhir.util.ElementUtil;
+import org.hl7.fhir.dstu3.model.DomainResource;
+import org.hl7.fhir.dstu3.model.ResourceType;
+import org.hl7.fhir.dstu3.model.StringType;
+import org.hl7.fhir.dstu3.model.Type;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * This is an example of a custom resource that also uses a custom
+ * datatype.
+ * 
+ * Note that we are extending DomainResource for an STU3
+ * resource. For DSTU2 it would be BaseResource. 
+ */
+@ResourceDef(name = &quot;CustomResource&quot;, profile = &quot;http://hl7.org/fhir/profiles/custom-resource&quot;)
+public class CustomResource extends DomainResource {
+
+   private static final long serialVersionUID = 1L;
+
+   /**
+    * We give the resource a field with name &quot;television&quot;. This field has no
+    * specific type, so it's a choice[x] field for any type.
+    */
+   @Child(name=&quot;television&quot;, min=1, max=Child.MAX_UNLIMITED, order=0)
+   private List&lt;Type&gt; myTelevision;
+
+   /**
+    * We'll give it one more field called &quot;dogs&quot;
+    */
+   @Child(name = &quot;dogs&quot;, min=0, max=1, order=1)
+   private StringType myDogs;
+   
+   @Override
+   public CustomResource copy() {
+      CustomResource retVal = new CustomResource();
+      super.copyValues(retVal);
+      retVal.myTelevision = myTelevision;
+      retVal.myDogs = myDogs;
+      return retVal;
+   }
+
+   public List&lt;Type&gt; getTelevision() {
+      if (myTelevision == null) {
+         myTelevision = new ArrayList&lt;Type&gt;();
+      }
+      return myTelevision;
+   }
+
+   public StringType getDogs() {
+      return myDogs;
+   }
+
+   @Override
+   public ResourceType getResourceType() {
+      return null;
+   }
+
+   @Override
+   public FhirVersionEnum getStructureFhirVersionEnum() {
+      return FhirVersionEnum.DSTU3;
+   }
+
+   @Override
+   public boolean isEmpty() {
+      return ElementUtil.isEmpty(myTelevision, myDogs);
+   }
+
+   public void setTelevision(List&lt;Type&gt; theValue) {
+      this.myTelevision = theValue;
+   }
+
+   public void setDogs(StringType theDogs) {
+      myDogs = theDogs;
+   }
+
+}
+</code></pre>
+<a name="custom-datatype-structure"></a>
+<h2>Custom Datatype Structure</h2>
+<p>The following example shows a custom datatype structure class:</p>
+<pre><code class="language-java">import ca.uhn.fhir.model.api.annotation.Child;
+import ca.uhn.fhir.model.api.annotation.DatatypeDef;
+import ca.uhn.fhir.util.ElementUtil;
+import org.hl7.fhir.dstu3.model.DateTimeType;
+import org.hl7.fhir.dstu3.model.StringType;
+import org.hl7.fhir.dstu3.model.Type;
+import org.hl7.fhir.instance.model.api.ICompositeType;
+
+/**
+ * This is an example of a custom datatype. 
+ * 
+ * This is an STU3 example so it extends Type and implements ICompositeType. For
+ * DSTU2 it would extend BaseIdentifiableElement and implement ICompositeDatatype.
+ */
+@DatatypeDef(name=&quot;CustomDatatype&quot;)
+public class CustomDatatype extends Type implements ICompositeType {
+
+   private static final long serialVersionUID = 1L;
+   
+   @Child(name = &quot;date&quot;, order = 0, min = 1, max = 1)
+   private DateTimeType myDate;
+
+   @Child(name = &quot;kittens&quot;, order = 1, min = 1, max = 1)
+   private StringType myKittens;
+
+   public DateTimeType getDate() {
+      if (myDate == null)
+         myDate = new DateTimeType();
+      return myDate;
+   }
+
+   public StringType getKittens() {
+      return myKittens;
+   }
+
+   @Override
+   public boolean isEmpty() {
+      return ElementUtil.isEmpty(myDate, myKittens);
+   }
+
+   public CustomDatatype setDate(DateTimeType theValue) {
+      myDate = theValue;
+      return this;
+   }
+
+   public CustomDatatype setKittens(StringType theKittens) {
+      myKittens = theKittens;
+      return this;
+   }
+
+   @Override
+   protected CustomDatatype typedCopy() {
+      CustomDatatype retVal = new CustomDatatype();
+      super.copyValues(retVal);
+      retVal.myDate = myDate;
+      return retVal;
+   }
+}
+</code></pre>
+<a name="using-the-custom-structure"></a>
+<h2>Using the Custom Structure</h2>
+<p>And now let's try the custom structure out:</p>
+<pre><code class="language-java">// Create a context. Note that we declare the custom types we'll be using
+// on the context before actually using them
+FhirContext ctx = FhirContext.forDstu3();
+ctx.registerCustomType(CustomResource.class);
+ctx.registerCustomType(CustomDatatype.class);
+
+// Now let's create an instance of our custom resource type
+// and populate it with some data
+CustomResource res = new CustomResource();
+
+// Add some values, including our custom datatype
+DateType value0 = new DateType(&quot;2015-01-01&quot;);
+res.getTelevision().add(value0);
+
+CustomDatatype value1 = new CustomDatatype();
+value1.setDate(new DateTimeType(new Date()));
+value1.setKittens(new StringType(&quot;FOO&quot;));
+res.getTelevision().add(value1);
+
+res.setDogs(new StringType(&quot;Some Dogs&quot;));
+
+// Now let's serialize our instance
+String output = ctx.newXmlParser().setPrettyPrint(true).encodeResourceToString(res);
+System.out.println(output);
+</code></pre>
+<p>This produces the following output (some spacing has been added for readability):</p>
+<pre><code class="language-xml">&lt;CustomResource xmlns=&quot;http://hl7.org/fhir&quot;&gt;
+   &lt;meta&gt;
+      &lt;profile value=&quot;http://hl7.org/fhir/profiles/custom-resource&quot;/&gt;
+   &lt;/meta&gt;
+   
+   &lt;televisionDate value=&quot;2015-01-01&quot;/&gt;
+   &lt;televisionCustomDatatype&gt;
+      &lt;date value=&quot;2016-05-22T08:30:36-04:00&quot;/&gt;
+      &lt;kittens value=&quot;FOO&quot;/&gt;
+   &lt;/televisionCustomDatatype&gt;
+   
+   &lt;dogs value=&quot;Some Dogs&quot;/&gt;
+   
+&lt;/CustomResource&gt;
+</code></pre>
+</section>
+
+
+				</div>
+
+				<div class="hide-sm-and-below"><div class="marg-btm-20 docs-inpage-nav-container">
+	<div class="docs-inpage-nav-row">
+		<span class="docs-inpage-nav-cell">
+			<a href="converter.html" class="btn docs-inpage-nav-link">
+				<i class="fa fa-arrow-left"></i>
+				&nbsp;&nbsp;
+				3.4
+				&nbsp;&nbsp;
+				Version Converters
+			</a>
+		</span>
+		<span class="docs-inpage-nav-cell">
+
+			<div class="dropdown">
+			  <button class="btn btn-outline-info dropdown-toggle" role="button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+				  3.5
+				  &nbsp;&nbsp;
+				  Custom Structures
+			  </button>
+			  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				  <li class="dropdown-header" style="text-align: center;">
+					  Working With The FHIR Model
+				  </li>
+				  <li role="separator" class="divider"></li>
+				  
+					  <li>
+						  <a href="working_with_resources.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  3.0
+							  </span>
+							  Working With Resources
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="parsers.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  3.1
+							  </span>
+							  Parsing and Serializing
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="references.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  3.2
+							  </span>
+							  Resource References
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="profiles_and_extensions.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  3.3
+							  </span>
+							  Profiles and Extensions
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="converter.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  3.4
+							  </span>
+							  Version Converters
+						  </a>
+					  </li>
+				  
+					  <li style="background-color: #F0F0F0;">
+						  <a href="custom_structures.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  3.5
+							  </span>
+							  Custom Structures
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="narrative_generation.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  3.6
+							  </span>
+							  Narrative Generation
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="bundle_builder.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  3.7
+							  </span>
+							  Bundle Builder
+						  </a>
+					  </li>
+				  
+			  </div>
+			</div>
+		</span>
+		<span class="docs-inpage-nav-cell">
+			<a href="narrative_generation.html" class="btn docs-inpage-nav-link">
+				3.6
+				&nbsp;&nbsp;
+				Narrative Generation
+				&nbsp;&nbsp;
+				<i class="fa fa-arrow-right"></i>
+			</a>
+		</span>
+	</div>
+</div>
+</div>
+				
+
+	<!-- footer -->
+	<footer class="page-footer">
+		<div class="container-fluid text-center text-md-left">
+			<hr class="bottom-hr">
+			<div class="row pt-3 pb-3">
+				<div class="col-md-3 text-center">
+					<img src="../../images/logos/raccoon-forwards.png" alt="raccoon logo without text" width="100">
+				</div>
+				<div class="col-md-2">
+					<p class="footer-heading">HAPI HAPI</p>
+					<ul class="list-unstyled">
+						<li><a href="https://hapifhir.io/hapi-fhir/">Home</a></li>
+						<li><a href="../getting_started/downloading_and_importing.html">Download</a></li>
+						<li><a href="../introduction/changelog.html">Changelog</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/license.html">License</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/blog/">News</a></li>
+					</ul>
+					<p class="footer-heading">TEST SERVER</p>
+					<ul class="list-unstyled">
+						<li><a href="http://hapi.fhir.org/" target="_blank">Public Test Server</a></li>
+					</ul>
+					<p class="footer-heading">SUPPORT</p>
+					<ul class="list-unstyled">
+						<li><a href="https://smilecdr.com/" target="_blank">Smile CDR</a></li>
+					</ul>
+				</div>
+				<div class="col-md-2">
+					<p class="footer-heading">USING HAPI</p>
+					<ul class="list-unstyled">
+						<li><a href="../index.html">Documentation</a></li>
+						<li><a href="#">Command Line Tool (cli)</a></li>
+					</ul>
+					<p class="footer-heading">STARTER PROJECTS</p>
+					<ul class="list-unstyled">
+						<li><a href="https://github.com/FirelyTeam/fhirstarters/tree/master/java/hapi-fhirstarters-client-skeleton">Client</a></li>
+						<li><a href="https://github.com/FirelyTeam/fhirstarters/tree/master/java/hapi-fhirstarters-rest-server-skeleton">Plain Server</a></li>
+						<li><a href="https://github.com/hapifhir/hapi-fhir-jpaserver-starter">JPA Server</a></li>
+					</ul>
+				</div>
+				<div class="col-md-2">
+					<p class="footer-heading">JAVADOCS</p>
+					<ul class="list-unstyled">
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/">Core API</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-structures-dstu2/">Model API (DSTU2)</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-structures-dstu3/">Model API (DSTU3)</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-structures-r4/">Model API (R4)</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-structures-r5/">Model API (R5)</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-client/">Client API</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-server/">Plain Server - API</a></li>
+                  <li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-server-mdm/">Plain Server - MDM API</a></li>
+                  <li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-server-openapi/">Plain Server - OpenAPI</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-storage/">JPA Server - API</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-jpaserver-model/">JPA Server - Model</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-jpaserver-searchparam/">JPA Server - Search Param Support</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-jpaserver-subscription/">JPA Server - Subscription</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-jpaserver-base/">JPA Server - Base</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-validation/">Validation API</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-converter/">Version Converter API</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-jaxrsserver-base/">Server API (JAX-RS)</a></li>
+					</ul>
+				</div>
+				<div class="col-md-3">
+					<p class="footer-heading">GET HELP</p>
+					<ul class="list-unstyled">
+						<li><a href="https://github.com/jamesagnew/hapi-fhir/wiki/Getting-Help" target="_blank">How to Ask for Help (read this first!)</a></li>
+						<li><a href="https://groups.google.com/d/forum/hapi-fhir" target="_blank">Google Group (Ask Questions)</a></li>
+						<li><a href="https://github.com/jamesagnew/hapi-fhir/issues" target="_blank">Issue Tracker (Report Bugs/Request Features)</a></li>
+						<li><a href="https://chat.fhir.org/" target="_blank">FHIR.org Chat (Live Chat with FHIR Implementors)</a></li>
+						<li><a href="../appendix/faq.html">Frequently Asked Questions (FAQ)</a></li>
+					</ul>
+					<p class="footer-heading">CONTRIBUTE</p>
+					<ul class="list-unstyled">
+						<li><a href="../contributing/hacking_guide.html">Guide to Hacking HAPI</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/contributors.html">Contributors</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<!-- footer copyright -->
+		<div class="footer-copyright text-center py-3">
+			<p>Updated: 2021-11-23T14:49:28.319Z — Made with <i style="color: #FF6600;" class="fas fa-heart"></i> in <a href="https://www.cbc.ca/news/canada/toronto/raccoon-city-wildlife-in-toronto-1.2742231"><img src="https://hapifhir.io/hapi-fhir/images/icons/raccoon.svg" alt="Raccoon" width="20"></a>
+		</div>
+
+	</footer>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-1395874-5"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-1395874-5');
+	</script>
+
+
+			</div>
+
+		</div>
+
+	</div>
+
+
+<script type="application/javascript">
+
+	$(function () {
+
+		/*
+		 * Build the TOC links on the right hand side by
+		 * scanning all of the sections in the documentation
+		 */
+		const sections = [];
+		const navLinks = [];
+		var nav = $('<ul class="nav flex-column">');
+		$('#toc').append(nav);
+
+		$('#tocscroll section').each(function () {
+			sections.push($(this));
+			let sectionName = $(this).find('h1').first().attr('data-toc-text');
+			let sectionId = $(this).prevAll('a').attr('name');
+			let navLink = $('<a class="nav-link" href="#' + sectionId + '">' + sectionName + '</a>');
+			navLinks.push(navLink);
+			nav.append($('<li class="nav-item">').append(navLink));
+		});
+
+		/*
+		 * Update the active link on the right hand side TOC when the
+		 * user scrolls up and down the page. Create a function for this,
+		 * then call the function once and register it to call again
+		 * any time the user scrolls
+		 */
+		function updateTocScroll() {
+			const sectionOffset = $('#tocscroll').offset().top;
+			let visible = false;
+			for (var idx = 0; idx < sections.length; idx++) {
+				var sectionTop = sections[idx].offset().top - sectionOffset + 20;
+				if (sectionTop >= 0 && !visible || (idx == sections.length -1 && !visible)) {
+					navLinks[idx].addClass('active');
+					visible = true;
+				} else {
+					navLinks[idx].removeClass('active');
+				}
+			}
+
+		}
+
+		$('#tocscroll').scroll(updateTocScroll);
+		updateTocScroll();
+
+		/*
+	    * When the page first loads, automatically scroll the left docs TOC
+	    * scroller to the actively displayed page.
+	    */
+		var activetop = $('.activechapter').offset().top - $('#tocscroll').offset().top - 30;
+		if (activetop < 100) {
+			activetop = 0;
+		}
+		$('#navcolumn').scrollTop(activetop);
+
+		function updateNavScroll() {
+			if ($('#navcolumn').scrollTop() < 100) {
+				$('.button-scroll-up-to-search').fadeOut(500);
+			} else {
+				$('.button-scroll-up-to-search').fadeIn(500);
+			}
+		}
+
+		updateNavScroll();
+		$('#navcolumn').scroll(updateNavScroll);
+
+	});
+</script>
+
+
+
+<script type="application/javascript">
+	function hover(element) {
+		element.setAttribute('src', '../../../images/icons/link-grey.html');
+	}
+
+	function unhover(element) {
+		element.setAttribute('src', '../../../images/icons/smiley-grey.html');
+	}
+
+   new ClipboardJS('.clipboardCopyBtn');
+
+</script>
+</body>
+
+
+<!-- Mirrored from hapifhir.io/hapi-fhir/docs/model/custom_structures.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 02 Dec 2021 00:00:27 GMT -->
+</html>
+

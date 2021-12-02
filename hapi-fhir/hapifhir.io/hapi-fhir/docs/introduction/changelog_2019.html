@@ -1,0 +1,4861 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from hapifhir.io/hapi-fhir/docs/introduction/changelog_2019.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 01 Dec 2021 23:59:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+	<title>Changelog: 2019 - HAPI FHIR Documentation</title>
+
+	
+
+	<!-- required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- objectgraph -->
+	
+
+	<!-- Favicon -->
+	<link rel="icon" href="https://smilecdr.com/favicon.ico">
+
+	<!-- font, icons -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+	<!-- jquery, bootstrap script for dropdown and hover-->
+	<script src="../../resources/jquery/dist/jquery.min.js"></script>
+	<script src="../../resources/popper.js/dist/umd/popper.min.js"></script>
+	<script src="../../resources/bootstrap/dist/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="../../resources/bootstrap/dist/css/bootstrap.min.css"/>
+
+	<!-- fontawesome -->
+	<script src="../../resources/font-awesome/js/all.min.js" data-auto-replace-svg="nest"></script>
+	<link rel="stylesheet" media="screen" href="../../resources/font-awesome/css/fontawesome.min.css" />
+
+	<!-- Clipboard.js -->
+	<script src="../../resources/clipboard.js/clipboard.min.js"></script>
+
+	
+	<script src="../../resources/prismjs/prism.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-bash.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-http.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-java.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-javascript.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-json.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-nginx.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-properties.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-sql.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/plugins/toolbar/prism-toolbar.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/plugins/command-line/prism-command-line.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/plugins/line-numbers/prism-line-numbers.js" type="text/javascript"></script>
+	<link href="../../resources/prismjs/themes/prism.css" rel="stylesheet" type="text/css"/>
+	<link href="../../resources/prismjs/themes/prism-coy.css" rel="stylesheet" type="text/css"/>
+	<link href="../../resources/prismjs/plugins/toolbar/prism-toolbar.css" rel="stylesheet" type="text/css"/>
+	<link href="../../resources/prismjs/plugins/line-numbers/prism-line-numbers.css" rel="stylesheet" type="text/css"/>
+
+	<link rel="stylesheet" type="text/css" href="../../css/hapifhir.css">
+
+
+
+
+	<!-- css sheet -->
+	<link href="../../resources/cdr-web-resources/css/help-common.css" rel="stylesheet" type="text/css"/>
+	<link href="../../css/pages.css" rel="stylesheet" type="text/css"/>
+	<link href="../../css/docs.css" rel="stylesheet" type="text/css"/>
+
+</head>
+
+<body>
+
+	
+	<header class="header" id="header">
+		<nav class="navbar fixed-top navbar-expand-sm navbar-light navbar-greyshadow">
+			<a class="navbar-brand text-center" href="https://hapifhir.io/hapi-fhir/" title="Home">
+				
+				<img src="../../images/logos/small-logo.png" alt="HAPI FHIR logo" width="156" id="collapsed-logo">
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<script type="application/javascript">
+				$(function(){
+					$(".dropdown").hover(
+						function() {
+							if ($( window ).width() >= 960) {
+								$('.dropdown-menu', this).stop(true, true).fadeIn("fast");
+								$(this).toggleClass('open');
+								$('b', this).toggleClass("caret caret-up");
+							} else {
+								$('.dropdown-menu', this).css("display", "");
+							}
+						},
+						function() {
+							if ($( window ).width() >= 960) {
+								$('.dropdown-menu', this).stop(true, true).fadeOut("fast");
+								$(this).toggleClass('open');
+								$('b', this).toggleClass("caret caret-up");
+							}
+						});
+				});
+			</script>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="nav navbar-nav ml-auto nav-text">
+					<li class="nav-item"><a class="nav-link" href="https://smilecdr.com/">Support</a></li>
+					<li class="nav-item"><a class="nav-link" target="_blank" href="https://github.com/jamesagnew/hapi-fhir">Github</a></li>
+					<li class="nav-item"><a class="nav-link" href="https://hapifhir.io/hapi-fhir/blog/">News</a></li>
+					<li class="nav-item"><a class="nav-link" href="../index.html">Documentation</a></li>
+					<li class="nav-item dropdown">
+						<a class="nav-link nav-link-dropdown" data-toggle="dropdown" id="navbarGETHELP" href="#">Get Help <i class="nav-chevron fas fa-chevron-down"></i></a>
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarGETHELP" id="navbarGETHELPDIV">
+							<a href="https://github.com/jamesagnew/hapi-fhir/wiki/Getting-Help" class="dropdown-item">Getting Help (read this first!)</a>
+							<a href="https://groups.google.com/d/forum/hapi-fhir" class="dropdown-item">Google Group (ask questions)</a>
+							<a href="https://github.com/jamesagnew/hapi-fhir/issues" class="dropdown-item">Issue Tracker (report bugs/request features)</a>
+							<a href="https://chat.fhir.org/" class="dropdown-item">chat.fhir.org (live chat with FHIR implementers)</a>
+							<a href="../appendix/faq.html" class="dropdown-item">Frequently Asked Questions (FAQ)</a>
+						</div>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link nav-link-dropdown" data-toggle="dropdown" id="navbarTESTSERVERS" href="#">Test Server <i class="nav-chevron fas fa-chevron-down"></i></a>
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarTESTSERVERS" id="navbarTESTSERVERSDIV">
+							<a href="http://hapi.fhir.org/" class="dropdown-item">HAPI FHIR Public Test Server</a>
+						</div>
+					</li>
+
+				</ul>
+			</div>
+		</nav>
+	</header>
+
+	
+	<script>
+		var scrollAfter = 10;
+	</script>
+
+	
+
+
+
+	<!-- "Scroll up the the search box" button -->
+	<button class="btn btn-secondary hide-sm-and-below button-scroll-up-to-search"
+			  onclick="$('#navcolumn').scrollTop(0); $('#button-ftsearch').focus();">
+		Search&nbsp;<i class="fa fa-search"></i>
+	</button>
+
+	<!-- Right column with the in-page TOC (not visible on mobile) -->
+	<div class="rightNavContainer hide-sm-and-below" id="pageNav">
+		<nav id="toc"></nav>
+	</div>
+
+	<div class="container-fluid grid">
+		<div class="row">
+			
+			<div class="hide-sm-and-below col-md-3 primaryColumn" id="navcolumn">
+				<div>
+					<div class="index-sidebar" id="side-nav">
+
+						<!-- Fullltext Search box -->
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Search" aria-label="Search"
+									 aria-describedby="button-ftsearch-clear" style="margin-top: 0px;" id="button-ftsearch">
+							<div class="input-group-append">
+								<button class="btn btn-outline-info" type="button" id="button-ftsearch-clear"
+										  onclick="javascript: $('#button-ftsearch').val(''); delayFunction(updateSearchFunction, 500);">
+									<i class="fa fa-times-circle"></i>
+								</button>
+							</div>
+							<script type="application/javascript">
+								var delayFunction = (function () {
+									var timer = 0;
+									return function (callback, ms) {
+										if (!$('#button-ftsearch').val()) {
+											$('#leftTocSearchResults').hide();
+											$('#leftTocView').show();
+										} else {
+											$('#leftTocView').hide();
+											$('#leftTocSearchResults').show();
+											$('#leftTocSearchResults').empty();
+											$('#leftTocSearchResults').append($('<i class="fa fa-spinner fa-spin" style="margin-top: 20px; font-size:24px;"></i>'));
+										}
+										clearTimeout(timer);
+										timer = setTimeout(callback, ms);
+									};
+								})();
+
+								function updateSearchFunction() {
+									if (!$('#button-ftsearch').val()) {
+										$('#leftTocSearchResults').hide();
+										$('#leftTocView').show();
+									} else {
+										$('#leftTocView').hide();
+										$('#leftTocSearchResults').show();
+										$.get("/hapi-fhir/docsearch", {
+											term: $('#button-ftsearch').val()
+										}, function (data) {
+											$('#leftTocSearchResults').empty();
+
+											let leftTocUl = null;
+											let leftTocHeader = null;
+											for (var idx = 0; idx < data.length; idx++) {
+												if (leftTocHeader == null || leftTocHeader.text() !== data[idx].sectionTitle) {
+													leftTocHeader = $('<h3>');
+													leftTocHeader.text(data[idx].sectionTitle);
+													$('#leftTocSearchResults').append(leftTocHeader);
+													leftTocUl = $('<ul>');
+													$('#leftTocSearchResults').append(leftTocUl);
+												}
+												let nextLink = $('<a>', {
+													href: "/hapi-fhir/docs/" + data[idx].page + ".html"
+												});
+												nextLink.text(data[idx].title);
+
+												let nextLinkLi = $('<li>').append(nextLink);
+												leftTocUl.append(nextLinkLi);
+											}
+										}, 'json');
+									}
+								}
+
+								$('#button-ftsearch').keyup(function () {
+									delayFunction(updateSearchFunction, 500);
+								});
+
+								// Clear the search box if the page is reloaded
+								$(function () {
+									$('#button-ftsearch').val('');
+								});
+
+							</script>
+						</div>
+
+						<div id="leftTocView">
+							
+								<h3 class="activechapter">
+									Welcome to HAPI FHIR
+								</h3>
+								<ul>
+									<li>
+										<a href="table_of_contents.html">
+											<span class="pull-left">Table of Contents</span>
+											<span class="pull-right">1.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="changelog.html">
+											<span class="pull-left">Changelog: 2021</span>
+											<span class="pull-right">1.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="changelog_2020.html">
+											<span class="pull-left">Changelog: 2020</span>
+											<span class="pull-right">1.2</span>
+										</a>
+									</li>
+									<li class="active-side">
+										<a href="changelog_2019.html">
+											<span class="pull-left">Changelog: 2019</span>
+											<span class="pull-right">1.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="changelog_2018.html">
+											<span class="pull-left">Changelog: 2018</span>
+											<span class="pull-right">1.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="changelog_2017.html">
+											<span class="pull-left">Changelog: 2017</span>
+											<span class="pull-right">1.5</span>
+										</a>
+									</li>
+									<li>
+										<a href="changelog_2016.html">
+											<span class="pull-left">Changelog: 2016</span>
+											<span class="pull-right">1.6</span>
+										</a>
+									</li>
+									<li>
+										<a href="changelog_2015.html">
+											<span class="pull-left">Changelog: 2015</span>
+											<span class="pull-right">1.7</span>
+										</a>
+									</li>
+									<li>
+										<a href="changelog_2014.html">
+											<span class="pull-left">Changelog: 2014</span>
+											<span class="pull-right">1.8</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Getting Started
+								</h3>
+								<ul>
+									<li>
+										<a href="../getting_started/introduction.html">
+											<span class="pull-left">Introduction</span>
+											<span class="pull-right">2.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../getting_started/versions.html">
+											<span class="pull-left">FHIR and HAPI FHIR Versions</span>
+											<span class="pull-right">2.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../getting_started/modules.html">
+											<span class="pull-left">HAPI FHIR Modules</span>
+											<span class="pull-right">2.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../getting_started/downloading_and_importing.html">
+											<span class="pull-left">Downloading and Importing</span>
+											<span class="pull-right">2.3</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Working With The FHIR Model
+								</h3>
+								<ul>
+									<li>
+										<a href="../model/working_with_resources.html">
+											<span class="pull-left">Working With Resources</span>
+											<span class="pull-right">3.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../model/parsers.html">
+											<span class="pull-left">Parsing and Serializing</span>
+											<span class="pull-right">3.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../model/references.html">
+											<span class="pull-left">Resource References</span>
+											<span class="pull-right">3.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../model/profiles_and_extensions.html">
+											<span class="pull-left">Profiles and Extensions</span>
+											<span class="pull-right">3.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../model/converter.html">
+											<span class="pull-left">Version Converters</span>
+											<span class="pull-right">3.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../model/custom_structures.html">
+											<span class="pull-left">Custom Structures</span>
+											<span class="pull-right">3.5</span>
+										</a>
+									</li>
+									<li>
+										<a href="../model/narrative_generation.html">
+											<span class="pull-left">Narrative Generation</span>
+											<span class="pull-right">3.6</span>
+										</a>
+									</li>
+									<li>
+										<a href="../model/bundle_builder.html">
+											<span class="pull-left">Bundle Builder</span>
+											<span class="pull-right">3.7</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Client
+								</h3>
+								<ul>
+									<li>
+										<a href="../client/introduction.html">
+											<span class="pull-left">Introduction</span>
+											<span class="pull-right">4.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../client/get_started.html">
+											<span class="pull-left">Get Started ⚡</span>
+											<span class="pull-right">4.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../client/generic_client.html">
+											<span class="pull-left">Generic (Fluent) Client</span>
+											<span class="pull-right">4.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../client/annotation_client.html">
+											<span class="pull-left">Annotation Client</span>
+											<span class="pull-right">4.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../client/client_configuration.html">
+											<span class="pull-left">Client Configuration</span>
+											<span class="pull-right">4.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../client/examples.html">
+											<span class="pull-left">Client Examples</span>
+											<span class="pull-right">4.5</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Plain Server
+								</h3>
+								<ul>
+									<li>
+										<a href="../server_plain/server_types.html">
+											<span class="pull-left">REST Server Types</span>
+											<span class="pull-right">5.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/introduction.html">
+											<span class="pull-left">Plain Server Introduction</span>
+											<span class="pull-right">5.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/get_started.html">
+											<span class="pull-left">Get Started ⚡</span>
+											<span class="pull-right">5.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/resource_providers.html">
+											<span class="pull-left">Resource Providers and Plain Providers</span>
+											<span class="pull-right">5.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/rest_operations.html">
+											<span class="pull-left">REST Operations: Overview</span>
+											<span class="pull-right">5.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/rest_operations_search.html">
+											<span class="pull-left">REST Operations: Search</span>
+											<span class="pull-right">5.5</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/rest_operations_operations.html">
+											<span class="pull-left">REST Operations: Extended Operations</span>
+											<span class="pull-right">5.6</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/paging.html">
+											<span class="pull-left">Paging Search Results</span>
+											<span class="pull-right">5.7</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/web_testpage_overlay.html">
+											<span class="pull-left">Web Testpage Overlay</span>
+											<span class="pull-right">5.8</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/multitenancy.html">
+											<span class="pull-left">Multitenancy</span>
+											<span class="pull-right">5.9</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/jax_rs.html">
+											<span class="pull-left">JAX-RS Support</span>
+											<span class="pull-right">5.10</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/customizing_the_capabilitystatement.html">
+											<span class="pull-left">Customizing the CapabilityStatement</span>
+											<span class="pull-right">5.11</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/openapi.html">
+											<span class="pull-left">OpenAPI / Swagger</span>
+											<span class="pull-right">5.12</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									JPA Server
+								</h3>
+								<ul>
+									<li>
+										<a href="../server_jpa/introduction.html">
+											<span class="pull-left">Introduction</span>
+											<span class="pull-right">6.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/get_started.html">
+											<span class="pull-left">Get Started ⚡</span>
+											<span class="pull-right">6.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/architecture.html">
+											<span class="pull-left">Architecture</span>
+											<span class="pull-right">6.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/schema.html">
+											<span class="pull-left">Database Schema</span>
+											<span class="pull-right">6.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/configuration.html">
+											<span class="pull-left">Configuration</span>
+											<span class="pull-right">6.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/search.html">
+											<span class="pull-left">Search</span>
+											<span class="pull-right">6.5</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/performance.html">
+											<span class="pull-left">Performance</span>
+											<span class="pull-right">6.6</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/upgrading.html">
+											<span class="pull-left">Upgrade Guide</span>
+											<span class="pull-right">6.7</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/diff.html">
+											<span class="pull-left">Diff Operation</span>
+											<span class="pull-right">6.8</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/lastn.html">
+											<span class="pull-left">LastN Operation</span>
+											<span class="pull-right">6.9</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/elastic.html">
+											<span class="pull-left">Lucene/Elasticsearch Indexing</span>
+											<span class="pull-right">6.10</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/terminology.html">
+											<span class="pull-left">Terminology</span>
+											<span class="pull-right">6.11</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									JPA Server: MDM
+								</h3>
+								<ul>
+									<li>
+										<a href="../server_jpa_mdm/mdm.html">
+											<span class="pull-left">MDM Getting Started</span>
+											<span class="pull-right">7.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_mdm/mdm_rules.html">
+											<span class="pull-left">MDM Rules</span>
+											<span class="pull-right">7.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_mdm/mdm_eid.html">
+											<span class="pull-left">MDM Enterprise Identifiers</span>
+											<span class="pull-right">7.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_mdm/mdm_operations.html">
+											<span class="pull-left">MDM Operations</span>
+											<span class="pull-right">7.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_mdm/mdm_details.html">
+											<span class="pull-left">MDM Technical Details</span>
+											<span class="pull-right">7.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_mdm/mdm_expansion.html">
+											<span class="pull-left">MDM Search Expansion</span>
+											<span class="pull-right">7.5</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									JPA Server: CQL
+								</h3>
+								<ul>
+									<li>
+										<a href="../server_jpa_cql/cql.html">
+											<span class="pull-left">CQL Getting Started</span>
+											<span class="pull-right">8.0</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									JPA Server: Partitioning and Multitenancy
+								</h3>
+								<ul>
+									<li>
+										<a href="../server_jpa_partitioning/partitioning.html">
+											<span class="pull-left">Partitioning and Multitenancy</span>
+											<span class="pull-right">9.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_partitioning/partition_interceptor_examples.html">
+											<span class="pull-left">Partition Interceptor Examples</span>
+											<span class="pull-right">9.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_partitioning/partitioning_management_operations.html">
+											<span class="pull-left">Partitioning Management Operations</span>
+											<span class="pull-right">9.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_partitioning/enabling_in_hapi_fhir.html">
+											<span class="pull-left">Enabling Partitioning in HAPI FHIR</span>
+											<span class="pull-right">9.3</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Interceptors
+								</h3>
+								<ul>
+									<li>
+										<a href="../interceptors/interceptors.html">
+											<span class="pull-left">Interceptors Overview</span>
+											<span class="pull-right">10.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../interceptors/client_interceptors.html">
+											<span class="pull-left">Client Interceptors</span>
+											<span class="pull-right">10.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../interceptors/client_pointcuts.html">
+											<span class="pull-left">Client Pointcuts</span>
+											<span class="pull-right">10.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../interceptors/built_in_client_interceptors.html">
+											<span class="pull-left">Built-In Client Interceptors</span>
+											<span class="pull-right">10.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../interceptors/server_interceptors.html">
+											<span class="pull-left">Server Interceptors</span>
+											<span class="pull-right">10.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../interceptors/server_pointcuts.html">
+											<span class="pull-left">Server Pointcuts</span>
+											<span class="pull-right">10.5</span>
+										</a>
+									</li>
+									<li>
+										<a href="../interceptors/built_in_server_interceptors.html">
+											<span class="pull-left">Built-In Server Interceptors</span>
+											<span class="pull-right">10.6</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Security
+								</h3>
+								<ul>
+									<li>
+										<a href="../security/introduction.html">
+											<span class="pull-left">Introduction</span>
+											<span class="pull-right">11.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../security/authorization_interceptor.html">
+											<span class="pull-left">Authorization Interceptor</span>
+											<span class="pull-right">11.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../security/consent_interceptor.html">
+											<span class="pull-left">Consent Interceptor</span>
+											<span class="pull-right">11.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../security/search_narrowing_interceptor.html">
+											<span class="pull-left">Search Narrowing Interceptor</span>
+											<span class="pull-right">11.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../security/cors.html">
+											<span class="pull-left">CORS</span>
+											<span class="pull-right">11.4</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Validation
+								</h3>
+								<ul>
+									<li>
+										<a href="../validation/introduction.html">
+											<span class="pull-left">Introduction</span>
+											<span class="pull-right">12.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../validation/parser_error_handler.html">
+											<span class="pull-left">Parser Error Handler</span>
+											<span class="pull-right">12.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../validation/instance_validator.html">
+											<span class="pull-left">Instance Validator</span>
+											<span class="pull-right">12.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../validation/validation_support_modules.html">
+											<span class="pull-left">Validation Support Modules</span>
+											<span class="pull-right">12.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../validation/schema_validator.html">
+											<span class="pull-left">Schema/Schematron Validator</span>
+											<span class="pull-right">12.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../validation/repository_validating_interceptor.html">
+											<span class="pull-left">Repository Validating Interceptor</span>
+											<span class="pull-right">12.5</span>
+										</a>
+									</li>
+									<li>
+										<a href="../validation/examples.html">
+											<span class="pull-left">Validation Examples</span>
+											<span class="pull-right">12.6</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Android
+								</h3>
+								<ul>
+									<li>
+										<a href="../android/client.html">
+											<span class="pull-left">Android Client</span>
+											<span class="pull-right">13.0</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Tools
+								</h3>
+								<ul>
+									<li>
+										<a href="../tools/hapi_fhir_cli.html">
+											<span class="pull-left">Command Line Interface (CLI) Tool</span>
+											<span class="pull-right">14.0</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Contributing to HAPI FHIR
+								</h3>
+								<ul>
+									<li>
+										<a href="../contributing/hacking_guide.html">
+											<span class="pull-left">Hacking Guide</span>
+											<span class="pull-right">15.0</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Appendix
+								</h3>
+								<ul>
+									<li>
+										<a href="../appendix/logging.html">
+											<span class="pull-left">Logging</span>
+											<span class="pull-right">16.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../appendix/faq.html">
+											<span class="pull-left">FAQ</span>
+											<span class="pull-right">16.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../appendix/javadocs.html">
+											<span class="pull-left">JavaDocs</span>
+											<span class="pull-right">16.2</span>
+										</a>
+									</li>
+								</ul>
+							
+						</div>
+						<div id="leftTocSearchResults">
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			
+			<div class="col-xs-12 col-md-9 primaryColumn" id="tocscroll">
+
+				<!-- Pager -->
+				<div class="hide-sm-and-below">
+</div>
+
+				<div class="hide-md-and-above mobile-header-links">
+					<a href="table_of_contents.html" class="btn btn-primary">
+						<i class="fa fa-arrow-left"></i>
+						&nbsp;&nbsp;
+						Table of Contents
+					</a>
+					<p>Changelog: 2019</p>
+				</div>
+
+				<div class="docs-content">
+					<a name="changelog-2019"></a>
+<section id="section0"><h1 data-toc-text="Changelog: 2019"><span class="helpHeaderSectionNumberBadge">1.3</span>Changelog: 2019</h1><a href="changelog_2019.html#changelog-2019" class="helpSectionLink">&nbsp;</a>
+</section>
+
+<a name="changelog"></a>
+<section id="section1"><h1 data-toc-text="Changelog"><span class="helpHeaderSectionNumberBadge">1.3.1</span>Changelog</h1><a href="changelog_2019.html#changelog" class="helpSectionLink">&nbsp;</a>
+</section>
+
+<a name="hapi-fhir-410-jitterbug"></a>
+<section id="section2"><h1 data-toc-text="HAPI FHIR 4.1.0  (Jitterbug)"><span class="helpHeaderSectionNumberBadge">1.3.2</span>HAPI FHIR 4.1.0  (Jitterbug)</h1><a href="changelog_2019.html#hapi-fhir-410-jitterbug" class="helpSectionLink">&nbsp;</a><a name="release-information"></a>
+<h2>Release Information</h2>
+<p><strong>Released:</strong> 2019-11-13</p>
+<p><strong>Codename:</strong> (Jitterbug)</p>
+<a name="changes"></a>
+<h2>Changes</h2>
+<table class="table">
+    <tr>
+        <td>
+            <a name="change4.1.0-0"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The version of a few dependencies have been bumped to the latest versions (dependent HAPI modules listed in brackets): <ul> <li>SLF4j (All): 1.7.25 -&gt; 1.7.28</li> <li>Spring (JPA): 5.1.8.Final -&gt; 5.2.0.Final</li> <li>Hibernate Core (JPA): 5.4.2.Final -&gt; 5.4.6.Final</li> <li>Hibernate Search (JPA): 5.11.1.Final -&gt; 5.11.3.Final</li> <li>Jackson Databind (JPA): 2.9.9 -&gt; 2.9.10 (CVE-2019-16335, CVE-2019-14540)</li> <li>Commons-DBCP2 (JPA): 2.6.0 -&gt; 2.7.0</li> <li>Postgresql JDBC Driver (JPA): 42.2.6.jre7 -&gt; 42.2.8</li> <li>MSSQL JDBC Driver (JPA): 7.0.0.jre8 -&gt; 7.4.1.jre8</li> <li>Spring Boot (Boot): 2.1.1 -&gt; 2.2.0</li> <li>Phloc Schematron (Validator): 5.0.4 -&gt; 5.2.0</li> <li>Phloc Commons (Validator): 9.1.1 -&gt; 9.3.8</li> </ul></p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-1"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p><b>New Feature</b>: The JPA server now saves and supports searching on <code>Resource.meta.source</code> via the <code>_source</code> search parameter. The server automatically appends the Request ID as a hash value on the URI as well in order to provide request level tracking. Searches can use either the source URI, the request ID, or both.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-11"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>When using the AuthorizationInterceptor with a rule to allow all reads by resource type, the server will now reject requests for other resource types earlier in the processing cycle. Thanks to Anders Havn for the suggestion!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-2"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p><b>New Feature</b>: Support for the FHIR Bulk Data Export specification has been added to the JPA server. See the <a href="http://hl7.org/fhir/uv/bulkdata/">specification</a> for information on how this works. Note that only system level export is currently supported but others will follow.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-22"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>It is now possible to submit a PATCH request as a part of a FHIR transaction in DSTU3 (previously this was only supported in R4+). This is not officially part of the DSTU3 spec, but it can now be performed by leaving the Bundle.entry.request.method blank in DSTU3 transactions and setting the request payload as a Binary resource containing a valid patch.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-24"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1443">#1443</a>
+        </td>
+        <td>
+            <p>LOINC concepts now include multiaxial hierarchical properties (e.g. <code>parent</code> and <code>child</code> , which identify parent and child concepts.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-25"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1445">#1445</a>
+        </td>
+        <td>
+            <p>When loading LOINC terminology, a new ValueSet is automatically created with a single include element that identifies the LOINC CodeSystem in <code>ValueSet.compose.include.system</code> . This ValueSet includes all LOINC codes.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-26"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1461">#1461</a>
+        </td>
+        <td>
+            <p>A note has been added to the downloads page explaning the removal of the hapi-fhir-utilities module. Thanks to Andrew Fitzgerald for the PR!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-29"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Added support for comparing resource dates to the current time via a new variable %now. E.g. Procedure?date=gt%now would match future procedures.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-3"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p><b>New Feature</b>: Support for ElasticSearch has been added to the JPA server directly (i.e. without needing a separate module) and a new class called &quot;ElasticsearchHibernatePropertiesBuilder&quot; has been added to facilitate the creation of relevant properties. Instructions have been added to the hapi-fhir-jpaserver-starter project to get started with Elasticsearch. It is likely we will switch our default recommendation to Elastic in the future.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-30"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Add support for in-memory matching on date comparisons ge,gt,eq,lt,le.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-34"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The JPA server now uses the Quartz scheduling library as a lob scheduling mechanism</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-41"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>A new flag has been added to the JPA migrator tool that causes the migrator to not try to reduce the length of existing columns in the schema.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-45"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1366">#1366</a>
+        </td>
+        <td>
+            <p>The ValueSet operation <code>$expand</code> has been optimized for large ValueSets. ValueSets are now persistence-backed by the terminology tables, which are populated by a scheduled pre-expansion process. A ValueSet previously stored in an existing FHIR repository will need to be re-created or updated to make it a candidate for pre-expansion. ValueSets that have yet to be pre-expanded will continue to be expanded in-memory.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-46"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1431">#1431</a>
+        </td>
+        <td>
+            <p>The ValueSet operation <code>$validate-code</code> has been optimized for large ValueSets. Codes in ValueSets that have yet to be pre-expanded will continue to be validated in-memory.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-47"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1447">#1447</a>
+        </td>
+        <td>
+            <p>LOINC filenames for terminology upload are now configurable using the <code>loincupload.properties</code> file.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-48"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1451">#1451</a>
+        </td>
+        <td>
+            <p>Support for the LOINC <code>EXTERNAL_COPYRIGHT_NOTICE</code> property and <code>copyright</code> filter has been added.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-49"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1453">#1453</a>
+        </td>
+        <td>
+            <p>Support for the LOINC <code>parent</code> and <code>child</code> filters has been added. Both filters can be used with either of the <code>=</code> or <code>in</code> operators.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-50"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1454">#1454</a>
+        </td>
+        <td>
+            <p>Support for the LOINC <code>ancestor</code> and <code>descendant</code> filters has been added. The <code>descendant</code> filter can be used with either of the <code>=</code> or <code>in</code> operators. At present, the <code>ancestor</code> filter can only be used with the <code>=</code> operator.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-51"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1512">#1512</a>
+        </td>
+        <td>
+            <p>Support for the LOINC <code>ancestor</code> filter with the <code>in</code> operator has been added.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-54"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1517">#1517</a>
+        </td>
+        <td>
+            <p>Support for concept property values with a length exceeding 500 characters has been added in the terminology tables. In particular, this was added to facilitate the LOINC EXTERNAL_COPYRIGHT_NOTICE property, for which values can be quite long.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-55"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The AuthorizationInterceptor has been enhanced so that a user can be authorized to perform create operations specifically, without authorizing all write operations. Also, conditional creates can now be authorized even if they are happening inside a FHIR transaction.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-58"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>A docker compose script for the hapi-fhir-jpaserver-starter project was added. Thanks to Long Nguyen for the pull request!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-59"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1476">#1476</a>
+        </td>
+        <td>
+            <p>A number of overridden methods in the HAPI FHIR codebase did not have the @Override annotation. Thanks to Clayton Bodendein for cleaning this up!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-60"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1373">#1373</a>
+        </td>
+        <td>
+            <p>Plain server resource providers were not correctly matching methods that had the _id search parameter if a client performed a request using a modifier such as :not or :exact. Thanks to Petro Mykhailyshyn for the pull request!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-69"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Auto generated transaction IDs will now use both upper- and lowercase letters for more uniqueness in the same amount of space.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-7"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1489">#1489</a>
+        </td>
+        <td>
+            <p><b>Performance Improvement</b>: A significant performance improvement was made to the parsers (particularly the Json Parser) when serializing resources. This work yields improvements of 20-50% in raw encode speed when encoding large resources. Thanks to David Maplesden for the pull request!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-72"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1541">#1541</a>
+        </td>
+        <td>
+            <p>The server CapabilityStatement (/metadata) endpoint now respects the Cache-Control header. Thanks to Jens Villadsen for the pull request!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-73"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The @Metadata annotation now has an attribute that can be used to control the cache timeout</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-8"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1489">#1489</a>
+        </td>
+        <td>
+            <p><b>Performance Improvement</b>: When running inside a JPA server, The DSTU3+ validator now performs code validations by directly testing ValueSet membership against a pre-calculated copy of the ValueSet, instead of first expanding the ValueSet and then examining the expanded contents. This can yield a significant improvement in validation speed in many cases.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-80"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Validation errors will now include details about the line number where the issue was found</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-86"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>A new built-in server interceptor called <code>CaptureResourceSourceFromHeaderInterceptor</code> has been added. This interceptor can be used to capture an incoming source system URI in an HTTP Request Header and automatically place it in <code>Resource.meta.source</code></p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-9"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1357">#1357</a>
+        </td>
+        <td>
+            <p>The email Subscription deliverer now respects the payload property of the subscription when deciding how to encode the resource being sent. Thanks to Sean McIlvenna for the pull request!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-92"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1088">#1088</a>
+        </td>
+        <td>
+            <p>The CapabilityStatement generator will now determine supported profiles by navigating the complete hierarchy of supported resource types, instead of just using the root resource for each type. Thanks to Stig Døssing for the pull request!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-19"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-cogs"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Two foreign keys have been dropped from the HFJ_SEARCH_RESULT table used by the FHIR search query cache. These constraints did not add value and caused unneccessary contention when used under high load.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-20"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-cogs"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>An inefficient regex expression in UrlUtil was replaced with a much more efficient hand-written checker. This regex was causing a noticable performance drop when feeding large numbers of transactions into the JPA server at the same time (i.e. when loading Synthea data).</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-23"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-cogs"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The HAPI FHIR CLI server now uses H2 as its database platform instead of Derby. Note that this means that data in any existing installations will need to be re-uploaded to the new database platform.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-27"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-cogs"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>REST servers will no longer try to guess the content type for HTTP requests where a body is provided but no Content-Type header is included. These requests are invalid, and will now result in an HTTP 400. This change corrects an error where some interceptors (notably the RequestValidatingInterceptor, but not including any HAPI FHIR security interceptors) could be bypassed if a Content Type was not included.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-35"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-cogs"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The Testpage Overlay has been upgraded to use FontAwesome 5.x, and now supports being deployed to a servlet path other than &quot;/&quot;.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-38"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-cogs"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The hapi-fhir-jaxrs-server module now lists dependencies on structures JARs as optional dependencies, in order to avoid automatically importing all versions. This means that implementers of JAX-RS servers may now need to add an explicit dependency on one or more structures JARs to their own project.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-71"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-cogs"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The <code>IValidationSupport#validateCode(...)</code> method has been modified to add an additional parameter (String theValueSetUrl). Most users will be unaffected by this change as HAPI FHIR provides a number of built-in implementations of this interface, but any direct user implementations of this interface will need to add the new parameter.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-81"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-cogs"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The hapi-fhir-testpage-overlay project now uses WebJars for importing JavaScript dependency libraries. This reduces our Git repository size and should make it easier to stay up-to-date.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-84"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-cogs"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The JPA server in DST2 mode previously automatically validated submitted QuestionnaireResponse resource against their corresponding Questionnaires and rejected non-conformant QuestionnaireResponse resources from being stored. This was in contrast to every other version where the RequestValidatingInterceptor has to be registered in order to achieve this specific behaviour. This behaviour has been removed from the JPA server, and the same interceptor must be used for QR validation in the DSTU2 JPA server as in all other versions of FHIR.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-85"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-cogs"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>DSTU2.1 profile validation now uses the same R5 validation as all other versions of FHIR.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-10"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>When using the _filter search parameter, string comparisons using the &quot;eq&quot; operator were incorrectly performing a partial match. This has been corrected. Thanks to Marc Sandberg for pointing this out!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-12"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Reference search parameters did not work via the _filter parameter</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-13"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Transaction entries with a resource URL starting with a leading slash (e.g. <code>/Organization?identifier=foo</code> instead of <code>Organization?identifier=foo</code> did not work. These are now supported.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-14"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>SubscriptionDstu2Config incorrectly pointed to a DSTU3 configuration file. This has been corrected.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-15"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>When using the VersionedApiConverterInterceptor, GraphQL responses failed with an HTTP 500 error.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-16"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Cascading deletes now correctly handle circular references. Previously this failed with an HTTP 500 error.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-17"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The informational message returned in an OperationOutcome when a delete failed due to cascades not being enabled contained an incorrect example. This has been corrected.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-18"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>In some cases, deleting a CodeSystem resource would fail because the underlying codes were not correctly deleted from the terminology service tables. This is fixed.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-21"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The FHIRPath engine used to parse search parameters in the JPA R4/R5 server is now reused across requests, as it is somewhat expensive to create and is thread safe.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-28"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The GraphQL provider did not wrap the respone in a &quot;data&quot; element as described in the FHIR specification. This has been corrected.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-31"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>When using the Consent Service and denying a resource via the &quot;Will See Resource&quot; method, the resource ID and version were still returned to the user. This has been corrected so that no details about the resource are leaked.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-32"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Fix a failure in FhirTerser#visit when fields in model classes being visited contain custom subclasses of the expected type.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-33"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Updating an existing CodeSystem resource with a content mode of COMPLETE did not cause the terminology service to accurately reflect the new CodeSystem URL and/or concepts. This is now corrected.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-36"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1495">#1495</a>
+        </td>
+        <td>
+            <p>A NullPointerException when using the AuthorizationInterceptor RuleBuilder to build a conditional rule with a custom tester has been corrected. Thanks to Tue Toft Nørgård for reporting!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-37"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1494">#1494</a>
+        </td>
+        <td>
+            <p>The R4+ client and server modules did not recognize the new <code>_include:iterate</code> syntax that replaces the previous <code>_include:recurse</code> syntax. Both are now supported on all servers in order to avoid breaking backwards compatibility, with the new syntax now being emitted in R4+ clients.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-39"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1482">#1482</a>
+        </td>
+        <td>
+            <p>The LOINC terminology distribution includes multiple copies of the same files. Uploading LOINC terminology resulted in some ValueSets with duplicate codes. This has been corrected by specifying a path with each filename.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-4"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p><b>New Feature</b>: A new set of operations have been added to the JPA server that allow CodeSystem deltas to be uploaded. A CodeSystem Delta consists of a set of codes and relationships that are added or removed incrementally to the live CodeSystem without requiring a downtime or a complete upload of the contents. Deltas may be specified using either a custom CSV format or a partial CodeSystem resource. <br/> In addition, the HAPI FHIR CLI <code>upload-terminology</code> command has been modified to support this new functionality.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-40"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>A corner case bug in the JPA server was solved: When performing a search that contained chained reference searches where the value contained slashes (e.g. <code>Observation?derived-from:DocumentReference.contenttype=application/vnd.mfer</code> ) the server could fail to load later pages in the search results.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-42"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1483">#1483</a>
+        </td>
+        <td>
+            <p>Some resource IDs and URLs for LOINC ValueSets and ConceptMaps were inconsistently populated by the terminology uploader. This has been corrected.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-43"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>When a resource was updated with a meta.source containing a request id, the meta.source was getting appended with the new request id, resulting in an ever growing source.meta value. E.g. after the first update, it looks like &quot;#9f0a901387128111#5f37835ee38a89e2&quot; when it should only be &quot;#5f37835ee38a89e2&quot;. This has been corrected.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-44"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1421">#1421</a>
+        </td>
+        <td>
+            <p>The Plain Server method selector was incorrectly allowing client requests with _include statements to be handled by method implementations that did not have any <code>@IncludeParam</code> defined. This is now corrected. Thanks to Tuomo Ala-Vannesluoma for reporting and providing a test case!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-5"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p><b>New Feature</b>: When using Externalized Binary Storage in the JPA server, the system will now automatically externalize Binary and Attachment payloads, meaning that these will automatically not be stored in the RDBMS.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-52"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The JPA server failed to find codes defined in not-present codesystems in some cases, and reported that the CodeSystem did not exist. This has been corrected.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-56"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/402">#402</a>
+        </td>
+        <td>
+            <p>When encoding a Composition resource in XML, the section narrative blocks were incorrectly replaced by the main resource narrative. Thanks to Mirjam Baltus for reporting!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-57"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1473">#1473</a>
+        </td>
+        <td>
+            <p>AN issue with date pickers not working in the hapi-fhir-testpage-overlay project has been fixed. Thanks to GitHub user @jaferkhan for the pull request!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-6"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p><b>Model Update</b>: The DSTU3 structures have been upgraded to the new 3.0.2 (Technical Correction) release.<br/> The R4 structures have been upgraded to the new 4.0.1 (Technical Correction) release.<br/> The R5 structure have been upgraded to the current (October) snapshot.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-61"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The JPA server contained a restriction on the columns used to hold a resource's type name that was too short to hold the longest name from the final R4 definitions. This has been corrected to account for names up to 40 characters long.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-62"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The subscription triggering operation was not able to handle commas within search URLs being used to trigger resources for subscription checking. This has been corrected.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-63"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>In some cases where resources were recently expunged, null entries could be passed to JPA interceptors registered against the STORAGE_PRESHOW_RESOURCES hook.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-64"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>In issue was fixed in the JPA server where a previously failed search would be reused, immediately returning an error rather than retrying the search.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-65"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The JPA server did not correctly process _has queries where the linked search parameter was the _id parameter.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-67"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1529">#1529</a>
+        </td>
+        <td>
+            <p>HAPI FHIR allows transactions in DSTU3 to contain a JSON/XML Patch in a Binary resource without specifying a verb in Bundle.entry.request.method, since the valueset defined in DSTU3 for that field does not include the PATCH verb. The AuthorizationInterceptor however did not understand this and would reject these requests. This is now corrected.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-68"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1530">#1530</a>
+        </td>
+        <td>
+            <p>A potential XXE vulnerability in the validator was corrected. The XML parser used for validating XML payloads (i.e. FHIR resources) will no longer read from DTD declarations.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-70"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Paging requests that are incorrectly executed at the type level were interpreted by the plain server as search requests with no search parameters, leading to confusing search results. These will now result in an HTTP 400 error with a meaningful error message.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-74"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1544">#1544</a>
+        </td>
+        <td>
+            <p>QuestionnaireResponse validation in the JPA server was not able to load Questionnaire resources that were referenced using a canonical URI instead of a local reference. Thanks to Vu Vuong for reporting!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-75"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/848">#848</a>
+        </td>
+        <td>
+            <p>When validating JSON payloads, the JSON structure was parsed by Gson instead of passing the raw JSON to the validator. This meant that the validator was unable to catch certain structural errors that are ignored by Gson. Thanks to Michael Lawley for reporting!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-76"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1546">#1546</a>
+        </td>
+        <td>
+            <p>The JPA server exposed a number of duplicate entries in the CapabilityStatement's list of supported _include values for a given resource. Thanks to Jens Villadsen for reporting!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-77"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1481">#1481</a>
+        </td>
+        <td>
+            <p>An unintended dependency from hapi-fhir-base on Jetty was introduced in HAPI FHIR 4.0.0. This has been removed.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-78"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The JPA migrator tool was not able to correctly drop tables containing foreign key references in some cases. This has been corrected.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-79"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1547">#1547</a>
+        </td>
+        <td>
+            <p>An issue was fixed where the JPA server would occasionally fail to save a resource because it contained a string containing characters that change length when normalized. Thanks to Tuomo Ala-Vannesluoma for the pull request!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-82"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>In the (fairly unlikely) circumstance that a JPA server was called with a parameter where the parameter name referenced a custom search parameter with an invalid chain attached, and the value was missing entirely (e.g. <code>ProcedureRequest?someCustomParameter.BAD_NAME=</code> , the server would ignore this parameter instead of incorrectly returning an error. This has been corrected.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-83"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1526">#1526</a>
+        </td>
+        <td>
+            <p>Several issues with HAPI FHIR's annotation scanner that prevented use with Kotlin based resource providers have been corrected. Thanks to Jelmer ter Wal for the pull request!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-88"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Search parameters of type URI did not work in the hapi-fhir-testpage-overlay. This has been corrected.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-89"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1568">#1568</a>
+        </td>
+        <td>
+            <p>JPA servers accidentally stripped the type attribute from the server-exported CapabilityStatement when search parameters of type &quot;special&quot; were found. This has been corrected.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-90"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>When running the JPA server without Lucene indexing enabled and performing ValueSet expansion, the server would incorrectly ignore inclusion rules that specified a system but no codes (i.e. include the whole system). This has been corrected.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-91"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1538">#1538</a>
+        </td>
+        <td>
+            <p>The hapi-fhir-testpage-overlay has been updated to support R5 endpoints. Thanks to Dazhi Jiao for the pull request!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-93"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>A NullPointerException in the XML Parser was fixed when serializing a resource containing an extension on a primitive datatype that was missing a URL declaration.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-94"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>When using the _filter search parameter in the JPA server with an untyped resource ID, the filter could bring in search results of the wrong type. Thanks to Anthony Sute for the Pull Request and Jens Villadsen for reporting!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-95"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1300">#1300</a>
+        </td>
+        <td>
+            <p>In some cases where where a single search parameter matches the same resource many times with different distinct values (e.g. a search by Patient:name where there are hundreds of patients having hundreds of distinct names each) the Search Coordinator would end up in an infinite loop and never return all of the possible results. Thanks to @imranmoezkhan for reporting, and to Tim Shaffer for providing a reproducible test case!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-53"></a>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The method <code>IVersionSpecificBundleFactory#initializeBundleFromResourceList</code> has been deprecated, as it provided duplicate functionality to other methods and had an outdated argument list based on the Bundle needs in DSTU1. We are not aware of any public use of this API, please let us know if this deprecation causes any issues.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-66"></a>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>HTTP PUT (resource update) operations will no longer allow the version to be specified in a Content-Location header. This behaviour was allowed in DSTU1 and was never removed from HAPI even though it hasn't been permitted in the spec for a very long time. Hopefully this change will not impact anyone!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.1.0-87"></a>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The @ProvidesResources annotation has been removed from HAPI FHIR, as it was not documented and did not do anything useful. Please get in touch if this causes any issues.</p>
+        </td>
+    </tr>
+</table>
+</section>
+
+<a name="change4.1.0-0"></a>
+<section id="section3"><h1 data-toc-text="HAPI FHIR 4.0.3  (Igloo (Point Release))"><span class="helpHeaderSectionNumberBadge">1.3.3</span>HAPI FHIR 4.0.3  (Igloo (Point Release))</h1><a href="changelog_2019.html#change4.1.0-0" class="helpSectionLink">&nbsp;</a><a name="release-information-1"></a>
+<h2>Release Information</h2>
+<p><strong>Released:</strong> 2019-09-03</p>
+<p><strong>Codename:</strong> (Igloo (Point Release))</p>
+<a name="changes-1"></a>
+<h2>Changes</h2>
+<table class="table">
+    <tr>
+        <td>
+            <a name="change4.0.3-0"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>This release contains no new or updated functionality, but addressed a dependency version that was left incorrectly requiring a SNAPSHOT maven build of the org.hl7.fhir.utilities module. Users who are successfully using HAPI FHIR 4.0.0 do not need to upgrade, but any users who were blocked from upgrading due to snapshot dependency issues are advised to upgrade immediately.</p>
+        </td>
+    </tr>
+</table>
+</section>
+
+<a name="change4.0.3-0"></a>
+<section id="section4"><h1 data-toc-text="HAPI FHIR 4.0.0  (Igloo)"><span class="helpHeaderSectionNumberBadge">1.3.4</span>HAPI FHIR 4.0.0  (Igloo)</h1><a href="changelog_2019.html#change4.0.3-0" class="helpSectionLink">&nbsp;</a><a name="release-information-2"></a>
+<h2>Release Information</h2>
+<p><strong>Released:</strong> 2019-08-14</p>
+<p><strong>Codename:</strong> (Igloo)</p>
+<a name="changes-2"></a>
+<h2>Changes</h2>
+<table class="table">
+    <tr>
+        <td>
+            <a name="change4.0.0-0"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The version of a few dependencies have been bumped to the latest versions (dependent HAPI modules listed in brackets): <ul> <li>Commons Codec (Core): 1.11 -&gt; 1.12</li> <li>Apache HTTPClient (Client): 4.5.3 -&gt; 4.5.9</li> <li>Apache HTTPCore (Client&gt;: 4.4.6 -&gt; 4.4.11</li> <li>Spring (JPA): 5.1.6.RELEASE -&gt; 5.1.8.RELEASE</li> <li>Spring-Data (JPA): 2.1.6.RELEASE -&gt; 2.1.8.RELEASE</li> <li>JANSI (CLI): 1.17.1 -&gt; 1.18</li> <li>json-patch (JPA): 1.10 -&gt; 1.15 (see changelog entry about this change)</li> <li>Jackson-Databind (JPA): 2.9.9 -&gt; 2.9.9.1 (due to a Jackson vulnerability CVE-2019-12384)</li> <li>commons-collections4 (Server/JPA): 4.1 -&gt; 4.3</li> <li>commons-dbcp2 (JPA): 2.5.0 -&gt; 2.6.0</li> <li>commons-lang3 (Core): 3.8.1 -&gt; 3.9</li> <li>commons-text (Core): 1.6 -&gt; 1.7</li> <li>Guava (JPA): 27.1-jre -&gt; 28.0-jre</li> </ul></p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-10"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p><b>New Feature</b>: A new interceptor called CascadingDeleteInterceptor has been added to the JPA project. This interceptor allows deletes to cascade when a specific URL parameter or header is added to the request. Cascading deletes can also be controlled by a new flag in the AuthorizationIntereptor RuleBuilder, in order to ensure that cascading deletes are only available to users with sufficient permission.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-11"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Several enhancements have been made to the <code>AuthorizationInterceptor</code> : <ul> <li>The interceptor now registers against the <code>STORAGE_PRESHOW_RESOURCES</code> interceptor hook, which allows it to successfully authorize JPA operations that don't actually return resource content, such as GraphQL responses, and resources that have been filtered using the <code>_elements</code> parameter.</li> <li> </li>The rule list is now cached on a per-request basis, which should improve performance</ul></p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-12"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The $expunge global everything operation has been refactored to do deletes in small batches. This change will likely reduce performance, but does allow for the operation to succeed without timing out in larger systems.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-19"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Added some experimental version-independent model classes to ca.uhn.fhir.jpa.model.any. They permit writing code that is version independent.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-20"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Added new subclass of HashMapResourceProvider called SearchableHashMapResourceProvider that uses the in-memory matcher to search the HashMap (using a full table scan). This allows rudimentary testing without a database.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-21"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Added a new interceptor hook called STORAGE_PRESTORAGE_DELETE_CONFLICTS that is invoked when a resource delete operation is about to fail due to referential integrity conflicts. Hooks have access to the list of resources that have references to the resource being deleted and can delete them. The boolean return value of the hook indicates whether the server should try checking for conflicts again (true means try again).</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-22"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1336">#1336</a>
+        </td>
+        <td>
+            <p>The HAPI FHIR unit test suite has been refactored to no longer rely on PortUtil to assign a free port. This should theoretically result in fewer failed builds resulting from port conflicts. Thanks to Stig Døssing for the pull request!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-24"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1348">#1348</a>
+        </td>
+        <td>
+            <p>JPA server now supports conditional PATCH operation (i.e. performing a patch with a syntax such as <code>/Patient?identifier=sys|val</code> )</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-25"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1347">#1347</a>
+        </td>
+        <td>
+            <p>The json-patch library used in the JPA server has been changed from <a href="https://github.com/java-json-tools/json-patch">java-json-tools.json-patch</a> to a more active fork of the same project: <a href="https://github.com/crate-metadata/json-patch">crate-metadata.json-patch</a>. Thanks to Jens Villadsen for the suggestion and pull request!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-26"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1343">#1343</a>
+        </td>
+        <td>
+            <p>Support has been implemented in the JPA server for the CodeSystem <code>$subsumes</code> operation.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-28"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>A new pointcut has been added to the JPA server called <code>JPA_PERFTRACE_RAW_SQL</code> that can be used to capture the raw SQL statements that are sent to the underlying database.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-32"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The JPA server now rejects subscriptions being submitted with no value in Subscription.status (this field is mandatory, but the subscription was previously ignored if no value was provided)</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-35"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The JSON and XML parsers will now raise a warning or error with the Parser Error Handler if an extension is being encoded that is missing a URL, or has both a value and nested extensions on the same parent extension.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-37"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1330">#1330</a>
+        </td>
+        <td>
+            <p>Support in the JPA Terminology Service terminology uploader has been added for uploading the IMGT <a href="http://hla.alleles.org/nomenclature/index.html">HLA Nomenclature</a> distribution files as a FHIR CodeSystem. Thanks to Joel Schneider for the contribution!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-38"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1354">#1354</a>
+        </td>
+        <td>
+            <p>A BOM POM has been added to the HAPI FHIR distribution, allowing users to import the HAPI FHIR library with all of its submodules automatically sharing the same version. Thanks to Stig Døssing for the pull request!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-39"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>AuthorizationInterceptor will now try to block delete operations sooner in the processing lifecycle if there is no chance they will be permitted later (i.e. because the type is not authorized at all)</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-40"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The HAPI FHIR server will now generate a random transaction ID to every request and add it to the response headers. Clients may supply the transaction header via the <code>X-Request-ID</code> header.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-41"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>When attempting to read a resource that is deleted, a Location header is now returned that includes the resource ID and the version ID for the deleted resource.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-44"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>IBundleProvider now has an isEmpty() method that can be used to check whether any results exist. A default implementation has been provided, so this is not a breaking change.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-47"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>A new server interceptor hook called PROCESSING_COMPLETED has been added. This hook is called by the server at the end of processing every request (success and failure).</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-50"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Added a new Pointcut STORAGE_PRESTORAGE_EXPUNGE_EVERYTHING that is called at the start of the expungeEverything operation.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-51"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The JPA server now has the ability to generate snapshot profiles from differential profiles via the $snapshot operation, and will automatically generate a snapshot when needed for validation.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-53"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Creating/updating CodeSystems now persist <code>CodeSystem.concept.designation</code> to the terminology tables.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-54"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Expanded ValueSets now populate <code>ValueSet.expansion.contains.designation.language</code> .</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-55"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>@Operation methods can now declare that they will manually process the request body and/or manually generate a response instead of letting the HAPI FHIR framework take care of these things. This is useful for situations where direct access to the low-level servlet streaming API is needed.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-56"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>@Operation methods can now declare that they are global, meaning that they will apply to all resource types (or instances of all resource types) if they are found on a plain provider.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-57"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>@Operation method parameters may now declare their type via a String name such as &quot;code&quot; or &quot;Coding&quot; in an attribute in @OperationParam. This is useful if you want to make operation methods that can operate across different versions of FHIR.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-58"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>A new resource provider for JPA servers called <code>BinaryAccessProvider</code> has been added. This provider serves two custom operations called <code>$binary-access-read</code> and <code>$binary-access-write</code> that can be used to request binary data in Attachments as raw binary content instead of as base 64 encoded content.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-6"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p><b>New Feature</b>: Support for the new R5 draft resources has been added. This support includes the client, server, and JPA server. Note that these definitions will change as the R5 standard is modified until it is released, so use with caution!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-60"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Support for PATCH operations performed within a transaction (using a Binary resource as the resource type in order to hold a JSONPatch or XMLPatch body) has been added to the JPA server.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-62"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>A new attribute has been added to the @Operation annotation called <code>typeName</code> . This annotation can be used to specify a type for an operation declared on a plain provider without needing to use a specific version of the FHIR structures.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-63"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The $upload-external-code-system operation and the corresponding HAPI FHIR CLI command can now be used to upload custom vocabulary that has been converted into a standard file format defined by HAPI FHIR. This is useful for uploading large organizational code systems.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-68"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1388">#1388</a>
+        </td>
+        <td>
+            <p>When performing a read-if-newer operation on a plain server, the resource ID in Resource.meta.versionId is now used if a version isn't found in the resource ID itself. Thanks to Stig Døssing for the pull request!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-7"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p><b>New Feature</b>: A new interceptor called <code>ConsentInterceptor</code> has been added. This interceptor allows JPA based servers to make appropriate consent decisions related to resources that and operations that are being returned. See Server Security for more information.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-8"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p><b>New Feature</b>: The JPA server now supports GraphQL for DSTU3 / R4 / R5 servers.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-9"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1220">#1220</a>
+        </td>
+        <td>
+            <p><b>New Feature</b>: The JPA server now supports the <code>_filter</code> search parameter when configured to do so. The <a href="http://hl7.org/fhir/search_filter.html">filter search parameter</a> is an extremely flexible and powerful feature, allowing for advanced grouping and order of operations on searches. It can be dangerous however, as it potentially allows users to create queries for which no database indexes exist in the default configuration so it is disabled by default. Thanks to Anthony Sute for the pull request and all of his support in what turned out to be a lengthy merge!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-1"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-cogs"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p><b>Breaking Change</b>: The HL7.org DSTU2 structures (and <i>ONLY</i> the HL7.org DSTU2 structures) have been moved to a new package. Where they were previously found in <code>org.hl7.fhir.instance.model</code> they are now found in <code>org.hl7.fhir.dstu2.model</code>. This was done in order to complete the harmonization between the <a href="https://github.com/hapifhir/hapi-fhir">HAPI FHIR</a> GitHub repository and the <a href="https://github.com/hapifhir/org.hl7.fhir.core/">org.hl7.fhir.core</a> GitHub repository. This is the kind of change we don't make lightly, as we do know that it will be annoying for users of the existing library. It is a change however that will allow us to apply validator fixes much more quickly, and will greatly reduce the amount of effort required to keep up with R5 changes as they come out, so we're hoping it is worth it. Note that no classes are removed, they have only been moved, so it should be fairly straightforward to migrate existing code with an IDE.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-18"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-cogs"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Moved in-memory matcher from Subscription module to SearchParam module and renamed the result type from SubscriptionMatchResult to InMemoryMatchResult.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-2"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-cogs"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p><b>Breaking Change</b>: The <code>IPagingProvider</code> interface has been modified so that the <code>retrieveResultList</code> method now takes one additional parameter of type <code>RequestDetails</code>. If you have created a custom implementation of this interface, you can add this parameter and ignore it if needed. The use of the method has not changed, so this should be an easy fix to existing code.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-3"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-cogs"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p><b>Breaking Change</b>: The HAPI FHIR REST client and server will now default to using JSON encoding instead of XML when the user has not explicitly configured a preference.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-4"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-cogs"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p><b>Breaking Change</b>: The JPA $upload-external-code-system operation has been moved from being a server level operation (i.e. called on the root of the server) to being a type level operation (i.e. called on the CodeSystem type).</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-45"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-cogs"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Server CapabilityStatement/Conformance repsonses from the /metadata endpoint will now be cached for 60 seconds always. This was previously a configurable setting on the ServerConformanceProvider, but it is now handled directly by the method binding so the provider now has no responsibility for caching.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-49"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-cogs"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The JPA server now uses the H2 database instead of the derby database to run its unit tests. We are hoping that this cuts down on the number of false test failures we get due to mysterious derby failures.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-5"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-cogs"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p><b>Breaking Change</b>: The FhirValidator#validate(IResource) method has been removed. It was deprecated in HAPI FHIR 0.7 and replaced with FhirValidator#validateWithResults(IBaseResource) so it is unlikely anyone is still depending on the old method.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-52"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-cogs"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The Base64Binary types for DSTU3+ now use a byte array internally to represent their content, which is more efficient than storing base 64 encoded text to represent the binary as was previously done.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-59"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-cogs"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>A few columns named 'CODE' in the JPA terminology services tables have been renamed to 'CODEVAL' to avoid any possibility of conflicting with reserved words in MySQL. The database migrator tool has been updated to handle this change.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-64"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-cogs"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Two new operations, <code>$apply-codesystem-delta-add</code> and <code>$apply-codesystem-delta-remove</code> have been added to the terminology server. These methods allow codes to be dynamically added and removed from external (notpresent) codesystems.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-13"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The JPA server did not correctly index Timing fields where the timing contained a period but no individual events. This has been corrected.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-14"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1320">#1320</a>
+        </td>
+        <td>
+            <p>The HAPI FHIR CLI import-csv-to-conceptmap command was not accounting for byte order marks in CSV files (e.g. some Excel CSV files). This has been fixed.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-15"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1241">#1241</a>
+        </td>
+        <td>
+            <p>A bug was fixed where deleting resources within a transaction did not always correctly enforce referential integrity even if referential integrity was enabled. Thanks to Tuomo Ala-Vannesluoma for reporting!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-16"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>In the JPA server, the <code>_total=accurate</code> was not always respected if a previous search already existed in the query cache that matched the same search parameters.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-17"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1337">#1337</a>
+        </td>
+        <td>
+            <p>Improved stability of concurrency test framework. Thanks to Stig Døssing for the pull request!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-23"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>AuthorizationInterceptor sometimes failed with a 500 error when checking compartment membership on a resource that has a contained subject (Patient).</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-27"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Uploading the LOINC/RSNA Radiology Playbook would occasionally fail when evaluating part type names due to case sensitivity. This has been corrected.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-29"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1355">#1355</a>
+        </td>
+        <td>
+            <p>Invoking the transaction or batch operation on the JPA server would fail with a NullPointerException if the Bundle passed in did not contain a resource in an entry that required a resource (e.g. a POST). Thanks to GitHub user @lytvynenko-dmitriy for reporting!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-30"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1250">#1250</a>
+        </td>
+        <td>
+            <p>HAPI FHIR Server (plain, JPA, and JAX-RS) all populated Bundle.entry.result on search result bundles, even though the FHIR specification states that this should not be populated. This has been corrected. Thanks to GitHub user @gitrust for reporting!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-31"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1352">#1352</a>
+        </td>
+        <td>
+            <p>Creating R4 Observation resources with a value type of SampledData failed in the JPA server because of an indexing error. Thanks to Brian Reinhold for reporting!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-33"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1361">#1361</a>
+        </td>
+        <td>
+            <p>Fix a build failure thanks to Maven pom errors. Thanks to Gary Teichrow for the pull request!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-34"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1362">#1362</a>
+        </td>
+        <td>
+            <p>The JPA server did not correctly process searches with a <code>_tag:not</code> expression containing more than one comma separated value.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-36"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>FHIR model classes have a method called <code>hasPrimitiveValue()</code> which previously returned true if the type was a primitive datatype (e.g. StringType). This method now only returns true if the type is a primitive datatype AND the type actually has a value.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-42"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>A number of columns in the JPA Terminology Services ConceptMap tables were not explicitly annotated with @Column, so the DB columns that were generated had Java ugly field names as their SQL column names. These have been renamed, and entries in the JPA migrator tool have been added for anyone upgrading.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-43"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Field values with a datatype of <code>canonical</code> were indexed as though they were explicit resource references by the JPA server. This led to errors about external references not being supported when uploading various resources (e.g. Questionnaires with HL7-defined ValueSet references). This has been corrected. Note that at this time, we do not index canonical references at all (as we were previously doing it incorrectly). This will be improved soon.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-46"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1370">#1370</a>
+        </td>
+        <td>
+            <p>The OkHttp client did not correctly apply the connection timeout and socket timeout settings to client requests. Thanks to Petro Mykhailyshyn for the pull request!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-48"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The <code>_summary</code> element was not always respected when encoding JSON resources.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-61"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1390">#1390</a>
+        </td>
+        <td>
+            <p>Two issues in the Thymeleaf Narrative Template which caused an error when generating a narrative on an untitled DiagnosticReport were fixed. Thanks to GitHub user @navyflower for reporting!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-65"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1404">#1404</a>
+        </td>
+        <td>
+            <p>In the JAX-RS server, the resource type history and instance vread operations had ambiguous paths that could lead to the wrong method being called. Thanks to Seth Rylan Gainey for the pull request!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-66"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1414">#1414</a>
+        </td>
+        <td>
+            <p>The profile validator (FhirInstanceValidator) can now be used to validate a resource using an explicit profile declaration rather than simply relying on the declared URL in the resource itself.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-67"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>When using the ResponseHighlighterInterceptor, some invalid requests that would normally generate an HTTP 400 response (e.g. an invalid _elements value) would cause an HTTP 500 crash.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change4.0.0-69"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1375">#1375</a>
+        </td>
+        <td>
+            <p>An example datatype was corrected in the DSTU2 Identifier datatype StructureDefinition. Thanks to Nick Robison for the pull request!</p>
+        </td>
+    </tr>
+</table>
+</section>
+
+<a name="change4.0.0-0"></a>
+<section id="section5"><h1 data-toc-text="HAPI FHIR 3.8.0  (Hippo)"><span class="helpHeaderSectionNumberBadge">1.3.5</span>HAPI FHIR 3.8.0  (Hippo)</h1><a href="changelog_2019.html#change4.0.0-0" class="helpSectionLink">&nbsp;</a><a name="release-information-3"></a>
+<h2>Release Information</h2>
+<p><strong>Released:</strong> 2019-05-30</p>
+<p><strong>Codename:</strong> (Hippo)</p>
+<a name="changes-3"></a>
+<h2>Changes</h2>
+<table class="table">
+    <tr>
+        <td>
+            <a name="change3.8.0-1"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The version of a few dependencies have been bumped to the latest versions (dependent HAPI modules listed in brackets): <ul> <li>Guava (base): 25-jre -&gt; 27.1-jre</li> <li>Hibernate (JPA): 5.4.1 -&gt; 5.4.2</li> <li>Jackson (JPA): 2.9.7 -&gt; 2.9.8</li> <li>Spring (JPA): 5.1.3.RELEASE -&gt; 5.1.6.RELEASE</li> <li>Spring-Data (JPA): 2.1.3.RELEASE -&gt; 2.1.6.RELEASE</li> <li>Caffeine (JPA): 2.6.2 -&gt; 2.7.0</li> <li>JANSI (CLI): 1.16 -&gt; 1.17.1</li> <!--<li>Jetty (CLI): 9.4.14.v20181114 -&gt; 9.4.17.v20190418</li>--> </ul></p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-10"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>ParametersUtil now has a utility method that can be used to add parameter values using the string name of the datatype (e.g. &quot;dateTime&quot;) in order to help building Parameters resources in a version-independent way.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-12"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>In the JPA server, a much more readable error message is now returned returned when two client threads collide while trying to simultaneously create a resource with the same client-assigned ID. In addition, better error messages are now returned when conflicts such as this one are hit within a FHIR transaction operation.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-13"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The JPA query builder has been optimized to take better advantage of SQL IN (..) expressions when performing token searches with multiple OR values.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-14"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The JPA server transaction processor will now automatically detect if the request Bundle contains multiple entries having identical conditional create operations, and collapse these into a single operation. This is done as a convenience, since many conversion algorithms can accidentally generate such duplicates.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-16"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>A new config setting has been added to the JPA DaoConfig that disables validation of the resource type for target resources in references.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-17"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>HapiLocalizer can now handle message patterns with braces that aren't a part of a message format expression. E.g. &quot;Here is an {example}&quot;.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-18"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>JPA searches using a Composite Unique Index will now use that index for faster searching even if the search has _includes and/or _sorts. Previously these two features caused the search builder to skip using the index.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-2"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>In Servers that are configured to support extended mode <code>_elements</code> parameters, it is now possible to use the :exclude modifier to exclude entire resource types.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-21"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>When performing a search in the JPA server where one of the parameters is a reference with multiple values (e.g. Patient?organization=A,B) the generated SQL was previously a set of OR clauses and this has been collapsed into a single IN clause for better performance.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-3"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>RequestDetails now has methods called getAttribute and setAttribute that can be used by interceptors to pass arbitrary data between requests.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-31"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Added new configuration parameter to DaoConfig and ModelConfig to specify the websocket context path. (Before it was hardcoded to &quot;/websocket&quot;).</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-32"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Added new IRemovableChannel interface. If a SubscriptionChannel implements this, then when a subscription channel is destroyed (because its subscription is deleted) then the remove() method will be called on that channel.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-35"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>When performing a JSON Patch in JPA server, the post-patched document is now validated to ensure that the patch was valid for the candidate resource. This means that invalid patches are caught and not just silently ignored.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-36"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Expunges are now done in batches in multiple threads. Both the number of expunge threads and batch size are configurable in DaoConfig.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-39"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>ValidationSupportChain will now call isCodeSystemSupported() on each entry in the chain before calling fetchCodeSystem() in order to reduce the work required by chain entries. Thanks to Anders Havn for the suggestion!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-4"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The hapi-fhir-jpaserver-starter project has been updated to use a properties file for configuration, making it much easier to get started with this project. Thanks to Sean McIlvenna for the pull request!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-44"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1228">#1228</a>
+        </td>
+        <td>
+            <p>The InstanceValidator now supports validating QuestionnairResponses with empty items for disabled questions. Thanks to Matti Uusitalo for the pull request!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-45"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1152">#1152</a>
+        </td>
+        <td>
+            <p>A new method has been added to the client that allows arbitrary headers to be easily added to the request. Thanks to Christian Ohr for the pull request!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-46"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1213">#1213</a>
+        </td>
+        <td>
+            <p>VersionConverter for R2-R3 has been modified to correectly handle the renamed basedOn field. Thanks to Gary Graham for the pull request!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-48"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1244">#1244</a>
+        </td>
+        <td>
+            <p>Add a missing @Deprecated tag. Thanks to Drew Mitchell for the pull request!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-49"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1303">#1303</a>
+        </td>
+        <td>
+            <p>The JSON parser has removed a few unneeded super keywords that prevented overriding behaviour. Thanks to Anders Havn for the pull request!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-50"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1179">#1179</a>
+        </td>
+        <td>
+            <p>The DSTU2/3 version converter now converts Specimen resources. Thanks to Gary Graham for the pull request!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-8"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The JPA terminology service can now detect when Hibernate Search (Lucene) is not enabled, and will perform simple ValueSet expansions without relying on Hibenrate Search in such cases.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-23"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-cogs"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The hapi-fhir-testpage-overlay project no longer includes any library JARs in the built WAR, in order to prevent duplicates and conflicts in implementing projects.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-33"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-cogs"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The JSON Patch provider has been switched to use the provider from the <a href="https://github.com/java-json-tools/json-patch">Java JSON Tools</a> project, as it is much more robust and fault tolerant.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-6"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-cogs"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Re-use subscription channel and handlers when a subscription is updated (unless the channel type changed).</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-9"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-cogs"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1209">#1209</a>
+        </td>
+        <td>
+            <p>A Google Analytics script fragment was leftover in the hapi-fhir-jpaserver example and starter projects. Thanks to Patrick Werner for removing these!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-0"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>A potential security vulnerability in the hapi-fhir-testpage-overlay project was corrected: A URL parameter was not being correctly escaped, leading to a potential XSS vulnerability. A big thanks to Mudit Punia and Dushyant Garg for reporting this.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-11"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>When performing a search using the JPA server, if a search returned between 1500 and 2000 results, a query for the final page of results would timeout due to a page calculation error. This has been corrected.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-15"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1223">#1223</a>
+        </td>
+        <td>
+            <p>Searching the JPA server with multiple instances of the same token search parameter (e.g. &quot;Patient?identifier=&amp;identifier=b&quot; returned no results even if resources should have matched. Thanks to @mingdatacom for reporting!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-19"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>JPA searches using a Composite Unique Index did not return the correct results if a REFERENCE search parameter was used with arguments that consisted of unqualified resource IDs.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-20"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>A non-threadsafe use of DateFormat was cleaned up in the StopWatch class.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-22"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>When returning the results of a history operation from a HAPI FHIR server, any entries with a method of DELETE contained a stub resource in Bundle.entry.resource, even though the FHIR spec states that this field should be empty. This was corrected.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-24"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Two expunge bug fixes: The first bug is that the expunge operation wasn't bailing once it hit its limit. This resulted in a &quot;Page size must not be less than one!&quot; error. The second bug is that one case wasn't properly handled: when a resourceId with no version is provided. This executed the case where only resource type is provided.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-25"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>When updating a resource in the JPA server, if the contents have not actually changed the resource version is not updated and no new version is created. In this situation, the update time was modified however. It will no longer be updated.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-26"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>When running the JPA server in Resource Client ID strategy mode of &quot;ANY&quot;, using the <code>_id</code> search parameter could return incorrect results. This has been corrected.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-27"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Performing a PUT or POST against a HAPI FHIR Server with no request body caused an HTTP 500 to be returned instead of a more appropriate HTTP 400. This has been corrected.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-28"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1255">#1255</a>
+        </td>
+        <td>
+            <p>The fetchValueSet method on IValidationSupport implementation was not visible and could not be overridden. Thanks to Patrick Werner for the pull reuqest!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-29"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1280">#1280</a>
+        </td>
+        <td>
+            <p>The JPA server failed to index R4 reources with search parameters pointing to the Money data type. Thanks to GitHub user @navyflower for reporting!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-30"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>When validating DSTU3 QuestionnaireResponses that leverage the &quot;enableWhen&quot; functionality available in Questionnaire resources, the validation could sometimes fail incorrectly.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-34"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Ensure that database cursors are closed immediately after performing a FHIR search.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-37"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Validation errors were fixed when using a Questionnaire with enableWhen on a question that contains sub-items.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-38"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Fixed &quot;because at least one resource has a reference to this resource&quot; delete error message that mistakingly reported the target instead of the source with the reference.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-40"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1299">#1299</a>
+        </td>
+        <td>
+            <p>In JPA server when updating a resource using a client assigned ID, if the resource was previously deleted (meaning that the operation is actually a create), the server will now return an HTTP 201 instead of an HTTP 200. Thanks to Mario Hyland for reporting!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-41"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The HAPI FHIR CLI was unable to start a server in R4 mode in HAPI FHIR 3.7.0. This has been corrected.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-42"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1311">#1311</a>
+        </td>
+        <td>
+            <p>When encoding resources, profile declarations on contained resources will now be preserved. Thanks to Anders Havn for the pull request!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-43"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1305">#1305</a>
+        </td>
+        <td>
+            <p>Two incorrect package declarations in unit tests were corrected. Thanks to github user @zaewonyx for the PR!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-47"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1141">#1141</a>
+        </td>
+        <td>
+            <p>The JPA database migration tool has been enhanced to support migration from HAPI FHIR 2.5. Thanks to Gary Graham for the pull request!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-5"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The hapi-fhir-jpaserver-example did not have Subscription capabilities enabled after the refactoring of how Subscriptions are enabled that occurred in HAPI FHIR 3.7.0. Thanks to Volker Schmidt for the pull request!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.8.0-7"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>When using the <code>_elements</code> parameter on searches and reads, requesting extensions to be included caused the extensions to be included but not any values contained within. This has been corrected.</p>
+        </td>
+    </tr>
+</table>
+</section>
+
+<a name="change3.8.0-1"></a>
+<section id="section6"><h1 data-toc-text="HAPI FHIR 3.7.0  (Gale)"><span class="helpHeaderSectionNumberBadge">1.3.6</span>HAPI FHIR 3.7.0  (Gale)</h1><a href="changelog_2019.html#change3.8.0-1" class="helpSectionLink">&nbsp;</a><a name="release-information-4"></a>
+<h2>Release Information</h2>
+<p><strong>Released:</strong> 2019-02-06</p>
+<p><strong>Codename:</strong> (Gale)</p>
+<a name="changes-4"></a>
+<h2>Changes</h2>
+<table class="table">
+    <tr>
+        <td>
+            <a name="change3.7.0-0"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>HAPI FHIR is now built using OpenJDK 11. Users are recommended to upgrade to this version of Java if this is feasible. We are not yet dropping support for Java 8 (aka 1.8), but users are recommended to upgrade if possible.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-1"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The version of a few dependencies have been bumped to the latest versions (dependent HAPI modules listed in brackets): <ul> <li>Spring (JPA): 5.0.8.RELEASE -&gt; 5.1.3.RELEASE</li> <li>Spring-Data (JPA): 2.0.7.RELEASE -&gt; 2.1.3.RELEASE</li> <li>Hibernate-Core (JPA): 5.3.6.FINAL -&gt; 5.4.1.FINAL</li> <li>Hibernate-Search (JPA): 5.10.3.FINAL -&gt; 5.11.1.FINAL</li> <li>Thymeleaf (JPA): 3.0.9.RELEASE -&gt; 3.0.11.RELEASE</li> <li>thymeleaf-spring4 (Testpage Overlay) has been replaced with thymeleaf-spring5</li> <li>Commons-Lang3: 3.8 -&gt; 3.8.1</li> <li>Commons-Text: 1.4 -&gt; 1.4</li> <li>Spring Boot: 1.5.6.RELEASE -&gt; 2.1.1.RELEASE</li> </ul></p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-11"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>FHIR Parser now has an additional overload of the <code>parseResource</code> method that accepts an InputStream instead of a Reader as the source.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-12"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>FHIR Fluent/Generic Client now has a new return option called <code>returnMethodOutcome</code> which can be used to return a raw response. This is handy for invoking operations that might return arbitrary binary content.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-13"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Moved state and functionality out of BaseHapiFhirDao.java into new classes: LogicalReferenceHelper, ResourceIndexedSearchParams, IdHelperService, SearcchParamExtractorService, and MatchUrlService.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-14"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Replaced explicit @Bean construction in BaseConfig.java with @ComponentScan. Beans with state are annotated with @Component and stateless beans are annotated as @Service. Also changed SearchBuilder.java and the three Subscriber classes into @Scope(&quot;protoype&quot;) so their dependencies can be @Autowired injected as opposed to constructor parameters.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-17"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>AuthorizationInterceptor now allows arbitrary FHIR $operations to be authorized, including support for either allowing the operation response to proceed unchallenged, or authorizing the contents of the response.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-18"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>JPA Migrator tool enhancements: An invalid SQL syntax issue has been fixed when running the CLI JPA Migrator tool against Oracle or SQL Server. In addition, when using the &quot;Dry Run&quot; option, all generated SQL statements will be logged at the end of the run. Also, a case sensitivity issue when running against some Postgres databases has been corrected.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-19"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>In the JPA server, when performing a chained reference search on a search parameter with a target type of <code>Reference(Any)</code> , the search failed with an incomprehensible error. This has been corrected to return an error message indicating that the chain must be qualified with a resource type for such a field. For example, <code>QuestionnaireResponse?subject:Patient.name=smith</code> instead of <code>QuestionnaireResponse?subject.name=smith</code> .</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-2"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Changed subscription processing, if the subscription criteria are straightforward (i.e. no chained references, qualifiers or prefixes) then attempt to match the incoming resource against the criteria in-memory. If the subscription criteria can't be matched in-memory, then the server falls back to the original subscription matching process of querying the database. The in-memory matcher can be disabled by setting isEnableInMemorySubscriptionMatching to &quot;false&quot; in DaoConfig (by default it is true). If isEnableInMemorySubscriptionMatching is &quot;false&quot;, then all subscription matching will query the database as before.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-20"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The LOINC uploader has been updated to suport the LOINC 2.65 release file format.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-21"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The resource reindexer can now detect when a resource's current version no longer exists in the database (e.g. because it was manually expunged), and can automatically adjust the most recent version to account for this.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-22"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>When updating existing resources, the JPA server will now attempt to reuse/update rows in the index tables if one row is being removed and one row is being added (e.g. because a Patient's name is changing from &quot;A&quot; to &quot;B&quot;). This has the net effect of reducing the number</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-24"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Plain Server ResourceProvider classes are no longer required to be public classes. This limitation has always been enforced, but did not actually serve any real purpose so it has been removed.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-25"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>A new interceptor called ServeMediaResourceRawInterceptor has been added. This interceptor causes Media resources to be served as raw content if the client explicitly requests the correct content type cia the Accept header.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-26"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/917">#917</a>
+        </td>
+        <td>
+            <p>A new configuration item has been added to the FhirInstanceValidator that allows you to specify additional &quot;known extension domains&quot;, meaning domains in which the validator will not complain about when it encounters new extensions. Thanks to Heinz-Dieter Conradi for the pull request!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-31"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Added 3 interfaces for services required by the standalone subscription server. The standalone subscription server doesn't have access to a database and so needs to get its resources using a FhirClient. Thus for each of these interfaces, there are two implementations: a Dao implementaiton and a FhirClient implementation. The interfaces thus introduced are ISubscriptionProvider (used to load subscriptions into the SubscriptionRegistry), the IResourceProvider (used to get the latest version of a resource if the &quot;get latest version&quot; flag is set on the subscription) and ISearchParamProvider used to load custom search parameters.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-35"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1051">#1051</a>
+        </td>
+        <td>
+            <p>FHIR Servers now support the HTTP HEAD method for FHIR read operations. Thanks to GitHub user Cory00 for the pull request!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-38"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>It is now possible in a plain or JPA server to specify the default return type for create/update operations when no Prefer header has been provided by the client.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-39"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>It is now possible in a JPA server to specify the _total calculation behaviour if no parameter is supplied by the client. This is done using a new setting on the DaoConfig. This can be used to force a total to always be calculated for searches, including large ones.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-40"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>AuthorizationInterceptor now rejects transactions with an invalid or unset request using an HTTP 422 response Bundle type instead of silently refusing to authorize them.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-41"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>AuthorizationInterceptor is now able to authorize DELETE operations performed via a transaction operation. Previously these were always denied.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-42"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1065">#1065</a>
+        </td>
+        <td>
+            <p>OperationDefinitions are now created for named queries in server module. Thanks to Stig Døssing for the pull request!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-43"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>A new server interceptor has been added called &quot;SearchNarrowingInterceptor&quot;. This interceptor can be used to automatically narrow the scope of searches performed by the user to limit them to specific resources or compartments that the user should have access to.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-44"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>In a DSTU2 server, if search parameters are expressed with chains directly in the parameter name (e.g. <code>@RequiredParam(name=&quot;subject.name.family&quot;)</code> ) the second part of the chain was lost when the chain was described in the server CapabilityStatement. This has been corrected.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-48"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>A wrapper script for Maven has been added, enabling new users to use Maven without having to install it beforehand. Thanks to Ari Ruotsalainen for the Pull Request!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-49"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>AuthorizationInterceptor can now allow a user to perform a search that is scoped to a particular resource (e.g. Patient?_id=123) if the user has read access for that specific instance.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-5"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Changed behaviour of FHIR Server to reject subscriptions with invalid criteria. If a Subscription is submitted with invalid criteria, the server returns HTTP 422 &quot;Unprocessable Entity&quot; and the Subscription is not persisted.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-51"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>HAPI FHIR will now log the Git revision when it first starts up (on the ame line as the version number that it already logs).</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-53"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Added support for _id in in-memory matcher</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-55"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Add a &quot;subscription-matching-strategy&quot; meta tag to incoming subscriptions with value of IN_MEMORY or DATABASE indicating whether the subscription can be matched against new resources in-memory or whether a call out to the database may be required. I say &quot;may&quot; because subscription matches fail fast so a negative match may be performed in-memory, but a positive match will require a database call.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-61"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1148">#1148</a>
+        </td>
+        <td>
+            <p>Support for validating enableWhen in Questionnaires has been added to the Validator. Thanks to Eeva Turkka and Matti Uutsitalo for the pull request!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-7"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1117">#1117</a>
+        </td>
+        <td>
+            <p>A badly formatted log message when handing exceptions was cleaned up. Thanks to Magnus Watn for the pull request!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-9"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-plus"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>AuthorizationInterceptor now allows the GraphQL operation to be authorized. Note that this is an all-or-nothing grant for now, it is not yet possible to specify individual resource security when using GraphQL.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-16"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-cogs"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The JPA stale search deletion service now deletes cached search results in much larger batches (20000 instead of 500) in order to reduce the amount of noise in the logs.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-28"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-cogs"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>In example-projects/README.md and hapi-fhir-jpaserver-example/README.md, incidate that these examples projects are no longer maintained. The README.md points users to a starter project they should use for examples.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-29"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-cogs"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Replaced use of BeanFactory with custom factory classes that Spring @Lookup the @Scope(&quot;prototype&quot;) beans (e.g. SearchBuilderFactory).</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-3"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-cogs"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Removed BaseSubscriptionInterceptor and all its subclasses (RestHook, EMail, WebSocket). These are replaced by two new interceptors: SubscriptionActivatingInterceptor that is responsible for activating subscriptions and SubscriptionMatchingInterceptor that is responsible for matching incoming resources against activated subscriptions. Call DaoConfig.addSupportedSubscriptionType(type) to configure which subscription types are supported in your environment. If you are processing subscriptions on a separate server and only want to activate subscriptions on this server, you should set DaoConfig.setSubscriptionMatchingEnabled to false. The helper method SubscriptionInterceptorLoader.registerInterceptors() will check if any subscription types are supported, and if so then load active subscriptions into the SubscriptionRegistry and register the subscription activating interceptor. This method also registers the subscription matching interceptor (that matches incoming resources and sends matches to subscription channels) only if DaoConfig.isSubscriptionMatchingEnabled is true. See https://github.com/hapifhir/hapi-fhir/wiki/Proposed-Subscription-Design-Change for more details.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-30"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-cogs"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Moved e-mail from address configuration from EmailInterceptor (which doesn't exist any more) to DaoConfig.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-32"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-cogs"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Separated active subscription cache from the interceptors into a new Spring component called the SubscriptionRegistry. This component maintains a cache of ActiveSubscriptions. An ActiveSubscription contains the subscription, it's delivery channel, and a list of delivery handlers.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-33"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-cogs"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Introduced a new Spring factory interface ISubscribableChannelFactory that is used to create delivery channels and handlers. By default, HAPI FHIR ships with a LinkedBlockingQueue implementation of the delivery channel factory. If a different type of channel factory is required (e.g. JMS or Kafka), add it to your application context and mark it as @Primary.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-4"></a>
+            <span style="color: #129c49; font-size: 1.1em;">
+                <i class="fa fa-cogs"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Added support for matching subscriptions in a separate server from the REST Server. To do this, run the SubscriptionActivatingInterceptor on the REST server and the SubscriptionMatchingInterceptor in the standalone server. Classes required to support running a standalone subscription server are in the ca.uhn.fhir.jpa.subscription.module.standalone package. These classes are excluded by default from the JPA ApplicationContext (that package is explicitly filtered out in the BaseConfig.java @ComponentScan).</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-10"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The ResponseHighlighterInterceptor now declines to handle Binary responses provided as a response from extended operations. In other words if the operation $foo returns a Binary resource, the ResponseHighliterInterceptor will not provide syntax highlighting on the response. This was previously the case for the /Binary endpoint, but not for other binary responses.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-15"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>A bug in the JPA resource reindexer was fixed: In many cases the reindexer would mark reindexing jobs as deleted before they had actually completed, leading to some resources not actually being reindexed.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-23"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>An issue was corrected with the JPA reindexer, where String index columns do not always get reindexed if they did not have an identity hash value in the HASH_IDENTITY column.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-27"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>Under some circumstances, when a custom search parameter was added to the JPA server resources could start reindexing before the new search parameter had been saved, meaning that it was not applied to all resources. This has been corrected.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-34"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/980">#980</a>
+        </td>
+        <td>
+            <p>When using the HL7.org DSTU2 structures, a QuestionnaireResponse with a value of type reference would fail to parse. Thanks to David Gileadi for the pull request!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-36"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>When running the JPA server on Oracle, certain search queries that return a very large number of _included resources failed with an SQL exception stating that too many parameters were used. Search include logic has been reworked to avoid this.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-37"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>JPA Subscription deliveries did not always include the accurate versionId if the Subscription module was configured to use an external queuing engine. This has been corrected.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-45"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>In the JPA server, search/read operations being performed within a transaction bundle did not pass the client request HTTP headers to the sub-request. This meant that AuthorizationInterceptor could not authorize these requests if it was depending on headers being present.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-46"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>When using a client in DSTU3/R4 mode, if the client attempted to validate the server CapabilityStatement but was not able to parse the response, the client would throw an exception with a misleading error about the Conformance resource not existing. This has been corrected. Thanks to Shayaan Munshi for reporting and providing a test case!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-47"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>It is now possible to upload a ConceptMap to the JPA server containing mappings where the source or target is a StructureDefinition canonical URI. This was previously blocked, as the system could not apply these mappings. It is now permitted to be stored, although the system will still not apply these mappings.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-50"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1084">#1084</a>
+        </td>
+        <td>
+            <p>In JPA Server REST Hook Subscriptions, any Headers defined in the Subscription resource are now applied to the outgoing HTTP request. Thanks to Volker Schmidt for the pull request!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-52"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>When fetching a page of search results, if a page offset beyond the total number of available result was requested, a single result was still returned (e.g. requesting a page beginning at index 1000 when there are only 10 results would result in the 10th result being returned). This will now result in an empty response Bundle as would be expected.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-54"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The casing of the base64Binary datatype was incorrect in the DSTU3 and R4 model classes. This has been corrected.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-56"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>When performing a JPA search with a chained :text modifier (e.g. MedicationStatement?medication.code:text=aspirin,tylenol) a series of unneccesary joins were introduced to the generated SQL query, harming performance. This has been fixed.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-57"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>A serialization error when performing some searches in the JPA server using data parameters has been fixed. Thanks to GitHub user @PickOneFish for reporting!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-58"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1135">#1135</a>
+        </td>
+        <td>
+            <p>An issue with outdated syntax in the Vagrant file that prevent it from being used was corrected. Thanks to Steve Lewis for the pull requst!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-59"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1130">#1130</a>
+        </td>
+        <td>
+            <p>The HAPI FHIR tutorial server project had outdated versions of HAPI FHIR in its pom file. Thanks to Ricardo Estevez for the pull request!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-6"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+        </td>
+        <td>
+            <p>The JPA server $expunge operation could sometimes fail to expunge if another resource linked to a resource that was being expunged. This has been corrected. In addition, the $expunge operation has been refactored to use smaller chunks of work within a single DB transaction. This improves performance and reduces contention when performing large expunge workloads.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-60"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/1114">#1114</a>
+        </td>
+        <td>
+            <p>A NullPointerException during validation was fixed. Thanks to GitHub user zilin375 for the pull request!</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a name="change3.7.0-8"></a>
+            <span style="color: #ee2324; font-size: 1.1em;">
+                <i class="fa fa-bug"></i>
+            </span>
+        </td>
+        <td>
+            <a href="https://github.com/hapifhir/hapi-fhir/issues/944">#944</a>
+        </td>
+        <td>
+            <p>A NullPointerException has been fixed when using custom resource classes that have a @Block class as a child element. Thanks to Lars Gram Mathiasen for reporting and providing a test case!</p>
+        </td>
+    </tr>
+</table>
+</section>
+
+
+				</div>
+
+				<div class="hide-sm-and-below">
+</div>
+				
+
+	<!-- footer -->
+	<footer class="page-footer">
+		<div class="container-fluid text-center text-md-left">
+			<hr class="bottom-hr">
+			<div class="row pt-3 pb-3">
+				<div class="col-md-3 text-center">
+					<img src="../../images/logos/raccoon-forwards.png" alt="raccoon logo without text" width="100">
+				</div>
+				<div class="col-md-2">
+					<p class="footer-heading">HAPI HAPI</p>
+					<ul class="list-unstyled">
+						<li><a href="https://hapifhir.io/hapi-fhir/">Home</a></li>
+						<li><a href="../getting_started/downloading_and_importing.html">Download</a></li>
+						<li><a href="changelog.html">Changelog</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/license.html">License</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/blog/">News</a></li>
+					</ul>
+					<p class="footer-heading">TEST SERVER</p>
+					<ul class="list-unstyled">
+						<li><a href="http://hapi.fhir.org/" target="_blank">Public Test Server</a></li>
+					</ul>
+					<p class="footer-heading">SUPPORT</p>
+					<ul class="list-unstyled">
+						<li><a href="https://smilecdr.com/" target="_blank">Smile CDR</a></li>
+					</ul>
+				</div>
+				<div class="col-md-2">
+					<p class="footer-heading">USING HAPI</p>
+					<ul class="list-unstyled">
+						<li><a href="../index.html">Documentation</a></li>
+						<li><a href="#">Command Line Tool (cli)</a></li>
+					</ul>
+					<p class="footer-heading">STARTER PROJECTS</p>
+					<ul class="list-unstyled">
+						<li><a href="https://github.com/FirelyTeam/fhirstarters/tree/master/java/hapi-fhirstarters-client-skeleton">Client</a></li>
+						<li><a href="https://github.com/FirelyTeam/fhirstarters/tree/master/java/hapi-fhirstarters-rest-server-skeleton">Plain Server</a></li>
+						<li><a href="https://github.com/hapifhir/hapi-fhir-jpaserver-starter">JPA Server</a></li>
+					</ul>
+				</div>
+				<div class="col-md-2">
+					<p class="footer-heading">JAVADOCS</p>
+					<ul class="list-unstyled">
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/">Core API</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-structures-dstu2/">Model API (DSTU2)</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-structures-dstu3/">Model API (DSTU3)</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-structures-r4/">Model API (R4)</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-structures-r5/">Model API (R5)</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-client/">Client API</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-server/">Plain Server - API</a></li>
+                  <li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-server-mdm/">Plain Server - MDM API</a></li>
+                  <li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-server-openapi/">Plain Server - OpenAPI</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-storage/">JPA Server - API</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-jpaserver-model/">JPA Server - Model</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-jpaserver-searchparam/">JPA Server - Search Param Support</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-jpaserver-subscription/">JPA Server - Subscription</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-jpaserver-base/">JPA Server - Base</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-validation/">Validation API</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-converter/">Version Converter API</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-jaxrsserver-base/">Server API (JAX-RS)</a></li>
+					</ul>
+				</div>
+				<div class="col-md-3">
+					<p class="footer-heading">GET HELP</p>
+					<ul class="list-unstyled">
+						<li><a href="https://github.com/jamesagnew/hapi-fhir/wiki/Getting-Help" target="_blank">How to Ask for Help (read this first!)</a></li>
+						<li><a href="https://groups.google.com/d/forum/hapi-fhir" target="_blank">Google Group (Ask Questions)</a></li>
+						<li><a href="https://github.com/jamesagnew/hapi-fhir/issues" target="_blank">Issue Tracker (Report Bugs/Request Features)</a></li>
+						<li><a href="https://chat.fhir.org/" target="_blank">FHIR.org Chat (Live Chat with FHIR Implementors)</a></li>
+						<li><a href="../appendix/faq.html">Frequently Asked Questions (FAQ)</a></li>
+					</ul>
+					<p class="footer-heading">CONTRIBUTE</p>
+					<ul class="list-unstyled">
+						<li><a href="../contributing/hacking_guide.html">Guide to Hacking HAPI</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/contributors.html">Contributors</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<!-- footer copyright -->
+		<div class="footer-copyright text-center py-3">
+			<p>Updated: 2021-11-23T14:49:28.319Z — Made with <i style="color: #FF6600;" class="fas fa-heart"></i> in <a href="https://www.cbc.ca/news/canada/toronto/raccoon-city-wildlife-in-toronto-1.2742231"><img src="https://hapifhir.io/hapi-fhir/images/icons/raccoon.svg" alt="Raccoon" width="20"></a>
+		</div>
+
+	</footer>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-1395874-5"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-1395874-5');
+	</script>
+
+
+			</div>
+
+		</div>
+
+	</div>
+
+
+<script type="application/javascript">
+
+	$(function () {
+
+		/*
+		 * Build the TOC links on the right hand side by
+		 * scanning all of the sections in the documentation
+		 */
+		const sections = [];
+		const navLinks = [];
+		var nav = $('<ul class="nav flex-column">');
+		$('#toc').append(nav);
+
+		$('#tocscroll section').each(function () {
+			sections.push($(this));
+			let sectionName = $(this).find('h1').first().attr('data-toc-text');
+			let sectionId = $(this).prevAll('a').attr('name');
+			let navLink = $('<a class="nav-link" href="#' + sectionId + '">' + sectionName + '</a>');
+			navLinks.push(navLink);
+			nav.append($('<li class="nav-item">').append(navLink));
+		});
+
+		/*
+		 * Update the active link on the right hand side TOC when the
+		 * user scrolls up and down the page. Create a function for this,
+		 * then call the function once and register it to call again
+		 * any time the user scrolls
+		 */
+		function updateTocScroll() {
+			const sectionOffset = $('#tocscroll').offset().top;
+			let visible = false;
+			for (var idx = 0; idx < sections.length; idx++) {
+				var sectionTop = sections[idx].offset().top - sectionOffset + 20;
+				if (sectionTop >= 0 && !visible || (idx == sections.length -1 && !visible)) {
+					navLinks[idx].addClass('active');
+					visible = true;
+				} else {
+					navLinks[idx].removeClass('active');
+				}
+			}
+
+		}
+
+		$('#tocscroll').scroll(updateTocScroll);
+		updateTocScroll();
+
+		/*
+	    * When the page first loads, automatically scroll the left docs TOC
+	    * scroller to the actively displayed page.
+	    */
+		var activetop = $('.activechapter').offset().top - $('#tocscroll').offset().top - 30;
+		if (activetop < 100) {
+			activetop = 0;
+		}
+		$('#navcolumn').scrollTop(activetop);
+
+		function updateNavScroll() {
+			if ($('#navcolumn').scrollTop() < 100) {
+				$('.button-scroll-up-to-search').fadeOut(500);
+			} else {
+				$('.button-scroll-up-to-search').fadeIn(500);
+			}
+		}
+
+		updateNavScroll();
+		$('#navcolumn').scroll(updateNavScroll);
+
+	});
+</script>
+
+
+
+<script type="application/javascript">
+	function hover(element) {
+		element.setAttribute('src', '../../../images/icons/link-grey.html');
+	}
+
+	function unhover(element) {
+		element.setAttribute('src', '../../../images/icons/smiley-grey.html');
+	}
+
+   new ClipboardJS('.clipboardCopyBtn');
+
+</script>
+</body>
+
+
+<!-- Mirrored from hapifhir.io/hapi-fhir/docs/introduction/changelog_2019.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 01 Dec 2021 23:59:36 GMT -->
+</html>
+

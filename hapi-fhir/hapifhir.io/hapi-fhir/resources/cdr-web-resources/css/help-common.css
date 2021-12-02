@@ -1,0 +1,808 @@
+/*
+This file contains CSS definitions used in rendering the documentation pages
+both on the website, but also in the web admin console.
+*/
+
+@font-face {
+   font-family: Comic Mono;
+   font-weight: normal;
+   src: url(https://hapifhir.io/hapi-fhir/resources/cdr-web-resources/font/ComicMono.woff);
+}
+
+@font-face {
+   font-family: Fantasque Sans Mono;
+   font-weight: normal;
+   src: url(https://hapifhir.io/hapi-fhir/resources/cdr-web-resources/font/FantasqueSansMono-Regular.ttf);
+}
+
+A CODE {
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-decoration-color: #444;
+}
+
+BLOCKQUOTE {
+    border-left: 3px solid #8CC;
+    padding-left: 10px;
+    background: #EEE;
+    margin-left: 50px;
+}
+
+CODE {
+    padding: 2px 4px;
+    font-size: 90%;
+    color: #c7254e;
+    background-color: #f9f2f4;
+    border: 1px rgba(199, 37, 78, 0.15) solid;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+
+P {
+    font-size: 1.0em;
+}
+
+.checklistCheckbox {
+    font-size: 1.1em;
+    color: #21b21d;
+    margin-right: 0.5em;
+}
+
+.enumConstant {
+    border: 1px rgba(199, 37, 78, 0.15) solid;
+    font-size: 90%;
+    padding: 2px 4px;
+    border-radius: 4px;
+    background-color: #f9f2f4;
+    word-wrap: break-word;
+}
+
+PRE CODE {
+    border: none;
+}
+
+DIV.helpCanonicalUriSmall {
+    padding: 2px 4px;
+    font-size: 90%;
+    color: #c7254e;
+    background-color: #f9f2f4;
+    border: 1px rgba(199, 37, 78, 0.15) solid;
+    border-radius: 4px;
+}
+
+DIV.helpCanonicalUriSmall A {
+    font-family: monospace;
+    font-size: 0.8em;
+    line-height: 1.1em;
+    display: inline-block;
+}
+
+.helpCommandOutput {
+    font-size: 0.90em;
+    margin-left: 50px;
+    padding-left: 10px;
+    border-left: 5px solid #6cc1be;
+    background: #F8F8F8;
+    font-family: monospace;
+    margin-bottom: 10px;
+    box-shadow: -1px 0px 0px 0px #6cc1be, 0px 0px 0px 1px #dfdfdf;
+}
+
+.helpCommandOutputUserInput {
+    color: #C04040;
+    font-weight: bold;
+}
+
+.helpSnippetUrlBox {
+    display: block;
+    background-color: #F8F8F8;
+    padding: 10px;
+    border: 1px solid #C0C0C0;
+    border-left: 3px solid #358ccb;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-bottom: 15px;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+}
+
+.helpSnippetUrlBox A:HOVER {
+    cursor: pointer;
+}
+
+pre {
+    margin-left: 50px;
+}
+
+/* Override PRISM.js's style a bit */
+pre[class*="language-"] {
+    margin-left: 50px;
+    border-left: 5px solid #358ccb80;
+}
+
+.helpPropertyTable pre[class*="language-"] {
+    margin-left: 0px;
+}
+
+pre[class*="language-"] > code {
+    font-family: Comic Mono, Fantasque Sans Mono, Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    border-left: none;
+    box-shadow: -1px 0px 0px 0px #358ccb80, 0px 0px 0px 1px #dfdfdf;
+    white-space: pre-wrap;
+}
+
+.helpPropertyTable pre[class*="language-"] code {
+    padding: 10px;
+}
+
+pre[class*="language-"].line-numbers > code {
+    white-space: pre-wrap;
+}
+
+.manualSyntaxHighlightSymbol {
+    color: #358ccb;
+    font-weight: bold;
+}
+
+.clipboardCopyInput {
+    min-width: 300px;
+    background: #F8F8F8;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+
+.helpMonoSnippet {
+    font-family: monospace;
+    background-color: #F0F0F0;
+    padding: 4px;
+}
+
+pre[class*="language-"]:before, pre[class*="language-"]:after {
+    display: none;
+}
+
+.docsHl7v2TransactionsSupportedCell {
+    text-align: center;
+    white-space: nowrap;
+}
+
+.docsHl7v2TransactionsSupportedCellTriggerTransactions {
+    color: #888;
+}
+
+.grid {
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+.helpSnippetUrlBox {
+    display: block;
+    background-color: #F8F8F8;
+    padding-left: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border: 1px solid #C0C0C0;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    font-size: 0.9em;
+
+    margin-left: 50px;
+    border-left: 5px solid #358ccb80;
+}
+
+.helpSnippetHl7v2Box {
+    white-space: nowrap;
+    display: block;
+    background-color: #F8F8F8;
+    padding: 10px;
+    border: 1px solid #C0C0C0;
+    border-left: 3px solid #358ccb;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-bottom: 15px;
+    overflow-x: auto;
+}
+
+.helpSnippetUrlBox A:HOVER {
+    cursor: pointer;
+}
+
+.helpSidebarPageAnchors {
+    color: #000000;
+    font-size: 0.8em;
+}
+
+.helpNavSubSectionLink {
+    /* nothing */
+}
+
+.helpClipboardCopyBtn:HOVER {
+    border-top-right-radius: 4px !IMPORTANT;
+    border-bottom-right-radius: 4px !IMPORTANT;
+    background-color: #F8F8F8;
+}
+
+.helpMainContent {
+    margin-top: 0px;
+}
+
+.helpPermissionTableImpliesBlock {
+    margin-top: 10px;
+    margin-left: 10px;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.helpTocTable {
+    width: 100%;
+}
+
+TR.helpTocChapter TD {
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+TD.helpTocChapter {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+TD.helpTocPage {
+    padding-left: 0px;
+}
+
+TD.helpTocPage A {
+    color: #444;
+}
+
+TD.helpTocSection {
+    padding-left: 10px;
+}
+
+TD.helpTocSection A {
+    color: #888;
+}
+
+.helpTutorialTrailIconCaption {
+    font-size: 0.8em;
+    color: #888;
+}
+
+TD.helpTutorialGettingStartedBlockDescription {
+    vertical-align: top;
+    white-space: pre;
+    border-top: 1px solid transparent;
+    padding: 5px;
+    font-size: 0.9em;
+}
+
+TD.helpTutorialGettingStartedSampleCode {
+    vertical-align: top;
+    white-space: pre;
+    font-family: monospace;
+    border: 1px solid #A0A0A0;
+    background-color: #F0F0F0;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 0.9em;
+}
+
+TD.helpTutorialGettingStartedBlockDescription DIV.helpTutorialGettingStartedSampleSection {
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+    background-color: #F0F0F0;
+    font-weight: bold;
+}
+
+TD.helpTutorialGettingStartedSampleCode DIV.helpTutorialGettingStartedSampleSection {
+    background-color: #E0E0E0;
+}
+
+DIV.helpTutorialGettingStartedSampleSection {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: -5px;
+    margin-right: -5px;
+}
+
+.helpBanner {
+    position: absolute;
+    left: 0px;
+    width: 100%;
+}
+
+.helpBanner H1 {
+    border-bottom: 0px !important;
+}
+
+TABLE.helpJavascriptCallbackModels {
+    width: 100%;
+    border: 1px solid #DDD;
+}
+
+TABLE.helpJavascriptCallbackModels TD {
+    padding: 6px;
+}
+
+TABLE.helpJavascriptCallbackModels > THEAD {
+    font-size: 1.05em;
+    font-weight: bold;
+    color: rgb(84, 96, 104);
+    background-color: #CCC;
+}
+
+TABLE.helpJavascriptCallbackModels > TBODY > TR {
+    border-bottom: 1px solid #AAA;
+}
+
+
+TABLE.helpJavascriptCallbackModels > TBODY > TR:nth-of-type(2n+1) {
+    background-color: #f9f9f9;
+}
+
+TD.helpJavascriptCallbackModelPropertyIcon {
+    color: #44AA44;
+}
+
+TD.helpJavascriptCallbackModelOperationIcon {
+    color: #AAAA44;
+}
+
+TD.helpJavascriptCallbackModelOperationName, TD.helpJavascriptCallbackModelPropertyName {
+    white-space: nowrap;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    font-size: 0.9em;
+    background: #c6e0fe80;
+    color: #000000;
+}
+
+.helpNavigatorBarTop {
+    margin-bottom: 30px;
+    margin-top: 60px;
+}
+
+.helpNavigatorBarBottom {
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+.helpNavigatorBar {
+    text-align: center;
+}
+
+.helpNavigatorBar .disabled {
+    color: #BBB;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.helpNavigatorBar A {
+    color: #666;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.helpNavigatorBar A:HOVER {
+    background-color: #EEE;
+    text-decoration: none;
+}
+
+.helpHl7v2StructureIndent {
+    margin-left: 15px;
+}
+
+TABLE.helpPropertyTable {
+    border-spacing: 10px;
+    border-collapse: separate;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: initial;
+}
+
+TABLE.helpPropertyTable > THEAD > TR > TH {
+    font-size: 1.1em;
+    font-weight: bold;
+    background-color: #F0F0F0;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+TABLE.helpPropertyTable TD {
+    padding: 10px;
+    vertical-align: middle;
+}
+
+TABLE.helpPropertyTable TD.propertyBanner {
+    text-align: center;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.helpPropertyTableCopyLinkAddon {
+    cursor: pointer;
+}
+
+.helpDocsFooter {
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.helpH1 {
+    border: 1px solid #CCC;
+    padding: 10px;
+    background: #EEE;
+    border-radius: 10px;
+}
+
+.helpHeaderSectionNumberBadge {
+    background: #DDD;
+    padding: 4px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.helpLinkPageNotSelectedChevron {
+    color: #888;
+}
+
+.helpLinkPageSelectedLink {
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.helpNavPageSelectedTop, .helpNavPageSelectedBottom, .modulesNavPageSelected {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+}
+
+.helpNavPageSelectedTop {
+    font-size: 1.1em;
+    background: #888;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    border-right: 6px solid #6cc1be;
+}
+
+.helpNavPageSelectedTop A, .modulesNavPageSelected A {
+    color: #FFF;
+    padding-left: 0px;
+    font-size: 0.9em;
+}
+
+/* This is the section number */
+.helpNavPageSelectedTop SPAN {
+    color: #FFF;
+}
+
+.helpNavPageSelectedBottom {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-left: 1px solid #888;
+    border-right: 1px solid #888;
+    border-bottom: 1px solid #888;
+    margin-left: 30px;
+    margin-right: 5px;
+}
+
+.helpNavPageNotSelected {
+    font-size: 1.1em;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    border-radius: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.helpNavPageNotSelected A, .helpNavPageNotSelected A SPAN:FIRST-CHILD,
+.modulesNavPageNotSelected A, .modulesNavPageNotSelected A SPAN:FIRST-CHILD {
+    color: #36474f;
+    padding-left: 0px;
+}
+
+.helpNavPageNotSelected:HOVER, .modulesNavPageNotSelected:HOVER {
+    background: #CCC;
+}
+
+.helpNavSection, .modulesNavSection {
+    padding-bottom: 10px;
+}
+
+.helpNavSectionTitle, .modulesNavSectionTitle {
+    color: #36474f;
+    font-size: 1.1em;
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+
+.helpPermissionDiv {
+    padding: 10px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    float: right;
+    width: 50%;
+    border: 1px dashed #888;
+    background: #f8f5f1;
+}
+
+.helpInfoCalloutBox, .doc_info_bubble {
+    padding: 10px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px dashed #888;
+    background: #EEEEBB;
+    font-size: 1.0em;
+    color: #444444;
+}
+
+.helpWarningCalloutBox {
+    padding: 10px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px dashed #888;
+    background: #f8d5d1;
+    font-size: 1.1em;
+    color: #C44;
+}
+
+.helpWarningCalloutBoxExclamation {
+    font-size: 1.2em;
+    color: #F88;
+}
+
+.helpNavSidebar {
+    padding: 10px;
+}
+
+.helpScreenshotRight {
+    box-shadow: 4px 4px 10px 0px #979797;
+    border: 1px solid #CCC;
+    float: right;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.helpScreenshotInline {
+    box-shadow: 4px 4px 10px 0px #979797;
+    border: 1px solid #CCC;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+/* Hide for mobile, show later */
+.helpSidebar {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .helpSidebar {
+        position: fixed;
+        top: 70px;
+        bottom: 0;
+        left: 0;
+        z-index: 1000;
+        display: block;
+        padding: 5px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        background-color: #f5f5f5;
+        border-right: 1px solid #eee;
+    }
+}
+
+@media (min-width: 768px) {
+    .primaryColumn {
+        position: relative;
+        overflow-y: scroll;
+        height: calc(100vh - 80px);
+        width: 100%;
+        padding: 1.0em;
+    }
+
+    .primaryColumn#tocscroll {
+        padding-right: 20%;
+    }
+
+    .rightNavContainer {
+        width: calc(20% - 30px);
+        height: calc(100% - 80px);
+        position: absolute;
+        right: 20px;
+        padding: 20px;
+        z-index: 1000;
+        overflow-x: hidden;
+        overflow-y: scroll;
+       scrollbar-width: none;
+    }
+
+    .hide-md-and-above {
+        display: none;
+    }
+
+}
+
+@media (max-width: 767px) {
+    .hide-sm-and-below {
+        display: none;
+    }
+}
+
+.pull-right {
+    float: right !important;
+}
+
+#toc .nav-link {
+    display: block;
+    padding: .1rem 0.75rem;
+    color: #333333;
+    line-height: 1.1em;
+    padding-bottom: 0.5em;
+}
+
+#toc A {
+    font-size: 0.8em;
+}
+
+#toc A {
+    font-weight: normal;
+    border-radius: 2px;
+    border-left: transparent 1px solid;
+}
+
+#toc A.active {
+    font-weight: bold;
+    border-left: #2b81af 1px solid;
+}
+
+#toc A:hover {
+    border-left: #2b81af 1px solid;
+}
+
+.mobile-header-links {
+    text-align: center;
+    width: 100%;
+    padding-top: 20px;
+}
+
+.mobile-header-links P {
+    font-size: 1.3em;
+    padding: 20px;
+}
+
+.button-scroll-up-to-search {
+    position: absolute;
+    top: 90px;
+    left: calc(25% - 70px);
+    z-index: 999;
+    font-size: 0.8em;
+    opacity: 0.75;
+}
+
+#navcolumn {
+    scrollbar-width: thin;
+}
+
+#navcolumn::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+#navcolumn::-webkit-scrollbar {
+    width: 6px;
+    background-color: #F5F5F5;
+}
+
+#navcolumn::-webkit-scrollbar-thumb {
+    background-color: #888;
+}
+
+
+/** DOCS **/
+.helpSectionLink {
+    min-width: 40px;
+    min-height: 40px;
+    display: inline-block;
+    position: relative;
+    float: right;
+    top: -55px;
+    background-image: url('../../../../images/icons/smiley-grey.html');
+}
+
+.helpSectionLink:hover {
+    background-image: url('../../../../images/icons/link-grey.html');
+}
+
+.docs-content {
+    color: #546068;
+}
+
+.docs-content .helpHeaderSectionNumberBadge {
+    background: none !important;
+    color: #63C4D2 !important;
+}
+
+.docs-content h1 {
+    font-size: 20px !important;;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.docs-content h2 {
+    font-size: 18px !important;;
+    font-weight: bold;
+    padding-bottom: 0.3em;
+}
+
+.docs-content h3 {
+    font-size: 16px !important;;
+    font-weight: bold;
+    color: #888;
+}
+
+.docs-content > SECTION {
+    background-color: #fff;
+    border: 1px #ddd solid;
+    padding-top: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    box-shadow: 2px 3px 3px #E0E0E0;
+    overflow-x: scroll;
+}
+
+.docs-content IMG {
+    max-width: 100%;
+}
+
+.docs-inpage-nav-container {
+    display: table;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.docs-inpage-nav-row {
+    display: table-row;
+}
+
+.docs-inpage-nav-link-header {
+    color: #888;
+    font-size: 0.8em;
+}
+
+.docs-inpage-nav-link {
+    color: #448;
+    font-size: 0.9em;
+}
+
+.docs-inpage-nav-cell {
+    display: table-cell;
+    width: 33%;
+    vertical-align: middle;
+}
+
+.docs-inpage-nav-cell .btn {
+    font-size: 0.8em !important;
+}
+
+.docs-inpage-nav-cell .dropdown-menu {
+    font-size: 0.8em !important;
+}
+
+.table-notmaximized {
+    width: auto;
+}

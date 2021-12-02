@@ -1,0 +1,2032 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from hapifhir.io/hapi-fhir/docs/server_plain/rest_operations_search.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 02 Dec 2021 00:00:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+	<title>REST Operations: Search - HAPI FHIR Documentation</title>
+
+	
+
+	<!-- required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- objectgraph -->
+	
+
+	<!-- Favicon -->
+	<link rel="icon" href="https://smilecdr.com/favicon.ico">
+
+	<!-- font, icons -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+	<!-- jquery, bootstrap script for dropdown and hover-->
+	<script src="../../resources/jquery/dist/jquery.min.js"></script>
+	<script src="../../resources/popper.js/dist/umd/popper.min.js"></script>
+	<script src="../../resources/bootstrap/dist/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="../../resources/bootstrap/dist/css/bootstrap.min.css"/>
+
+	<!-- fontawesome -->
+	<script src="../../resources/font-awesome/js/all.min.js" data-auto-replace-svg="nest"></script>
+	<link rel="stylesheet" media="screen" href="../../resources/font-awesome/css/fontawesome.min.css" />
+
+	<!-- Clipboard.js -->
+	<script src="../../resources/clipboard.js/clipboard.min.js"></script>
+
+	
+	<script src="../../resources/prismjs/prism.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-bash.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-http.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-java.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-javascript.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-json.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-nginx.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-properties.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-sql.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/plugins/toolbar/prism-toolbar.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/plugins/command-line/prism-command-line.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/plugins/line-numbers/prism-line-numbers.js" type="text/javascript"></script>
+	<link href="../../resources/prismjs/themes/prism.css" rel="stylesheet" type="text/css"/>
+	<link href="../../resources/prismjs/themes/prism-coy.css" rel="stylesheet" type="text/css"/>
+	<link href="../../resources/prismjs/plugins/toolbar/prism-toolbar.css" rel="stylesheet" type="text/css"/>
+	<link href="../../resources/prismjs/plugins/line-numbers/prism-line-numbers.css" rel="stylesheet" type="text/css"/>
+
+	<link rel="stylesheet" type="text/css" href="../../css/hapifhir.css">
+
+
+
+
+	<!-- css sheet -->
+	<link href="../../resources/cdr-web-resources/css/help-common.css" rel="stylesheet" type="text/css"/>
+	<link href="../../css/pages.css" rel="stylesheet" type="text/css"/>
+	<link href="../../css/docs.css" rel="stylesheet" type="text/css"/>
+
+</head>
+
+<body>
+
+	
+	<header class="header" id="header">
+		<nav class="navbar fixed-top navbar-expand-sm navbar-light navbar-greyshadow">
+			<a class="navbar-brand text-center" href="https://hapifhir.io/hapi-fhir/" title="Home">
+				
+				<img src="../../images/logos/small-logo.png" alt="HAPI FHIR logo" width="156" id="collapsed-logo">
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<script type="application/javascript">
+				$(function(){
+					$(".dropdown").hover(
+						function() {
+							if ($( window ).width() >= 960) {
+								$('.dropdown-menu', this).stop(true, true).fadeIn("fast");
+								$(this).toggleClass('open');
+								$('b', this).toggleClass("caret caret-up");
+							} else {
+								$('.dropdown-menu', this).css("display", "");
+							}
+						},
+						function() {
+							if ($( window ).width() >= 960) {
+								$('.dropdown-menu', this).stop(true, true).fadeOut("fast");
+								$(this).toggleClass('open');
+								$('b', this).toggleClass("caret caret-up");
+							}
+						});
+				});
+			</script>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="nav navbar-nav ml-auto nav-text">
+					<li class="nav-item"><a class="nav-link" href="https://smilecdr.com/">Support</a></li>
+					<li class="nav-item"><a class="nav-link" target="_blank" href="https://github.com/jamesagnew/hapi-fhir">Github</a></li>
+					<li class="nav-item"><a class="nav-link" href="https://hapifhir.io/hapi-fhir/blog/">News</a></li>
+					<li class="nav-item"><a class="nav-link" href="../index.html">Documentation</a></li>
+					<li class="nav-item dropdown">
+						<a class="nav-link nav-link-dropdown" data-toggle="dropdown" id="navbarGETHELP" href="#">Get Help <i class="nav-chevron fas fa-chevron-down"></i></a>
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarGETHELP" id="navbarGETHELPDIV">
+							<a href="https://github.com/jamesagnew/hapi-fhir/wiki/Getting-Help" class="dropdown-item">Getting Help (read this first!)</a>
+							<a href="https://groups.google.com/d/forum/hapi-fhir" class="dropdown-item">Google Group (ask questions)</a>
+							<a href="https://github.com/jamesagnew/hapi-fhir/issues" class="dropdown-item">Issue Tracker (report bugs/request features)</a>
+							<a href="https://chat.fhir.org/" class="dropdown-item">chat.fhir.org (live chat with FHIR implementers)</a>
+							<a href="../appendix/faq.html" class="dropdown-item">Frequently Asked Questions (FAQ)</a>
+						</div>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link nav-link-dropdown" data-toggle="dropdown" id="navbarTESTSERVERS" href="#">Test Server <i class="nav-chevron fas fa-chevron-down"></i></a>
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarTESTSERVERS" id="navbarTESTSERVERSDIV">
+							<a href="http://hapi.fhir.org/" class="dropdown-item">HAPI FHIR Public Test Server</a>
+						</div>
+					</li>
+
+				</ul>
+			</div>
+		</nav>
+	</header>
+
+	
+	<script>
+		var scrollAfter = 10;
+	</script>
+
+	
+
+
+
+	<!-- "Scroll up the the search box" button -->
+	<button class="btn btn-secondary hide-sm-and-below button-scroll-up-to-search"
+			  onclick="$('#navcolumn').scrollTop(0); $('#button-ftsearch').focus();">
+		Search&nbsp;<i class="fa fa-search"></i>
+	</button>
+
+	<!-- Right column with the in-page TOC (not visible on mobile) -->
+	<div class="rightNavContainer hide-sm-and-below" id="pageNav">
+		<nav id="toc"></nav>
+	</div>
+
+	<div class="container-fluid grid">
+		<div class="row">
+			
+			<div class="hide-sm-and-below col-md-3 primaryColumn" id="navcolumn">
+				<div>
+					<div class="index-sidebar" id="side-nav">
+
+						<!-- Fullltext Search box -->
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Search" aria-label="Search"
+									 aria-describedby="button-ftsearch-clear" style="margin-top: 0px;" id="button-ftsearch">
+							<div class="input-group-append">
+								<button class="btn btn-outline-info" type="button" id="button-ftsearch-clear"
+										  onclick="javascript: $('#button-ftsearch').val(''); delayFunction(updateSearchFunction, 500);">
+									<i class="fa fa-times-circle"></i>
+								</button>
+							</div>
+							<script type="application/javascript">
+								var delayFunction = (function () {
+									var timer = 0;
+									return function (callback, ms) {
+										if (!$('#button-ftsearch').val()) {
+											$('#leftTocSearchResults').hide();
+											$('#leftTocView').show();
+										} else {
+											$('#leftTocView').hide();
+											$('#leftTocSearchResults').show();
+											$('#leftTocSearchResults').empty();
+											$('#leftTocSearchResults').append($('<i class="fa fa-spinner fa-spin" style="margin-top: 20px; font-size:24px;"></i>'));
+										}
+										clearTimeout(timer);
+										timer = setTimeout(callback, ms);
+									};
+								})();
+
+								function updateSearchFunction() {
+									if (!$('#button-ftsearch').val()) {
+										$('#leftTocSearchResults').hide();
+										$('#leftTocView').show();
+									} else {
+										$('#leftTocView').hide();
+										$('#leftTocSearchResults').show();
+										$.get("/hapi-fhir/docsearch", {
+											term: $('#button-ftsearch').val()
+										}, function (data) {
+											$('#leftTocSearchResults').empty();
+
+											let leftTocUl = null;
+											let leftTocHeader = null;
+											for (var idx = 0; idx < data.length; idx++) {
+												if (leftTocHeader == null || leftTocHeader.text() !== data[idx].sectionTitle) {
+													leftTocHeader = $('<h3>');
+													leftTocHeader.text(data[idx].sectionTitle);
+													$('#leftTocSearchResults').append(leftTocHeader);
+													leftTocUl = $('<ul>');
+													$('#leftTocSearchResults').append(leftTocUl);
+												}
+												let nextLink = $('<a>', {
+													href: "/hapi-fhir/docs/" + data[idx].page + ".html"
+												});
+												nextLink.text(data[idx].title);
+
+												let nextLinkLi = $('<li>').append(nextLink);
+												leftTocUl.append(nextLinkLi);
+											}
+										}, 'json');
+									}
+								}
+
+								$('#button-ftsearch').keyup(function () {
+									delayFunction(updateSearchFunction, 500);
+								});
+
+								// Clear the search box if the page is reloaded
+								$(function () {
+									$('#button-ftsearch').val('');
+								});
+
+							</script>
+						</div>
+
+						<div id="leftTocView">
+							
+								<h3>
+									Welcome to HAPI FHIR
+								</h3>
+								<ul>
+									<li>
+										<a href="../introduction/table_of_contents.html">
+											<span class="pull-left">Table of Contents</span>
+											<span class="pull-right">1.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog.html">
+											<span class="pull-left">Changelog: 2021</span>
+											<span class="pull-right">1.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog_2020.html">
+											<span class="pull-left">Changelog: 2020</span>
+											<span class="pull-right">1.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog_2019.html">
+											<span class="pull-left">Changelog: 2019</span>
+											<span class="pull-right">1.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog_2018.html">
+											<span class="pull-left">Changelog: 2018</span>
+											<span class="pull-right">1.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog_2017.html">
+											<span class="pull-left">Changelog: 2017</span>
+											<span class="pull-right">1.5</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog_2016.html">
+											<span class="pull-left">Changelog: 2016</span>
+											<span class="pull-right">1.6</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog_2015.html">
+											<span class="pull-left">Changelog: 2015</span>
+											<span class="pull-right">1.7</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog_2014.html">
+											<span class="pull-left">Changelog: 2014</span>
+											<span class="pull-right">1.8</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Getting Started
+								</h3>
+								<ul>
+									<li>
+										<a href="../getting_started/introduction.html">
+											<span class="pull-left">Introduction</span>
+											<span class="pull-right">2.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../getting_started/versions.html">
+											<span class="pull-left">FHIR and HAPI FHIR Versions</span>
+											<span class="pull-right">2.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../getting_started/modules.html">
+											<span class="pull-left">HAPI FHIR Modules</span>
+											<span class="pull-right">2.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../getting_started/downloading_and_importing.html">
+											<span class="pull-left">Downloading and Importing</span>
+											<span class="pull-right">2.3</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Working With The FHIR Model
+								</h3>
+								<ul>
+									<li>
+										<a href="../model/working_with_resources.html">
+											<span class="pull-left">Working With Resources</span>
+											<span class="pull-right">3.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../model/parsers.html">
+											<span class="pull-left">Parsing and Serializing</span>
+											<span class="pull-right">3.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../model/references.html">
+											<span class="pull-left">Resource References</span>
+											<span class="pull-right">3.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../model/profiles_and_extensions.html">
+											<span class="pull-left">Profiles and Extensions</span>
+											<span class="pull-right">3.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../model/converter.html">
+											<span class="pull-left">Version Converters</span>
+											<span class="pull-right">3.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../model/custom_structures.html">
+											<span class="pull-left">Custom Structures</span>
+											<span class="pull-right">3.5</span>
+										</a>
+									</li>
+									<li>
+										<a href="../model/narrative_generation.html">
+											<span class="pull-left">Narrative Generation</span>
+											<span class="pull-right">3.6</span>
+										</a>
+									</li>
+									<li>
+										<a href="../model/bundle_builder.html">
+											<span class="pull-left">Bundle Builder</span>
+											<span class="pull-right">3.7</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Client
+								</h3>
+								<ul>
+									<li>
+										<a href="../client/introduction.html">
+											<span class="pull-left">Introduction</span>
+											<span class="pull-right">4.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../client/get_started.html">
+											<span class="pull-left">Get Started ⚡</span>
+											<span class="pull-right">4.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../client/generic_client.html">
+											<span class="pull-left">Generic (Fluent) Client</span>
+											<span class="pull-right">4.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../client/annotation_client.html">
+											<span class="pull-left">Annotation Client</span>
+											<span class="pull-right">4.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../client/client_configuration.html">
+											<span class="pull-left">Client Configuration</span>
+											<span class="pull-right">4.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../client/examples.html">
+											<span class="pull-left">Client Examples</span>
+											<span class="pull-right">4.5</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3 class="activechapter">
+									Plain Server
+								</h3>
+								<ul>
+									<li>
+										<a href="server_types.html">
+											<span class="pull-left">REST Server Types</span>
+											<span class="pull-right">5.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="introduction.html">
+											<span class="pull-left">Plain Server Introduction</span>
+											<span class="pull-right">5.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="get_started.html">
+											<span class="pull-left">Get Started ⚡</span>
+											<span class="pull-right">5.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="resource_providers.html">
+											<span class="pull-left">Resource Providers and Plain Providers</span>
+											<span class="pull-right">5.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="rest_operations.html">
+											<span class="pull-left">REST Operations: Overview</span>
+											<span class="pull-right">5.4</span>
+										</a>
+									</li>
+									<li class="active-side">
+										<a href="rest_operations_search.html">
+											<span class="pull-left">REST Operations: Search</span>
+											<span class="pull-right">5.5</span>
+										</a>
+									</li>
+									<li>
+										<a href="rest_operations_operations.html">
+											<span class="pull-left">REST Operations: Extended Operations</span>
+											<span class="pull-right">5.6</span>
+										</a>
+									</li>
+									<li>
+										<a href="paging.html">
+											<span class="pull-left">Paging Search Results</span>
+											<span class="pull-right">5.7</span>
+										</a>
+									</li>
+									<li>
+										<a href="web_testpage_overlay.html">
+											<span class="pull-left">Web Testpage Overlay</span>
+											<span class="pull-right">5.8</span>
+										</a>
+									</li>
+									<li>
+										<a href="multitenancy.html">
+											<span class="pull-left">Multitenancy</span>
+											<span class="pull-right">5.9</span>
+										</a>
+									</li>
+									<li>
+										<a href="jax_rs.html">
+											<span class="pull-left">JAX-RS Support</span>
+											<span class="pull-right">5.10</span>
+										</a>
+									</li>
+									<li>
+										<a href="customizing_the_capabilitystatement.html">
+											<span class="pull-left">Customizing the CapabilityStatement</span>
+											<span class="pull-right">5.11</span>
+										</a>
+									</li>
+									<li>
+										<a href="openapi.html">
+											<span class="pull-left">OpenAPI / Swagger</span>
+											<span class="pull-right">5.12</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									JPA Server
+								</h3>
+								<ul>
+									<li>
+										<a href="../server_jpa/introduction.html">
+											<span class="pull-left">Introduction</span>
+											<span class="pull-right">6.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/get_started.html">
+											<span class="pull-left">Get Started ⚡</span>
+											<span class="pull-right">6.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/architecture.html">
+											<span class="pull-left">Architecture</span>
+											<span class="pull-right">6.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/schema.html">
+											<span class="pull-left">Database Schema</span>
+											<span class="pull-right">6.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/configuration.html">
+											<span class="pull-left">Configuration</span>
+											<span class="pull-right">6.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/search.html">
+											<span class="pull-left">Search</span>
+											<span class="pull-right">6.5</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/performance.html">
+											<span class="pull-left">Performance</span>
+											<span class="pull-right">6.6</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/upgrading.html">
+											<span class="pull-left">Upgrade Guide</span>
+											<span class="pull-right">6.7</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/diff.html">
+											<span class="pull-left">Diff Operation</span>
+											<span class="pull-right">6.8</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/lastn.html">
+											<span class="pull-left">LastN Operation</span>
+											<span class="pull-right">6.9</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/elastic.html">
+											<span class="pull-left">Lucene/Elasticsearch Indexing</span>
+											<span class="pull-right">6.10</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/terminology.html">
+											<span class="pull-left">Terminology</span>
+											<span class="pull-right">6.11</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									JPA Server: MDM
+								</h3>
+								<ul>
+									<li>
+										<a href="../server_jpa_mdm/mdm.html">
+											<span class="pull-left">MDM Getting Started</span>
+											<span class="pull-right">7.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_mdm/mdm_rules.html">
+											<span class="pull-left">MDM Rules</span>
+											<span class="pull-right">7.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_mdm/mdm_eid.html">
+											<span class="pull-left">MDM Enterprise Identifiers</span>
+											<span class="pull-right">7.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_mdm/mdm_operations.html">
+											<span class="pull-left">MDM Operations</span>
+											<span class="pull-right">7.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_mdm/mdm_details.html">
+											<span class="pull-left">MDM Technical Details</span>
+											<span class="pull-right">7.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_mdm/mdm_expansion.html">
+											<span class="pull-left">MDM Search Expansion</span>
+											<span class="pull-right">7.5</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									JPA Server: CQL
+								</h3>
+								<ul>
+									<li>
+										<a href="../server_jpa_cql/cql.html">
+											<span class="pull-left">CQL Getting Started</span>
+											<span class="pull-right">8.0</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									JPA Server: Partitioning and Multitenancy
+								</h3>
+								<ul>
+									<li>
+										<a href="../server_jpa_partitioning/partitioning.html">
+											<span class="pull-left">Partitioning and Multitenancy</span>
+											<span class="pull-right">9.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_partitioning/partition_interceptor_examples.html">
+											<span class="pull-left">Partition Interceptor Examples</span>
+											<span class="pull-right">9.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_partitioning/partitioning_management_operations.html">
+											<span class="pull-left">Partitioning Management Operations</span>
+											<span class="pull-right">9.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_partitioning/enabling_in_hapi_fhir.html">
+											<span class="pull-left">Enabling Partitioning in HAPI FHIR</span>
+											<span class="pull-right">9.3</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Interceptors
+								</h3>
+								<ul>
+									<li>
+										<a href="../interceptors/interceptors.html">
+											<span class="pull-left">Interceptors Overview</span>
+											<span class="pull-right">10.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../interceptors/client_interceptors.html">
+											<span class="pull-left">Client Interceptors</span>
+											<span class="pull-right">10.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../interceptors/client_pointcuts.html">
+											<span class="pull-left">Client Pointcuts</span>
+											<span class="pull-right">10.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../interceptors/built_in_client_interceptors.html">
+											<span class="pull-left">Built-In Client Interceptors</span>
+											<span class="pull-right">10.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../interceptors/server_interceptors.html">
+											<span class="pull-left">Server Interceptors</span>
+											<span class="pull-right">10.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../interceptors/server_pointcuts.html">
+											<span class="pull-left">Server Pointcuts</span>
+											<span class="pull-right">10.5</span>
+										</a>
+									</li>
+									<li>
+										<a href="../interceptors/built_in_server_interceptors.html">
+											<span class="pull-left">Built-In Server Interceptors</span>
+											<span class="pull-right">10.6</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Security
+								</h3>
+								<ul>
+									<li>
+										<a href="../security/introduction.html">
+											<span class="pull-left">Introduction</span>
+											<span class="pull-right">11.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../security/authorization_interceptor.html">
+											<span class="pull-left">Authorization Interceptor</span>
+											<span class="pull-right">11.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../security/consent_interceptor.html">
+											<span class="pull-left">Consent Interceptor</span>
+											<span class="pull-right">11.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../security/search_narrowing_interceptor.html">
+											<span class="pull-left">Search Narrowing Interceptor</span>
+											<span class="pull-right">11.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../security/cors.html">
+											<span class="pull-left">CORS</span>
+											<span class="pull-right">11.4</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Validation
+								</h3>
+								<ul>
+									<li>
+										<a href="../validation/introduction.html">
+											<span class="pull-left">Introduction</span>
+											<span class="pull-right">12.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../validation/parser_error_handler.html">
+											<span class="pull-left">Parser Error Handler</span>
+											<span class="pull-right">12.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../validation/instance_validator.html">
+											<span class="pull-left">Instance Validator</span>
+											<span class="pull-right">12.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../validation/validation_support_modules.html">
+											<span class="pull-left">Validation Support Modules</span>
+											<span class="pull-right">12.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../validation/schema_validator.html">
+											<span class="pull-left">Schema/Schematron Validator</span>
+											<span class="pull-right">12.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../validation/repository_validating_interceptor.html">
+											<span class="pull-left">Repository Validating Interceptor</span>
+											<span class="pull-right">12.5</span>
+										</a>
+									</li>
+									<li>
+										<a href="../validation/examples.html">
+											<span class="pull-left">Validation Examples</span>
+											<span class="pull-right">12.6</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Android
+								</h3>
+								<ul>
+									<li>
+										<a href="../android/client.html">
+											<span class="pull-left">Android Client</span>
+											<span class="pull-right">13.0</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Tools
+								</h3>
+								<ul>
+									<li>
+										<a href="../tools/hapi_fhir_cli.html">
+											<span class="pull-left">Command Line Interface (CLI) Tool</span>
+											<span class="pull-right">14.0</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Contributing to HAPI FHIR
+								</h3>
+								<ul>
+									<li>
+										<a href="../contributing/hacking_guide.html">
+											<span class="pull-left">Hacking Guide</span>
+											<span class="pull-right">15.0</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Appendix
+								</h3>
+								<ul>
+									<li>
+										<a href="../appendix/logging.html">
+											<span class="pull-left">Logging</span>
+											<span class="pull-right">16.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../appendix/faq.html">
+											<span class="pull-left">FAQ</span>
+											<span class="pull-right">16.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../appendix/javadocs.html">
+											<span class="pull-left">JavaDocs</span>
+											<span class="pull-right">16.2</span>
+										</a>
+									</li>
+								</ul>
+							
+						</div>
+						<div id="leftTocSearchResults">
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			
+			<div class="col-xs-12 col-md-9 primaryColumn" id="tocscroll">
+
+				<!-- Pager -->
+				<div class="hide-sm-and-below"><div class="marg-btm-20 docs-inpage-nav-container">
+	<div class="docs-inpage-nav-row">
+		<span class="docs-inpage-nav-cell">
+			<a href="rest_operations.html" class="btn docs-inpage-nav-link">
+				<i class="fa fa-arrow-left"></i>
+				&nbsp;&nbsp;
+				5.4
+				&nbsp;&nbsp;
+				REST Operations: Overview
+			</a>
+		</span>
+		<span class="docs-inpage-nav-cell">
+
+			<div class="dropdown">
+			  <button class="btn btn-outline-info dropdown-toggle" role="button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+				  5.5
+				  &nbsp;&nbsp;
+				  REST Operations: Search
+			  </button>
+			  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				  <li class="dropdown-header" style="text-align: center;">
+					  Plain Server
+				  </li>
+				  <li role="separator" class="divider"></li>
+				  
+					  <li>
+						  <a href="server_types.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  5.0
+							  </span>
+							  REST Server Types
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="introduction.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  5.1
+							  </span>
+							  Plain Server Introduction
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="get_started.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  5.2
+							  </span>
+							  Get Started ⚡
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="resource_providers.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  5.3
+							  </span>
+							  Resource Providers and Plain Providers
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="rest_operations.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  5.4
+							  </span>
+							  REST Operations: Overview
+						  </a>
+					  </li>
+				  
+					  <li style="background-color: #F0F0F0;">
+						  <a href="rest_operations_search.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  5.5
+							  </span>
+							  REST Operations: Search
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="rest_operations_operations.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  5.6
+							  </span>
+							  REST Operations: Extended Operations
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="paging.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  5.7
+							  </span>
+							  Paging Search Results
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="web_testpage_overlay.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  5.8
+							  </span>
+							  Web Testpage Overlay
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="multitenancy.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  5.9
+							  </span>
+							  Multitenancy
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="jax_rs.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  5.10
+							  </span>
+							  JAX-RS Support
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="customizing_the_capabilitystatement.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  5.11
+							  </span>
+							  Customizing the CapabilityStatement
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="openapi.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  5.12
+							  </span>
+							  OpenAPI / Swagger
+						  </a>
+					  </li>
+				  
+			  </div>
+			</div>
+		</span>
+		<span class="docs-inpage-nav-cell">
+			<a href="rest_operations_operations.html" class="btn docs-inpage-nav-link">
+				5.6
+				&nbsp;&nbsp;
+				REST Operations: Extended Operations
+				&nbsp;&nbsp;
+				<i class="fa fa-arrow-right"></i>
+			</a>
+		</span>
+	</div>
+</div>
+</div>
+
+				<div class="hide-md-and-above mobile-header-links">
+					<a href="../introduction/table_of_contents.html" class="btn btn-primary">
+						<i class="fa fa-arrow-left"></i>
+						&nbsp;&nbsp;
+						Table of Contents
+					</a>
+					<p>REST Operations: Search</p>
+				</div>
+
+				<div class="docs-content">
+					<a name="rest-operations-search"></a>
+<section id="section0"><h1 data-toc-text="Rest Operations: Search"><span class="helpHeaderSectionNumberBadge">5.5</span>Rest Operations: Search</h1><a href="rest_operations_search.html#rest-operations-search" class="helpSectionLink">&nbsp;</a>
+<p>This page describes how to add various FHIR search features to your resource/plain providers.</p>
+</section>
+
+<a name="search-with-no-parameters"></a>
+<section id="section1"><h1 data-toc-text="Search with No Parameters"><span class="helpHeaderSectionNumberBadge">5.5.1</span>Search with No Parameters</h1><a href="rest_operations_search.html#search-with-no-parameters" class="helpSectionLink">&nbsp;</a>
+<p>The following example shows a search with no parameters. This operation should return all resources of a given type (this obviously doesn't make sense in all contexts, but does for some resource types).</p>
+<pre><code class="language-java">@Search
+public List&lt;Organization&gt; getAllOrganizations() {
+   List&lt;Organization&gt; retVal=new ArrayList&lt;Organization&gt;(); // populate this
+   return retVal;
+}
+</code></pre>
+<p>Example URL to invoke this method:
+<span class="helpSnippetUrlBox"><a href="http://fhir.example.com/Patient"><span style="color: #428bca;">http://fhir.example.com/Patient</span><span style="color: #660000; font-weight: bold;"></span><span style="color: #006699;"></span></a></span></p>
+</section>
+
+<a name="search-parameters-string-introduction"></a>
+<section id="section2"><h1 data-toc-text="Search Parameters: String Introduction"><span class="helpHeaderSectionNumberBadge">5.5.2</span>Search Parameters: String Introduction</h1><a href="rest_operations_search.html#search-parameters-string-introduction" class="helpSectionLink">&nbsp;</a>
+<p>To allow a search using given search parameters, add one or more parameters to your search method and tag these parameters as either <a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/ca/uhn/fhir/rest/annotation/RequiredParam.html">@RequiredParam</a> or <a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/ca/uhn/fhir/rest/annotation/OptionalParam.html">@OptionalParam</a>.</p>
+<p>This annotation takes a &quot;name&quot; parameter which specifies the parameter's name (as it will appear in the search URL). FHIR defines standardized parameter names for each resource, and these are available as constants on the individual HAPI resource classes.</p>
+<p>Parameters which take a string as their format should use the <a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/ca/uhn/fhir/rest/param/StringParam.html">StringParam</a> type. They may also use normal java <code>String</code>, although it is not possible to use modifiers such as the <code>:exact</code> modifier in that case.</p>
+<pre><code class="language-java">@Search()
+public List&lt;Patient&gt; searchByLastName(@RequiredParam(name=Patient.SP_FAMILY) StringParam theFamily) {
+   String valueToMatch = theFamily.getValue();
+   
+   if (theFamily.isExact()) {
+      // Do an exact match search
+   } else {
+      // Do a fuzzy search if possible
+   }
+   
+   // ...populate...
+   Patient patient = new Patient();
+   patient.addIdentifier().setSystem(&quot;urn:mrns&quot;).setValue(&quot;12345&quot;);
+   patient.addName().setFamily(&quot;Smith&quot;).addGiven(&quot;Tester&quot;).addGiven(&quot;Q&quot;);
+   // ...etc...
+
+   //  Every returned resource must have its logical ID set. If the server
+   //  supports versioning, that should be set too
+   String logicalId = &quot;4325&quot;;
+   String versionId = &quot;2&quot;; // optional
+   patient.setId(new IdType(&quot;Patient&quot;, logicalId, versionId));
+   
+   /*
+    * This is obviously a fairly contrived example since we are always
+    * just returning the same hardcoded patient, but in a real scenario
+    * you could return as many resources as you wanted, and they
+    * should actually match the given search criteria.
+    */
+   List&lt;Patient&gt; retVal = new ArrayList&lt;Patient&gt;();
+   retVal.add(patient);
+   
+   return retVal;
+}
+</code></pre>
+<p>Example URL to invoke this method:
+<span class="helpSnippetUrlBox"><a href="http://fhir.example.com/Patient?family=SMITH"><span style="color: #428bca;">http://fhir.example.com/Patient</span><span style="color: #660000; font-weight: bold;">?</span><span style="color: #006699;">family</span><span style="color: #660000; font-weight: bold;">=</span><span style="color: #666;">SMITH</span></a></span></p>
+</section>
+
+<a name="search-parameters-tokenidentifier"></a>
+<section id="section3"><h1 data-toc-text="Search Parameters: Token/Identifier"><span class="helpHeaderSectionNumberBadge">5.5.3</span>Search Parameters: Token/Identifier</h1><a href="rest_operations_search.html#search-parameters-tokenidentifier" class="helpSectionLink">&nbsp;</a>
+<p>The &quot;token&quot; type is used for parameters which have two parts, such as an identifier (which has a system URI, as well as the actual identifier) or a code (which has a code system, as well as the actual code). For example, the search below can be used to search by identifier (e.g. search for an MRN).</p>
+<pre><code class="language-java">@Search()
+public List&lt;Patient&gt; searchByIdentifier(@RequiredParam(name=Patient.SP_IDENTIFIER) TokenParam theId) {
+   String identifierSystem = theId.getSystem();
+   String identifier = theId.getValue();
+   
+   List&lt;Patient&gt; retVal = new ArrayList&lt;Patient&gt;();
+   // ...populate...
+   return retVal;
+}
+</code></pre>
+<p>Example URL to invoke this method:
+<span class="helpSnippetUrlBox"><a href="http://fhir.example.com/Patient?identifier=urn:foo|7000135"><span style="color: #428bca;">http://fhir.example.com/Patient</span><span style="color: #660000; font-weight: bold;">?</span><span style="color: #006699;">identifier</span><span style="color: #660000; font-weight: bold;">=</span><span style="color: #666;">urn:foo|7000135</span></a></span></p>
+</section>
+
+<a name="search-parameters-date-simple"></a>
+<section id="section4"><h1 data-toc-text="Search Parameters: Date (Simple)"><span class="helpHeaderSectionNumberBadge">5.5.4</span>Search Parameters: Date (Simple)</h1><a href="rest_operations_search.html#search-parameters-date-simple" class="helpSectionLink">&nbsp;</a>
+<p>The FHIR specification provides a syntax for specifying dates+times (but for simplicity we will just say dates here) as search criteria.</p>
+<p>Dates may be optionally prefixed with a qualifier. For example, the string <code>=ge2011-01-02</code> means any date on or after 2011-01-02.</p>
+<p>To accept a qualified date parameter, use the <a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/ca/uhn/fhir/rest/param/DateParam.html">DateParam</a> parameter type.</p>
+<pre><code class="language-java">@Search()
+public List&lt;Patient&gt; searchByObservationNames( @RequiredParam(name=Patient.SP_BIRTHDATE) DateParam theDate ) {
+   ParamPrefixEnum prefix = theDate.getPrefix(); // e.g. gt, le, etc..
+   Date date = theDate.getValue(); // e.g. 2011-01-02
+   TemporalPrecisionEnum precision = theDate.getPrecision(); // e.g. DAY
+   
+   List&lt;Patient&gt; retVal = new ArrayList&lt;Patient&gt;();
+   // ...populate...
+   return retVal;
+}
+</code></pre>
+<p>Example URL to invoke this method:
+<span class="helpSnippetUrlBox"><a href="http://fhir.example.com/Observation?birthdate=gt2011-01-02"><span style="color: #428bca;">http://fhir.example.com/Observation</span><span style="color: #660000; font-weight: bold;">?</span><span style="color: #006699;">birthdate</span><span style="color: #660000; font-weight: bold;">=</span><span style="color: #666;">gt2011-01-02</span></a></span></p>
+<p>Invoking a client of this type involves the following syntax:</p>
+<pre><code class="language-java">DateParam param = new DateParam(ParamPrefixEnum.GREATERTHAN_OR_EQUALS, &quot;2011-01-02&quot;);
+List&lt;Patient&gt; response = client.getPatientByDob(param);
+</code></pre>
+<a name="DATE_RANGES" />
+</section>
+
+<a name="DATE_RANGES"></a>
+<section id="section5"><h1 data-toc-text="Search Parameters: Date (Ranges)"><span class="helpHeaderSectionNumberBadge">5.5.5</span>Search Parameters: Date (Ranges)</h1><a href="rest_operations_search.html#DATE_RANGES" class="helpSectionLink">&nbsp;</a>
+<p>A common scenario in searches is to allow searching for resources with values (i.e timestamps) within a range of dates.</p>
+<p>FHIR allows for multiple parameters with the same key, and interprets these as being an <em><strong>AND</strong></em> set. So, for example, a range of <code>&amp;date=gt2011-01-01&amp;date=lt2011-02-01</code> can be interpreted as any date within January 2011.</p>
+<p>The following snippet shows how to accept such a range, and combines it with a specific identifier, which is a common scenario. (i.e. Give me a list of observations for a specific patient within a given date range). This is accomplished using a single parameter of type <a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/ca/uhn/fhir/rest/param/DateRangeParam.html">DateRangeParam</a>.</p>
+<pre><code class="language-java">@Search()
+public List&lt;Observation&gt; searchByDateRange(
+    @RequiredParam(name=Observation.SP_DATE) DateRangeParam theRange ) {
+  
+  Date from = theRange.getLowerBoundAsInstant();
+  Date to = theRange.getUpperBoundAsInstant();
+   
+  List&lt;Observation&gt; retVal = new ArrayList&lt;Observation&gt;();
+  // ...populate...
+  return retVal;
+}
+</code></pre>
+<p>Example URL to invoke this method:
+<span class="helpSnippetUrlBox"><a href="http://fhir.example.com/Observation?subject.identifier=7000135&amp;date=gt2011-01-01&amp;date=lt2011-02-01"><span style="color: #428bca;">http://fhir.example.com/Observation</span><span style="color: #660000; font-weight: bold;">?</span><span style="color: #006699;">subject.identifier</span><span style="color: #660000; font-weight: bold;">=</span><span style="color: #666;">7000135</span><span style="color: #660000; font-weight: bold;">&amp;</span><span style="color: #006699;">date</span><span style="color: #660000; font-weight: bold;">=</span><span style="color: #666;">gt2011-01-01</span><span style="color: #660000; font-weight: bold;">&amp;</span><span style="color: #006699;">date</span><span style="color: #660000; font-weight: bold;">=</span><span style="color: #666;">lt2011-02-01</span></a></span></p>
+<p>Invoking a client of this type involves the following syntax:</p>
+<pre><code class="language-java">DateParam param = new DateParam(ParamPrefixEnum.GREATERTHAN_OR_EQUALS, &quot;2011-01-02&quot;);
+List&lt;Patient&gt; response = client.getPatientByDob(param);
+</code></pre>
+<a name="unbounded-date-ranges"></a>
+<h2>Unbounded Date Ranges</h2>
+<p>Note that when using a date range parameter, it is also possible for the client to request an <em>unbounded</em> range. In other words, a range that only a start date and no end date, or vice versa.</p>
+<p>An example of this might be the following URL, which refers to any Observation resources for the given MRN and having a date after 2011-01-01.
+<span class="helpSnippetUrlBox"><a href="http://fhir.example.com/Observation?subject.identifier=7000135&amp;date=gt2011-01-01"><span style="color: #428bca;">http://fhir.example.com/Observation</span><span style="color: #660000; font-weight: bold;">?</span><span style="color: #006699;">subject.identifier</span><span style="color: #660000; font-weight: bold;">=</span><span style="color: #666;">7000135</span><span style="color: #660000; font-weight: bold;">&amp;</span><span style="color: #006699;">date</span><span style="color: #660000; font-weight: bold;">=</span><span style="color: #666;">gt2011-01-01</span></a></span></p>
+<p>When such a request is made of a server (or to make such a request from a client), the <code>getLowerBound()</code> or <code>getUpperBound()</code> property of the <a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/ca/uhn/fhir/rest/param/DateRangeParam.html">DateRangeParam</a> object will be set to <code>null</code>.</p>
+</section>
+
+<a name="search-parameters-quantity"></a>
+<section id="section6"><h1 data-toc-text="Search Parameters: Quantity"><span class="helpHeaderSectionNumberBadge">5.5.6</span>Search Parameters: Quantity</h1><a href="rest_operations_search.html#search-parameters-quantity" class="helpSectionLink">&nbsp;</a>
+<p>Quantity parameters allow a number with units and a comparator.</p>
+<p>The following snippet shows how to accept such a range, and combines it with a specific identifier, which is a common scenario. (i.e. Give me a list of observations for a specific patient within a given date range)</p>
+<pre><code class="language-java">@Search()
+public List&lt;Observation&gt; getObservationsByQuantity(
+        @RequiredParam(name=Observation.SP_VALUE_QUANTITY) QuantityParam theQuantity) {
+  
+  List&lt;Observation&gt; retVal = new ArrayList&lt;Observation&gt;();
+  
+  ParamPrefixEnum prefix = theQuantity.getPrefix();
+  BigDecimal value = theQuantity.getValue();
+  String units = theQuantity.getUnits();
+  // .. Apply these parameters ..
+  
+  // ... populate ...
+  return retVal;
+}
+</code></pre>
+<p>Example URL to invoke this method:
+<span class="helpSnippetUrlBox"><a href="http://fhir.example.com/Observation?value-quantity=lt123.2||mg|http://unitsofmeasure.org"><span style="color: #428bca;">http://fhir.example.com/Observation</span><span style="color: #660000; font-weight: bold;">?</span><span style="color: #006699;">value-quantity</span><span style="color: #660000; font-weight: bold;">=</span><span style="color: #666;">lt123.2||mg|http://unitsofmeasure.org</span></a></span></p>
+</section>
+
+<a name="search-parameters-resource-reference"></a>
+<section id="section7"><h1 data-toc-text="Search Parameters: Resource Reference"><span class="helpHeaderSectionNumberBadge">5.5.7</span>Search Parameters: Resource Reference</h1><a href="rest_operations_search.html#search-parameters-resource-reference" class="helpSectionLink">&nbsp;</a>
+<p>Many search parameters refer to resource references. For instance, the Patient parameter &quot;provider&quot; refers to the resource marked as the managing organization for patients.</p>
+<p>Reference parameters use the <a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/ca/uhn/fhir/rest/param/ReferenceParam.html">ReferenceParam</a> type. Reference parameters are, in their most basic form, just a pointer to another resource. For example, you might want to query for DiagnosticReport resources where the subject (the Patient resource that the report is about) is Patient/123. The following example shows a simple resource reference parameter in use.</p>
+<pre><code class="language-java">@Search
+public List&lt;DiagnosticReport&gt; findDiagnosticReportsWithSubjet(
+      @OptionalParam(name=DiagnosticReport.SP_SUBJECT) ReferenceParam theSubject
+      ) {
+   List&lt;DiagnosticReport&gt; retVal=new ArrayList&lt;DiagnosticReport&gt;();
+
+   // If the parameter passed in includes a resource type (e.g. ?subject:Patient=123)
+   // that resource type is available. Here we just check that it is either not provided
+   // or set to &quot;Patient&quot;
+   if (theSubject.hasResourceType()) {
+      String resourceType = theSubject.getResourceType();
+      if (&quot;Patient&quot;.equals(resourceType) == false) {
+         throw new InvalidRequestException(&quot;Invalid resource type for parameter 'subject': &quot; + resourceType);
+      }
+   }
+   
+   if (theSubject != null) {
+      // ReferenceParam extends IdType so all of the resource ID methods are available
+      String subjectId = theSubject.getIdPart();
+      
+      // .. populate retVal with DiagnosticReport resources having 
+      // subject with id &quot;subjectId&quot; ..
+      
+   }
+   
+   return retVal;
+
+}
+</code></pre>
+<a name="filter"/>
+</section>
+
+<a name="filter"></a>
+<section id="section8"><h1 data-toc-text="Search Parameters: Filter"><span class="helpHeaderSectionNumberBadge">5.5.8</span>Search Parameters: Filter</h1><a href="rest_operations_search.html#filter" class="helpSectionLink">&nbsp;</a>
+<p>To implement the FHIR <a href="http://hl7.org/fhir/search_filter.html" target="_blank">_filter</a> search style, you may create a parameter of type <code>StringParam</code> (or one of the and/or derivatives), as shown below.</p>
+<pre><code class="language-java">@OptionalParam(name=ca.uhn.fhir.rest.api.Constants.PARAM_FILTER)
+StringAndListParam theFtFilter
+</code></pre>
+</section>
+
+<a name="chained-resource-references"></a>
+<section id="section9"><h1 data-toc-text="Chained Resource References"><span class="helpHeaderSectionNumberBadge">5.5.9</span>Chained Resource References</h1><a href="rest_operations_search.html#chained-resource-references" class="helpSectionLink">&nbsp;</a>
+<p>References may also support a &quot;chained&quot; value. This is a search parameter name on the target resource. For example, you might want to search for DiagnosticReport resources by subject, but use the subject's last name instead of their resource ID. In this example, you are chaining &quot;family&quot; (the last name) to &quot;subject&quot; (the patient).</p>
+<p>The net result in the query string would look like:
+<span class="helpSnippetUrlBox"><a href="http://fhir.example.com/DiagnosticReport?subject.family=SMITH"><span style="color: #428bca;">http://fhir.example.com/DiagnosticReport</span><span style="color: #660000; font-weight: bold;">?</span><span style="color: #006699;">subject.family</span><span style="color: #660000; font-weight: bold;">=</span><span style="color: #666;">SMITH</span></a></span></p>
+<p>What this query says is &quot;fetch me all of the DiagnosticReport resources where the <strong>subject</strong> (Patient) of the report has the <strong>family</strong> (name) of 'SMITH'&quot;.</p>
+<p>There are two ways of dealing with chained parameters in your methods: static chains and dynamic chains. Both are equally valid, although dynamic chains might lead to somewhat more compact and readable code.</p>
+<a name="dynamic_chains"/>
+<a name="dynamic-chains"></a>
+<h2>Dynamic Chains</h2>
+<p>Chained values must be explicitly declared through the use of a whitelist (or blacklist). The following example shows how to declare a report with an allowable chained parameter:</p>
+<pre><code class="language-java">@Search
+public List&lt;DiagnosticReport&gt; findReportsWithChain(
+    @RequiredParam(name=DiagnosticReport.SP_SUBJECT, chainWhitelist= {Patient.SP_FAMILY, Patient.SP_GENDER}) ReferenceParam theSubject
+    ) {
+   List&lt;DiagnosticReport&gt; retVal=new ArrayList&lt;DiagnosticReport&gt;();
+
+   String chain = theSubject.getChain();
+   if (Patient.SP_FAMILY.equals(chain)) {
+      String familyName = theSubject.getValue();
+      // .. populate with reports matching subject family name ..
+   }
+   if (Patient.SP_GENDER.equals(chain)) {
+      String gender = theSubject.getValue();
+      // .. populate with reports matching subject gender ..
+   }
+
+   return retVal;
+}
+</code></pre>
+<p>You may also specify the whitelist value of <code>&quot;&quot;</code> to allow an empty chain (e.g. the resource ID) and this can be combined with other values, as shown below:</p>
+<pre><code class="language-java">@Search
+public List&lt;DiagnosticReport&gt; findReportsWithChainCombo (
+  @RequiredParam(name=DiagnosticReport.SP_SUBJECT, chainWhitelist= {&quot;&quot;, Patient.SP_FAMILY}) ReferenceParam theSubject
+  ) {
+   List&lt;DiagnosticReport&gt; retVal=new ArrayList&lt;DiagnosticReport&gt;();
+
+   String chain = theSubject.getChain();
+   if (Patient.SP_FAMILY.equals(chain)) {
+      String familyName = theSubject.getValue();
+      // .. populate with reports matching subject family name ..
+   }
+   if (&quot;&quot;.equals(chain)) {
+      String resourceId = theSubject.getValue();
+      // .. populate with reports matching subject with resource ID ..
+   }
+
+   return retVal;
+}
+</code></pre>
+<p>If you are handling multiple types of chained parameters in a single method, you may want to convert the reference parameter type into something more convenient before using its value. The following example shows how to do that.</p>
+<pre><code class="language-java">@Search()
+public List&lt;Observation&gt; findBySubject(
+      @RequiredParam(name=Observation.SP_SUBJECT, chainWhitelist = {&quot;&quot;, Patient.SP_IDENTIFIER, Patient.SP_BIRTHDATE}) ReferenceParam subject
+      ) {
+    List&lt;Observation&gt; observations = new ArrayList&lt;Observation&gt;();
+
+    String chain = subject.getChain();
+    if (Patient.SP_IDENTIFIER.equals(chain)) {
+
+       // Because the chained parameter &quot;subject.identifier&quot; is actually of type
+       // &quot;token&quot;, we convert the value to a token before processing it. 
+       TokenParam tokenSubject = subject.toTokenParam(myContext);
+       String system = tokenSubject.getSystem();
+       String identifier = tokenSubject.getValue();
+       
+       // TODO: populate all the observations for the identifier
+       
+    } else if (Patient.SP_BIRTHDATE.equals(chain)) {
+
+          // Because the chained parameter &quot;subject.birthdate&quot; is actually of type
+          // &quot;date&quot;, we convert the value to a date before processing it. 
+          DateParam dateSubject = subject.toDateParam(myContext);
+          DateTimeType birthDate = new DateTimeType(dateSubject.getValueAsString());
+          
+          // TODO: populate all the observations for the birthdate
+          
+    } else if (&quot;&quot;.equals(chain)) {
+        
+       String resourceId = subject.getValue();
+        // TODO: populate all the observations for the resource id
+        
+    }
+
+    return observations;
+}
+</code></pre>
+<a name="static-chains"></a>
+<h2>Static Chains</h2>
+<p>It is also possible to explicitly state a chained value right in the parameter name. This is useful if you want to only support a search by a specific given chained parameter. It has the added bonus that you can use the correct parameter type of the chained parameter (in this case a TokenParameter because the Patient.identifier parameter is a token).</p>
+<pre><code class="language-java">@Search
+public List&lt;Patient&gt; findObservations(
+      @RequiredParam(name= Observation.SP_SUBJECT+'.'+Patient.SP_IDENTIFIER) TokenParam theProvider
+      ) {
+
+  String system = theProvider.getSystem();
+  String identifier = theProvider.getValue();
+
+  // ...Do a search for all observations for the given subject...
+  
+  List&lt;Patient&gt; retVal=new ArrayList&lt;Patient&gt;(); // populate this
+  return retVal;
+
+}
+</code></pre>
+</section>
+
+<a name="search-parameters-composite"></a>
+<section id="section10"><h1 data-toc-text="Search Parameters: Composite"><span class="helpHeaderSectionNumberBadge">5.5.10</span>Search Parameters: Composite</h1><a href="rest_operations_search.html#search-parameters-composite" class="helpSectionLink">&nbsp;</a>
+<p>Composite search parameters incorporate two parameters in a single value. Each of those parameters will themselves have a parameter type.</p>
+<p>In the following example, Observation.name-value-date is shown. This parameter is a composite of a string and a date. Note that the composite parameter types (StringParam and DateParam) must be specified in both the annotation's <code>compositeTypes</code> field, as well as the generic types for the <code>CompositeParam</code> method parameter itself.</p>
+<pre><code class="language-java">@Search()
+public List&lt;Observation&gt; searchByComposite(
+      @RequiredParam(name=Observation.SP_CODE_VALUE_DATE, compositeTypes= {TokenParam.class, DateParam.class}) 
+      CompositeParam&lt;TokenParam, DateParam&gt; theParam) {
+  // Each of the two values in the composite param are accessible separately.
+  // In the case of Observation's name-value-date, the left is a string and
+  // the right is a date.
+  TokenParam observationName = theParam.getLeftValue();
+  DateParam observationValue = theParam.getRightValue();
+   
+  List&lt;Observation&gt; retVal = new ArrayList&lt;Observation&gt;();
+  // ...populate...
+  return retVal;
+}
+</code></pre>
+<p>Example URL to invoke this method:
+<span class="helpSnippetUrlBox"><a href="http://fhir.example.com/Observation?name-value-date=PROCTIME$2001-02-02"><span style="color: #428bca;">http://fhir.example.com/Observation</span><span style="color: #660000; font-weight: bold;">?</span><span style="color: #006699;">name-value-date</span><span style="color: #660000; font-weight: bold;">=</span><span style="color: #666;">PROCTIME$2001-02-02</span></a></span></p>
+</section>
+
+<a name="combining-multiple-parameters"></a>
+<section id="section11"><h1 data-toc-text="Combining Multiple Parameters"><span class="helpHeaderSectionNumberBadge">5.5.11</span>Combining Multiple Parameters</h1><a href="rest_operations_search.html#combining-multiple-parameters" class="helpSectionLink">&nbsp;</a>
+<p>Search methods may take multiple parameters, and these parameters may (or may not) be optional. To add a second required parameter, annotate the parameter with <a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/ca/uhn/fhir/rest/annotation/RequiredParam.html">@RequiredParam</a>. To add an optional parameter (which will be passed in as <code>null</code> if no value is supplied), annotate the method with <a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/ca/uhn/fhir/rest/annotation/OptionalParam.html">@OptionalParam</a>.</p>
+<p>You may annotate a method with any combination of as many <a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/ca/uhn/fhir/rest/annotation/RequiredParam.html">@RequiredParam</a> and as many <a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/ca/uhn/fhir/rest/annotation/OptionalParam.html">@OptionalParam</a> parameters as you want. It is valid to have only <a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/ca/uhn/fhir/rest/annotation/RequiredParam.html">@RequiredParam</a> parameters, or only <a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/ca/uhn/fhir/rest/annotation/OptionalParam.html">@OptionalParam</a> parameters, or any combination of the two.</p>
+<p>If you wish to create a server that can accept any combination of a large number of parameters, (this is how the various reference servers behave, as well as the <a href="http://hapi.fhir.org/" target="_blank">Public HAPI Test Server</a>). The easiest way to accomplish this is to simply create one method with all allowable parameters, each annotated as <a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/ca/uhn/fhir/rest/annotation/OptionalParam.html">@OptionalParam</a>.</p>
+<p>On the other hand, if you have specific combinations of parameters you wish to support (a common scenario if you are building FHIR on top of existing data sources and only have certain indexes you can use) you could create multiple search methods, each with specific required and optional parameters matching the database indexes.</p>
+<p>The following example shows a method with two parameters.</p>
+<pre><code class="language-java">@Search()
+public List&lt;Patient&gt; searchByNames( @RequiredParam(name=Patient.SP_FAMILY) StringParam theFamilyName,
+                                    @OptionalParam(name=Patient.SP_GIVEN)  StringParam theGivenName ) {
+   String familyName = theFamilyName.getValue();
+   String givenName = theGivenName != null ? theGivenName.getValue() : null;
+   
+   List&lt;Patient&gt; retVal = new ArrayList&lt;Patient&gt;();
+   // ...populate...
+   return retVal;
+}
+</code></pre>
+<p>Example URLs to invoke this method:
+<span class="helpSnippetUrlBox"><a href="http://fhir.example.com/Patient?family=SMITH"><span style="color: #428bca;">http://fhir.example.com/Patient</span><span style="color: #660000; font-weight: bold;">?</span><span style="color: #006699;">family</span><span style="color: #660000; font-weight: bold;">=</span><span style="color: #666;">SMITH</span></a><br/>
+<a href="http://fhir.example.com/Patient?family=SMITH&amp;given=JOHN"><span style="color: #428bca;">http://fhir.example.com/Patient</span><span style="color: #660000; font-weight: bold;">?</span><span style="color: #006699;">family</span><span style="color: #660000; font-weight: bold;">=</span><span style="color: #666;">SMITH</span><span style="color: #660000; font-weight: bold;">&amp;</span><span style="color: #006699;">given</span><span style="color: #660000; font-weight: bold;">=</span><span style="color: #666;">JOHN</span></a></span></p>
+</section>
+
+<a name="multi-valued-andor-parameters"></a>
+<section id="section12"><h1 data-toc-text="Multi-Valued (AND/OR) Parameters"><span class="helpHeaderSectionNumberBadge">5.5.12</span>Multi-Valued (AND/OR) Parameters</h1><a href="rest_operations_search.html#multi-valued-andor-parameters" class="helpSectionLink">&nbsp;</a>
+<p>It is possible to accept multiple values of a single parameter as well. This is useful in cases when you want to return a list of resources with criteria matching a list of possible values. See the <a href="http://www.hl7.org/implement/standards/fhir/search.html#combining" target="_blank">FHIR Specification</a> for more information.</p>
+<p>The FHIR specification allows two types of composite parameters:</p>
+<ul>
+<li>
+<p>Where a parameter may accept multiple comma separated values within a single value string (e.g.
+<code>?language=FR,NL</code>) this is treated as an <em><strong>OR</strong></em> relationship, and the search should return elements matching either one or the other.</p>
+</li>
+<li>
+<p>Where a parameter may accept multiple value strings for the same parameter name (e.g. <code>?language=FR&amp;language=NL</code>) this is treated as an <em><strong>AND</strong></em> relationship, and the search should return only elements matching both.</p>
+</li>
+</ul>
+<p>It is worth noting that according to the FHIR specification, you can have an AND relationship combining multiple OR relationships, but not vice-versa. In other words, it's possible to support a search like
+<code>(&quot;name&quot; = (&quot;joe&quot; or &quot;john&quot;)) AND (&quot;age&quot; = (11 or 12))</code> but not a search like <code>(&quot;language&quot; = (&quot;en&quot; AND &quot;fr&quot;) OR (&quot;address&quot; = (&quot;Canada&quot; AND &quot;Quebec&quot;))</code>. If you wish to support the latter, you may consider implementing the <a href="#filter">_filter parameter</a>.</p>
+<a name="or-relationship-query-parameters"></a>
+<h2>OR Relationship Query Parameters</h2>
+<p>To accept a composite parameter, use a parameter type which implements the <a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/ca/uhn/fhir/model/api/IQueryParameterOr.html">IQueryParameterOr</a> interface.</p>
+<p>Each parameter type (<a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/ca/uhn/fhir/rest/param/StringParam.html">StringParam</a>, <a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/ca/uhn/fhir/rest/param/TokenParam.html">TokenParam</a>, etc.) has a corresponding parameter which accepts an <em><strong>OR</strong></em> list of parameters. These types are called &quot;[type]OrListParam&quot;, for example: <a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/ca/uhn/fhir/rest/param/StringOrListParam.html">StringOrListParam</a> and <a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/ca/uhn/fhir/rest/param/TokenOrListParam.html">TokenOrListParam</a>.</p>
+<p>The following example shows a search for Observation by name, where a list of names may be passed in (and the expectation is that the server will return Observations that match any of these names):</p>
+<pre><code class="language-java">@Search()
+public List&lt;Observation&gt; searchByObservationNames( 
+      @RequiredParam(name=Observation.SP_CODE) TokenOrListParam theCodings ) {
+
+   // The list here will contain 0..* codings, and any observations which match any of the 
+   // given codings should be returned
+   List&lt;TokenParam&gt; wantedCodings = theCodings.getValuesAsQueryTokens();
+   
+   List&lt;Observation&gt; retVal = new ArrayList&lt;Observation&gt;();
+   // ...populate...
+   return retVal;
+}
+</code></pre>
+<p>Example URL to invoke this method:
+<span class="helpSnippetUrlBox"><a href="http://fhir.example.com/Observation?name=urn:fakenames|123,urn:fakenames|456"><span style="color: #428bca;">http://fhir.example.com/Observation</span><span style="color: #660000; font-weight: bold;">?</span><span style="color: #006699;">name</span><span style="color: #660000; font-weight: bold;">=</span><span style="color: #666;">urn:fakenames|123,urn:fakenames|456</span></a></span></p>
+<a name="and-relationship-query-parameters"></a>
+<h2>AND Relationship Query Parameters</h2>
+<p>To accept a composite parameter, use a parameter type which implements the <a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/ca/uhn/fhir/model/api/IQueryParameterAnd.html">IQueryParameterAnd</a> interface (which in turn encapsulates the corresponding IQueryParameterOr types).</p>
+<p>An example follows which shows a search for Patients by address, where multiple string lists may be supplied by the client. For example, the client might request that the address match <code>(&quot;Montreal&quot; OR &quot;Sherbrooke&quot;) AND (&quot;Quebec&quot; OR &quot;QC&quot;)</code> using the following query:
+<span class="helpSnippetUrlBox"><a href="http://fhir.example.com/Patient?address=Montreal,Sherbrooke&amp;address=Quebec,QC"><span style="color: #428bca;">http://fhir.example.com/Patient</span><span style="color: #660000; font-weight: bold;">?</span><span style="color: #006699;">address</span><span style="color: #660000; font-weight: bold;">=</span><span style="color: #666;">Montreal,Sherbrooke</span><span style="color: #660000; font-weight: bold;">&amp;</span><span style="color: #006699;">address</span><span style="color: #660000; font-weight: bold;">=</span><span style="color: #666;">Quebec,QC</span></a></span></p>
+<p>The following code shows how to receive this parameter using a <a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/ca/uhn/fhir/rest/param/StringAndListParam.html">StringAndListParameter</a>, which can handle an AND list of multiple OR lists of strings.</p>
+<pre><code class="language-java">@Search()
+public List&lt;Patient&gt; searchByPatientAddress( 
+      @RequiredParam(name=Patient.SP_ADDRESS) StringAndListParam theAddressParts ) {
+
+  // StringAndListParam is a container for 0..* StringOrListParam, which is in turn a
+  // container for 0..* strings. It is a little bit weird to understand at first, but think of the
+  // StringAndListParam to be an AND list with multiple OR lists inside it. So you will need 
+  // to return results which match at least one string within every OR list. 
+  List&lt;StringOrListParam&gt; wantedCodings = theAddressParts.getValuesAsQueryTokens();
+  for (StringOrListParam nextOrList : wantedCodings) {
+    List&lt;StringParam&gt; queryTokens = nextOrList.getValuesAsQueryTokens();
+   // Only return results that match at least one of the tokens in the list below
+    for (StringParam nextString : queryTokens) {
+          // ....check for match...
+    }
+  }
+  
+  List&lt;Patient&gt; retVal = new ArrayList&lt;Patient&gt;();
+  // ...populate...
+  return retVal;
+}
+</code></pre>
+<p>Note that AND parameters join multiple OR parameters together, but the inverse is not true. In other words, it is possible in FHIR to use AND search parameters to specify a search criteria of <code>(A=1 OR A=2) AND (B=1 OR B=2)</code> but it is not possible to specify <code>(A=1 AND B=1) OR (A=2 AND B=2)</code> (aside from in very specific cases where a composite parameter has been specifically defined).</p>
+</section>
+
+<a name="and-relationship-query-parameters-for-dates"></a>
+<section id="section13"><h1 data-toc-text="AND Relationship Query Parameters for Dates"><span class="helpHeaderSectionNumberBadge">5.5.13</span>AND Relationship Query Parameters for Dates</h1><a href="rest_operations_search.html#and-relationship-query-parameters-for-dates" class="helpSectionLink">&nbsp;</a>
+<p>Dates are a special case, since it is a fairly common scenario to want to match a date range (which is really just an AND query on two qualified date parameters). See the section on <a href="#DATE_RANGES">date ranges</a> for an example of a <a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/ca/uhn/fhir/rest/param/DateRangeParam.html">DateRangeParam</a>.</p>
+</section>
+
+<a name="resource-includes-include"></a>
+<section id="section14"><h1 data-toc-text="Resource Includes (_include)"><span class="helpHeaderSectionNumberBadge">5.5.14</span>Resource Includes (_include)</h1><a href="rest_operations_search.html#resource-includes-include" class="helpSectionLink">&nbsp;</a>
+<p>FHIR allows clients to request that specific linked resources be included as contained resources, which means that they will be &quot;embedded&quot; in a special container called &quot;contained&quot; within the parent resource.</p>
+<p>HAPI allows you to add a parameter for accepting includes if you wish to support them for specific search methods.</p>
+<pre><code class="language-java">@Search()
+public List&lt;DiagnosticReport&gt; getDiagnosticReport( 
+               @RequiredParam(name=DiagnosticReport.SP_IDENTIFIER) 
+               TokenParam theIdentifier,
+               
+               @IncludeParam(allow= {&quot;DiagnosticReport:subject&quot;}) 
+               Set&lt;Include&gt; theIncludes ) {
+   
+  List&lt;DiagnosticReport&gt; retVal = new ArrayList&lt;DiagnosticReport&gt;();
+ 
+  // Assume this method exists and loads the report from the DB
+  DiagnosticReport report = loadSomeDiagnosticReportFromDatabase(theIdentifier);
+
+  // If the client has asked for the subject to be included:
+  if (theIncludes.contains(new Include(&quot;DiagnosticReport:subject&quot;))) {
+    
+    // The resource reference should contain the ID of the patient
+    IIdType subjectId = report.getSubject().getReferenceElement();
+   
+    // So load the patient ID and return it
+    Patient subject = loadSomePatientFromDatabase(subjectId);
+    report.getSubject().setResource(subject);
+   
+  }
+ 
+  retVal.add(report);
+  return retVal;
+}
+</code></pre>
+<p>Example URL to invoke this method:
+<span class="helpSnippetUrlBox"><a href="http://fhir.example.com/DiagnosticReport?identifier=7000135&amp;_include=DiagnosticReport.subject"><span style="color: #428bca;">http://fhir.example.com/DiagnosticReport</span><span style="color: #660000; font-weight: bold;">?</span><span style="color: #006699;">identifier</span><span style="color: #660000; font-weight: bold;">=</span><span style="color: #666;">7000135</span><span style="color: #660000; font-weight: bold;">&amp;</span><span style="color: #006699;">_include</span><span style="color: #660000; font-weight: bold;">=</span><span style="color: #666;">DiagnosticReport.subject</span></a></span></p>
+<p>It is also possible to use a String type for the include parameter, which is more convenient if only a single include (or null for none) is all that is required.</p>
+<pre><code class="language-java">@Search()
+public List&lt;DiagnosticReport&gt; getDiagnosticReport( 
+             @RequiredParam(name=DiagnosticReport.SP_IDENTIFIER) 
+             TokenParam theIdentifier,
+             
+             @IncludeParam(allow= {&quot;DiagnosticReport:subject&quot;}) 
+             String theInclude ) {
+   
+  List&lt;DiagnosticReport&gt; retVal = new ArrayList&lt;DiagnosticReport&gt;();
+
+  // Assume this method exists and loads the report from the DB
+  DiagnosticReport report = loadSomeDiagnosticReportFromDatabase(theIdentifier);
+
+  // If the client has asked for the subject to be included:
+  if (&quot;DiagnosticReport:subject&quot;.equals(theInclude)) {
+    
+    // The resource reference should contain the ID of the patient
+    IIdType subjectId = report.getSubject().getReferenceElement();
+   
+    // So load the patient ID and return it
+    Patient subject = loadSomePatientFromDatabase(subjectId);
+    report.getSubject().setResource(subject);
+   
+  }
+
+  retVal.add(report);
+  return retVal;
+}
+</code></pre>
+</section>
+
+<a name="reverse-resource-includes-revinclude"></a>
+<section id="section15"><h1 data-toc-text="Reverse Resource Includes (_revinclude)"><span class="helpHeaderSectionNumberBadge">5.5.15</span>Reverse Resource Includes (_revinclude)</h1><a href="rest_operations_search.html#reverse-resource-includes-revinclude" class="helpSectionLink">&nbsp;</a>
+<p>To add support for reverse includes (via the <code>_revinclude</code> parameter), use the same format as with the <code>_include</code> parameter (shown above) but add <code>reverse=true</code> to the <a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/ca/uhn/fhir/rest/annotation/IncludeParam.html">@IncludeParam</a> annotation, as shown below.</p>
+<pre><code class="language-java">@Search()
+public List&lt;DiagnosticReport&gt; getDiagnosticReport( 
+             @RequiredParam(name=DiagnosticReport.SP_IDENTIFIER) 
+             TokenParam theIdentifier,
+             
+             @IncludeParam() 
+             Set&lt;Include&gt; theIncludes, 
+             
+             @IncludeParam(reverse=true)
+             Set&lt;Include&gt; theReverseIncludes
+         ) {
+ 
+return new ArrayList&lt;DiagnosticReport&gt;(); // populate this
+}
+</code></pre>
+</section>
+
+<a name="named-queries-query"></a>
+<section id="section16"><h1 data-toc-text="Named Queries (_query)"><span class="helpHeaderSectionNumberBadge">5.5.16</span>Named Queries (_query)</h1><a href="rest_operations_search.html#named-queries-query" class="helpSectionLink">&nbsp;</a>
+<p>FHIR supports <a href="http://www.hl7.org/implement/standards/fhir/search.html#advanced" target="_blank">named queries</a>, which may have specific behaviour defined. The following example shows how to create a Search operation with a name.</p>
+<p>This operation can only be invoked by explicitly specifying the given query name in the request URL. Note that the query does not need to take any parameters.</p>
+<pre><code class="language-java">@Search(queryName=&quot;namedQuery1&quot;)
+public List&lt;Patient&gt; searchByNamedQuery(@RequiredParam(name=&quot;someparam&quot;) StringParam theSomeParam) {
+ List&lt;Patient&gt; retVal = new ArrayList&lt;Patient&gt;();
+ // ...populate...
+ return retVal;
+}
+</code></pre>
+<p>Example URL to invoke this method:
+<span class="helpSnippetUrlBox"><a href="http://fhir.example.com/Patient?_query=namedQuery1&amp;someparam=value"><span style="color: #428bca;">http://fhir.example.com/Patient</span><span style="color: #660000; font-weight: bold;">?</span><span style="color: #006699;">_query</span><span style="color: #660000; font-weight: bold;">=</span><span style="color: #666;">namedQuery1</span><span style="color: #660000; font-weight: bold;">&amp;</span><span style="color: #006699;">someparam</span><span style="color: #660000; font-weight: bold;">=</span><span style="color: #666;">value</span></a></span></p>
+</section>
+
+<a name="sorting-sort"></a>
+<section id="section17"><h1 data-toc-text="Sorting (_sort)"><span class="helpHeaderSectionNumberBadge">5.5.17</span>Sorting (_sort)</h1><a href="rest_operations_search.html#sorting-sort" class="helpSectionLink">&nbsp;</a>
+<p>FHIR supports <a href="http://www.hl7.org/implement/standards/fhir/search.html#sort" target="_blank">sorting</a> according to a specific set of rules.</p>
+<p>According to the specification, sorting is requested by the client using a search param as the sort key. For example, when searching Patient resources, a sort key of &quot;given&quot; requests the &quot;given&quot; search param as the sort key. That param maps to the values in the field &quot;Patient.name.given&quot;.</p>
+<p>Sort specifications can be passed into handler methods by adding a parameter of type <a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/ca/uhn/fhir/rest/api/SortSpec.html">SortSpec</a>, which has been annotated with the <a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/ca/uhn/fhir/rest/annotation/Sort.html">@Sort</a> annotation, as shown in the following example:</p>
+<pre><code class="language-java">@Search
+public List&lt;Patient&gt; findPatients(
+      @RequiredParam(name=Patient.SP_IDENTIFIER) StringParam theParameter,
+      @Sort SortSpec theSort) {
+   List&lt;Patient&gt; retVal=new ArrayList&lt;Patient&gt;(); // populate this
+
+   // theSort is null unless a _sort parameter is actually provided 
+   if (theSort != null) {
+      
+      // The name of the param to sort by
+      String param = theSort.getParamName();
+
+      // The sort order, or null
+      SortOrderEnum order = theSort.getOrder();
+
+      // This will be populated if a second _sort was specified
+      SortSpec subSort = theSort.getChain();
+      
+      // ...apply the sort...
+   }
+
+   return retVal;
+}
+</code></pre>
+<p>Example URL to invoke this method:
+<span class="helpSnippetUrlBox"><a href="http://fhir.example.com/Patient?_identifier=urn:foo|123&amp;_sort=given"><span style="color: #428bca;">http://fhir.example.com/Patient</span><span style="color: #660000; font-weight: bold;">?</span><span style="color: #006699;">_identifier</span><span style="color: #660000; font-weight: bold;">=</span><span style="color: #666;">urn:foo|123</span><span style="color: #660000; font-weight: bold;">&amp;</span><span style="color: #006699;">_sort</span><span style="color: #660000; font-weight: bold;">=</span><span style="color: #666;">given</span></a></span></p>
+<a name="limiting-results"/>
+</section>
+
+<a name="limiting-results"></a>
+<section id="section18"><h1 data-toc-text="Limiting results (`_count`)"><span class="helpHeaderSectionNumberBadge">5.5.18</span>Limiting results (`_count`)</h1><a href="rest_operations_search.html#limiting-results" class="helpSectionLink">&nbsp;</a>
+<p>FHIR supports <a href="http://www.hl7.org/implement/standards/fhir/search.html#count" target="_blank">Page Count</a>. Count specification may be passed into handler methods with <a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/ca/uhn/fhir/rest/annotation/Count.html">@Count</a> annotation. Count may be used to limit the number of resources fetched from the database.</p>
+<pre><code class="language-java">@Search
+public List&lt;Patient&gt; findPatients(
+   @RequiredParam(name=Patient.SP_IDENTIFIER) StringParam theParameter,
+   @Count Integer theCount) {
+   List&lt;Patient&gt; retVal=new ArrayList&lt;Patient&gt;(); // populate this
+
+   // count is null unless a _count parameter is actually provided
+   if (theCount != null) {
+      // ... do search with count ...
+   } else {
+      // ... do search without count ...
+   }
+
+   return retVal;
+}
+</code></pre>
+<p>Example URL to invoke this method:
+<span class="helpSnippetUrlBox"><a href="http://fhir.example.com/Patient?_identifier=urn:foo|123&amp;_count=10"><span style="color: #428bca;">http://fhir.example.com/Patient</span><span style="color: #660000; font-weight: bold;">?</span><span style="color: #006699;">_identifier</span><span style="color: #660000; font-weight: bold;">=</span><span style="color: #666;">urn:foo|123</span><span style="color: #660000; font-weight: bold;">&amp;</span><span style="color: #006699;">_count</span><span style="color: #660000; font-weight: bold;">=</span><span style="color: #666;">10</span></a></span></p>
+</section>
+
+<a name="paging"></a>
+<section id="section19"><h1 data-toc-text="Paging"><span class="helpHeaderSectionNumberBadge">5.5.19</span>Paging</h1><a href="rest_operations_search.html#paging" class="helpSectionLink">&nbsp;</a><a name="offset-paging-with-offset"></a>
+<h2>Offset paging with <code>_offset</code></h2>
+<p>HAPI FHIR supports also paging. Offset specification can be passed into handler methods with <a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/ca/uhn/fhir/rest/annotation/Offset.html">@Offset</a> annotation.
+This annotation is <em>not</em> part of the FHIR standard.</p>
+<p>There are two possible ways to use paging. It is possible to define <code>_offset</code> parameter in the request which means that when combined with <code>_count</code> the paging is done on the database level. This type of paging benefits from not having to return so many items from the database when paging items. It's also possible to define default page size (i.e. default <code>_count</code> if not given) and maximum page size (i.e. maximum value for the <code>_count</code> parameter). See <a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-server/ca/uhn/fhir/rest/server/RestfulServer.html">RestfulServer</a> for more information.</p>
+<pre><code class="language-java">@Search
+public List&lt;Patient&gt; findPatients(
+   @RequiredParam(name=Patient.SP_IDENTIFIER) StringParam theParameter,
+   @Offset Integer theOffset,
+   @Count Integer theCount) {
+   List&lt;Patient&gt; retVal=new ArrayList&lt;Patient&gt;(); // populate this
+
+   // offset is null unless a _offset parameter is actually provided
+   if (theOffset != null) {
+      // ... do search with offset ...
+   } else {
+      // ... do search without offset ...
+   }
+
+   return retVal;
+}
+</code></pre>
+<p>Example URL to invoke this method for the first page:
+<span class="helpSnippetUrlBox"><a href="http://fhir.example.com/Patient?_identifier=urn:foo|123&amp;_count=10&amp;_offset=0"><span style="color: #428bca;">http://fhir.example.com/Patient</span><span style="color: #660000; font-weight: bold;">?</span><span style="color: #006699;">_identifier</span><span style="color: #660000; font-weight: bold;">=</span><span style="color: #666;">urn:foo|123</span><span style="color: #660000; font-weight: bold;">&amp;</span><span style="color: #006699;">_count</span><span style="color: #660000; font-weight: bold;">=</span><span style="color: #666;">10</span><span style="color: #660000; font-weight: bold;">&amp;</span><span style="color: #006699;">_offset</span><span style="color: #660000; font-weight: bold;">=</span><span style="color: #666;">0</span></a></span>
+or just<span class="helpSnippetUrlBox"><a href="http://fhir.example.com/Patient?_identifier=urn:foo|123&amp;_count=10"><span style="color: #428bca;">http://fhir.example.com/Patient</span><span style="color: #660000; font-weight: bold;">?</span><span style="color: #006699;">_identifier</span><span style="color: #660000; font-weight: bold;">=</span><span style="color: #666;">urn:foo|123</span><span style="color: #660000; font-weight: bold;">&amp;</span><span style="color: #006699;">_count</span><span style="color: #660000; font-weight: bold;">=</span><span style="color: #666;">10</span></a></span></p>
+<p>Example URL to invoke this method for the second page:
+<span class="helpSnippetUrlBox"><a href="http://fhir.example.com/Patient?_identifier=urn:foo|123&amp;_count=10&amp;_offset=10"><span style="color: #428bca;">http://fhir.example.com/Patient</span><span style="color: #660000; font-weight: bold;">?</span><span style="color: #006699;">_identifier</span><span style="color: #660000; font-weight: bold;">=</span><span style="color: #666;">urn:foo|123</span><span style="color: #660000; font-weight: bold;">&amp;</span><span style="color: #006699;">_count</span><span style="color: #660000; font-weight: bold;">=</span><span style="color: #666;">10</span><span style="color: #660000; font-weight: bold;">&amp;</span><span style="color: #006699;">_offset</span><span style="color: #660000; font-weight: bold;">=</span><span style="color: #666;">10</span></a></span></p>
+<p>Note that if the paging provider is configured to be database backed, <code>_offset=0</code> behaves differently than no <code>_offset</code>. This  allows the user the choose if he wants offset paging or database backed paging.</p>
+<a name="using-paging-provider"></a>
+<h2>Using paging provider</h2>
+<p>It is also possible to implement own paging provider (or use implementation bundled in HAPI FHIR). See <a href="paging.html">Paging</a> for information on how to use paging provider.</p>
+</section>
+
+<a name="adding-descriptions"></a>
+<section id="section20"><h1 data-toc-text="Adding Descriptions"><span class="helpHeaderSectionNumberBadge">5.5.20</span>Adding Descriptions</h1><a href="rest_operations_search.html#adding-descriptions" class="helpSectionLink">&nbsp;</a>
+<p>It is also possible to annotate search methods and/or parameters with the <a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/ca/uhn/fhir/model/api/annotation/Description.html">@Description</a> annotation. This annotation allows you to add a description of the method and the individual parameters. These descriptions will be placed in the server's conformance statement, which can be helpful to anyone who is developing software against your server.</p>
+<pre><code class="language-java">@Description(shortDefinition=&quot;This search finds all patient resources matching a given name combination&quot;)
+@Search()
+public List&lt;Patient&gt; searchWithDocs( 
+          @Description(shortDefinition=&quot;This is the patient's last name - Supports partial matches&quot;)
+          @RequiredParam(name=Patient.SP_FAMILY) StringParam theFamilyName,
+
+          @Description(shortDefinition=&quot;This is the patient's given names&quot;)
+          @OptionalParam(name=Patient.SP_GIVEN)  StringParam theGivenName ) {
+   
+  List&lt;Patient&gt; retVal = new ArrayList&lt;Patient&gt;();
+  // ...populate...
+  return retVal;
+}
+</code></pre>
+</section>
+
+
+				</div>
+
+				<div class="hide-sm-and-below"><div class="marg-btm-20 docs-inpage-nav-container">
+	<div class="docs-inpage-nav-row">
+		<span class="docs-inpage-nav-cell">
+			<a href="rest_operations.html" class="btn docs-inpage-nav-link">
+				<i class="fa fa-arrow-left"></i>
+				&nbsp;&nbsp;
+				5.4
+				&nbsp;&nbsp;
+				REST Operations: Overview
+			</a>
+		</span>
+		<span class="docs-inpage-nav-cell">
+
+			<div class="dropdown">
+			  <button class="btn btn-outline-info dropdown-toggle" role="button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+				  5.5
+				  &nbsp;&nbsp;
+				  REST Operations: Search
+			  </button>
+			  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				  <li class="dropdown-header" style="text-align: center;">
+					  Plain Server
+				  </li>
+				  <li role="separator" class="divider"></li>
+				  
+					  <li>
+						  <a href="server_types.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  5.0
+							  </span>
+							  REST Server Types
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="introduction.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  5.1
+							  </span>
+							  Plain Server Introduction
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="get_started.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  5.2
+							  </span>
+							  Get Started ⚡
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="resource_providers.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  5.3
+							  </span>
+							  Resource Providers and Plain Providers
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="rest_operations.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  5.4
+							  </span>
+							  REST Operations: Overview
+						  </a>
+					  </li>
+				  
+					  <li style="background-color: #F0F0F0;">
+						  <a href="rest_operations_search.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  5.5
+							  </span>
+							  REST Operations: Search
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="rest_operations_operations.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  5.6
+							  </span>
+							  REST Operations: Extended Operations
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="paging.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  5.7
+							  </span>
+							  Paging Search Results
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="web_testpage_overlay.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  5.8
+							  </span>
+							  Web Testpage Overlay
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="multitenancy.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  5.9
+							  </span>
+							  Multitenancy
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="jax_rs.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  5.10
+							  </span>
+							  JAX-RS Support
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="customizing_the_capabilitystatement.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  5.11
+							  </span>
+							  Customizing the CapabilityStatement
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="openapi.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  5.12
+							  </span>
+							  OpenAPI / Swagger
+						  </a>
+					  </li>
+				  
+			  </div>
+			</div>
+		</span>
+		<span class="docs-inpage-nav-cell">
+			<a href="rest_operations_operations.html" class="btn docs-inpage-nav-link">
+				5.6
+				&nbsp;&nbsp;
+				REST Operations: Extended Operations
+				&nbsp;&nbsp;
+				<i class="fa fa-arrow-right"></i>
+			</a>
+		</span>
+	</div>
+</div>
+</div>
+				
+
+	<!-- footer -->
+	<footer class="page-footer">
+		<div class="container-fluid text-center text-md-left">
+			<hr class="bottom-hr">
+			<div class="row pt-3 pb-3">
+				<div class="col-md-3 text-center">
+					<img src="../../images/logos/raccoon-forwards.png" alt="raccoon logo without text" width="100">
+				</div>
+				<div class="col-md-2">
+					<p class="footer-heading">HAPI HAPI</p>
+					<ul class="list-unstyled">
+						<li><a href="https://hapifhir.io/hapi-fhir/">Home</a></li>
+						<li><a href="../getting_started/downloading_and_importing.html">Download</a></li>
+						<li><a href="../introduction/changelog.html">Changelog</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/license.html">License</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/blog/">News</a></li>
+					</ul>
+					<p class="footer-heading">TEST SERVER</p>
+					<ul class="list-unstyled">
+						<li><a href="http://hapi.fhir.org/" target="_blank">Public Test Server</a></li>
+					</ul>
+					<p class="footer-heading">SUPPORT</p>
+					<ul class="list-unstyled">
+						<li><a href="https://smilecdr.com/" target="_blank">Smile CDR</a></li>
+					</ul>
+				</div>
+				<div class="col-md-2">
+					<p class="footer-heading">USING HAPI</p>
+					<ul class="list-unstyled">
+						<li><a href="../index.html">Documentation</a></li>
+						<li><a href="#">Command Line Tool (cli)</a></li>
+					</ul>
+					<p class="footer-heading">STARTER PROJECTS</p>
+					<ul class="list-unstyled">
+						<li><a href="https://github.com/FirelyTeam/fhirstarters/tree/master/java/hapi-fhirstarters-client-skeleton">Client</a></li>
+						<li><a href="https://github.com/FirelyTeam/fhirstarters/tree/master/java/hapi-fhirstarters-rest-server-skeleton">Plain Server</a></li>
+						<li><a href="https://github.com/hapifhir/hapi-fhir-jpaserver-starter">JPA Server</a></li>
+					</ul>
+				</div>
+				<div class="col-md-2">
+					<p class="footer-heading">JAVADOCS</p>
+					<ul class="list-unstyled">
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/">Core API</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-structures-dstu2/">Model API (DSTU2)</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-structures-dstu3/">Model API (DSTU3)</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-structures-r4/">Model API (R4)</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-structures-r5/">Model API (R5)</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-client/">Client API</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-server/">Plain Server - API</a></li>
+                  <li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-server-mdm/">Plain Server - MDM API</a></li>
+                  <li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-server-openapi/">Plain Server - OpenAPI</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-storage/">JPA Server - API</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-jpaserver-model/">JPA Server - Model</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-jpaserver-searchparam/">JPA Server - Search Param Support</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-jpaserver-subscription/">JPA Server - Subscription</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-jpaserver-base/">JPA Server - Base</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-validation/">Validation API</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-converter/">Version Converter API</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-jaxrsserver-base/">Server API (JAX-RS)</a></li>
+					</ul>
+				</div>
+				<div class="col-md-3">
+					<p class="footer-heading">GET HELP</p>
+					<ul class="list-unstyled">
+						<li><a href="https://github.com/jamesagnew/hapi-fhir/wiki/Getting-Help" target="_blank">How to Ask for Help (read this first!)</a></li>
+						<li><a href="https://groups.google.com/d/forum/hapi-fhir" target="_blank">Google Group (Ask Questions)</a></li>
+						<li><a href="https://github.com/jamesagnew/hapi-fhir/issues" target="_blank">Issue Tracker (Report Bugs/Request Features)</a></li>
+						<li><a href="https://chat.fhir.org/" target="_blank">FHIR.org Chat (Live Chat with FHIR Implementors)</a></li>
+						<li><a href="../appendix/faq.html">Frequently Asked Questions (FAQ)</a></li>
+					</ul>
+					<p class="footer-heading">CONTRIBUTE</p>
+					<ul class="list-unstyled">
+						<li><a href="../contributing/hacking_guide.html">Guide to Hacking HAPI</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/contributors.html">Contributors</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<!-- footer copyright -->
+		<div class="footer-copyright text-center py-3">
+			<p>Updated: 2021-11-23T14:49:28.319Z — Made with <i style="color: #FF6600;" class="fas fa-heart"></i> in <a href="https://www.cbc.ca/news/canada/toronto/raccoon-city-wildlife-in-toronto-1.2742231"><img src="https://hapifhir.io/hapi-fhir/images/icons/raccoon.svg" alt="Raccoon" width="20"></a>
+		</div>
+
+	</footer>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-1395874-5"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-1395874-5');
+	</script>
+
+
+			</div>
+
+		</div>
+
+	</div>
+
+
+<script type="application/javascript">
+
+	$(function () {
+
+		/*
+		 * Build the TOC links on the right hand side by
+		 * scanning all of the sections in the documentation
+		 */
+		const sections = [];
+		const navLinks = [];
+		var nav = $('<ul class="nav flex-column">');
+		$('#toc').append(nav);
+
+		$('#tocscroll section').each(function () {
+			sections.push($(this));
+			let sectionName = $(this).find('h1').first().attr('data-toc-text');
+			let sectionId = $(this).prevAll('a').attr('name');
+			let navLink = $('<a class="nav-link" href="#' + sectionId + '">' + sectionName + '</a>');
+			navLinks.push(navLink);
+			nav.append($('<li class="nav-item">').append(navLink));
+		});
+
+		/*
+		 * Update the active link on the right hand side TOC when the
+		 * user scrolls up and down the page. Create a function for this,
+		 * then call the function once and register it to call again
+		 * any time the user scrolls
+		 */
+		function updateTocScroll() {
+			const sectionOffset = $('#tocscroll').offset().top;
+			let visible = false;
+			for (var idx = 0; idx < sections.length; idx++) {
+				var sectionTop = sections[idx].offset().top - sectionOffset + 20;
+				if (sectionTop >= 0 && !visible || (idx == sections.length -1 && !visible)) {
+					navLinks[idx].addClass('active');
+					visible = true;
+				} else {
+					navLinks[idx].removeClass('active');
+				}
+			}
+
+		}
+
+		$('#tocscroll').scroll(updateTocScroll);
+		updateTocScroll();
+
+		/*
+	    * When the page first loads, automatically scroll the left docs TOC
+	    * scroller to the actively displayed page.
+	    */
+		var activetop = $('.activechapter').offset().top - $('#tocscroll').offset().top - 30;
+		if (activetop < 100) {
+			activetop = 0;
+		}
+		$('#navcolumn').scrollTop(activetop);
+
+		function updateNavScroll() {
+			if ($('#navcolumn').scrollTop() < 100) {
+				$('.button-scroll-up-to-search').fadeOut(500);
+			} else {
+				$('.button-scroll-up-to-search').fadeIn(500);
+			}
+		}
+
+		updateNavScroll();
+		$('#navcolumn').scroll(updateNavScroll);
+
+	});
+</script>
+
+
+
+<script type="application/javascript">
+	function hover(element) {
+		element.setAttribute('src', '../../../images/icons/link-grey.html');
+	}
+
+	function unhover(element) {
+		element.setAttribute('src', '../../../images/icons/smiley-grey.html');
+	}
+
+   new ClipboardJS('.clipboardCopyBtn');
+
+</script>
+</body>
+
+
+<!-- Mirrored from hapifhir.io/hapi-fhir/docs/server_plain/rest_operations_search.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 02 Dec 2021 00:00:28 GMT -->
+</html>
+

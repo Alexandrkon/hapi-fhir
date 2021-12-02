@@ -1,0 +1,1707 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from hapifhir.io/hapi-fhir/docs/server_jpa_mdm/mdm_rules.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 02 Dec 2021 00:00:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+	<title>MDM Rules - HAPI FHIR Documentation</title>
+
+	
+
+	<!-- required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- objectgraph -->
+	
+
+	<!-- Favicon -->
+	<link rel="icon" href="https://smilecdr.com/favicon.ico">
+
+	<!-- font, icons -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+	<!-- jquery, bootstrap script for dropdown and hover-->
+	<script src="../../resources/jquery/dist/jquery.min.js"></script>
+	<script src="../../resources/popper.js/dist/umd/popper.min.js"></script>
+	<script src="../../resources/bootstrap/dist/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="../../resources/bootstrap/dist/css/bootstrap.min.css"/>
+
+	<!-- fontawesome -->
+	<script src="../../resources/font-awesome/js/all.min.js" data-auto-replace-svg="nest"></script>
+	<link rel="stylesheet" media="screen" href="../../resources/font-awesome/css/fontawesome.min.css" />
+
+	<!-- Clipboard.js -->
+	<script src="../../resources/clipboard.js/clipboard.min.js"></script>
+
+	
+	<script src="../../resources/prismjs/prism.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-bash.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-http.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-java.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-javascript.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-json.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-nginx.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-properties.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/components/prism-sql.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/plugins/toolbar/prism-toolbar.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/plugins/command-line/prism-command-line.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.js" type="text/javascript"></script>
+	<script src="../../resources/prismjs/plugins/line-numbers/prism-line-numbers.js" type="text/javascript"></script>
+	<link href="../../resources/prismjs/themes/prism.css" rel="stylesheet" type="text/css"/>
+	<link href="../../resources/prismjs/themes/prism-coy.css" rel="stylesheet" type="text/css"/>
+	<link href="../../resources/prismjs/plugins/toolbar/prism-toolbar.css" rel="stylesheet" type="text/css"/>
+	<link href="../../resources/prismjs/plugins/line-numbers/prism-line-numbers.css" rel="stylesheet" type="text/css"/>
+
+	<link rel="stylesheet" type="text/css" href="../../css/hapifhir.css">
+
+
+
+
+	<!-- css sheet -->
+	<link href="../../resources/cdr-web-resources/css/help-common.css" rel="stylesheet" type="text/css"/>
+	<link href="../../css/pages.css" rel="stylesheet" type="text/css"/>
+	<link href="../../css/docs.css" rel="stylesheet" type="text/css"/>
+
+</head>
+
+<body>
+
+	
+	<header class="header" id="header">
+		<nav class="navbar fixed-top navbar-expand-sm navbar-light navbar-greyshadow">
+			<a class="navbar-brand text-center" href="https://hapifhir.io/hapi-fhir/" title="Home">
+				
+				<img src="../../images/logos/small-logo.png" alt="HAPI FHIR logo" width="156" id="collapsed-logo">
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<script type="application/javascript">
+				$(function(){
+					$(".dropdown").hover(
+						function() {
+							if ($( window ).width() >= 960) {
+								$('.dropdown-menu', this).stop(true, true).fadeIn("fast");
+								$(this).toggleClass('open');
+								$('b', this).toggleClass("caret caret-up");
+							} else {
+								$('.dropdown-menu', this).css("display", "");
+							}
+						},
+						function() {
+							if ($( window ).width() >= 960) {
+								$('.dropdown-menu', this).stop(true, true).fadeOut("fast");
+								$(this).toggleClass('open');
+								$('b', this).toggleClass("caret caret-up");
+							}
+						});
+				});
+			</script>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="nav navbar-nav ml-auto nav-text">
+					<li class="nav-item"><a class="nav-link" href="https://smilecdr.com/">Support</a></li>
+					<li class="nav-item"><a class="nav-link" target="_blank" href="https://github.com/jamesagnew/hapi-fhir">Github</a></li>
+					<li class="nav-item"><a class="nav-link" href="https://hapifhir.io/hapi-fhir/blog/">News</a></li>
+					<li class="nav-item"><a class="nav-link" href="../index.html">Documentation</a></li>
+					<li class="nav-item dropdown">
+						<a class="nav-link nav-link-dropdown" data-toggle="dropdown" id="navbarGETHELP" href="#">Get Help <i class="nav-chevron fas fa-chevron-down"></i></a>
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarGETHELP" id="navbarGETHELPDIV">
+							<a href="https://github.com/jamesagnew/hapi-fhir/wiki/Getting-Help" class="dropdown-item">Getting Help (read this first!)</a>
+							<a href="https://groups.google.com/d/forum/hapi-fhir" class="dropdown-item">Google Group (ask questions)</a>
+							<a href="https://github.com/jamesagnew/hapi-fhir/issues" class="dropdown-item">Issue Tracker (report bugs/request features)</a>
+							<a href="https://chat.fhir.org/" class="dropdown-item">chat.fhir.org (live chat with FHIR implementers)</a>
+							<a href="../appendix/faq.html" class="dropdown-item">Frequently Asked Questions (FAQ)</a>
+						</div>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link nav-link-dropdown" data-toggle="dropdown" id="navbarTESTSERVERS" href="#">Test Server <i class="nav-chevron fas fa-chevron-down"></i></a>
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarTESTSERVERS" id="navbarTESTSERVERSDIV">
+							<a href="http://hapi.fhir.org/" class="dropdown-item">HAPI FHIR Public Test Server</a>
+						</div>
+					</li>
+
+				</ul>
+			</div>
+		</nav>
+	</header>
+
+	
+	<script>
+		var scrollAfter = 10;
+	</script>
+
+	
+
+
+
+	<!-- "Scroll up the the search box" button -->
+	<button class="btn btn-secondary hide-sm-and-below button-scroll-up-to-search"
+			  onclick="$('#navcolumn').scrollTop(0); $('#button-ftsearch').focus();">
+		Search&nbsp;<i class="fa fa-search"></i>
+	</button>
+
+	<!-- Right column with the in-page TOC (not visible on mobile) -->
+	<div class="rightNavContainer hide-sm-and-below noPageNav" id="pageNav">
+		<nav id="toc"></nav>
+	</div>
+
+	<div class="container-fluid grid">
+		<div class="row">
+			
+			<div class="hide-sm-and-below col-md-3 primaryColumn" id="navcolumn">
+				<div>
+					<div class="index-sidebar" id="side-nav">
+
+						<!-- Fullltext Search box -->
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Search" aria-label="Search"
+									 aria-describedby="button-ftsearch-clear" style="margin-top: 0px;" id="button-ftsearch">
+							<div class="input-group-append">
+								<button class="btn btn-outline-info" type="button" id="button-ftsearch-clear"
+										  onclick="javascript: $('#button-ftsearch').val(''); delayFunction(updateSearchFunction, 500);">
+									<i class="fa fa-times-circle"></i>
+								</button>
+							</div>
+							<script type="application/javascript">
+								var delayFunction = (function () {
+									var timer = 0;
+									return function (callback, ms) {
+										if (!$('#button-ftsearch').val()) {
+											$('#leftTocSearchResults').hide();
+											$('#leftTocView').show();
+										} else {
+											$('#leftTocView').hide();
+											$('#leftTocSearchResults').show();
+											$('#leftTocSearchResults').empty();
+											$('#leftTocSearchResults').append($('<i class="fa fa-spinner fa-spin" style="margin-top: 20px; font-size:24px;"></i>'));
+										}
+										clearTimeout(timer);
+										timer = setTimeout(callback, ms);
+									};
+								})();
+
+								function updateSearchFunction() {
+									if (!$('#button-ftsearch').val()) {
+										$('#leftTocSearchResults').hide();
+										$('#leftTocView').show();
+									} else {
+										$('#leftTocView').hide();
+										$('#leftTocSearchResults').show();
+										$.get("/hapi-fhir/docsearch", {
+											term: $('#button-ftsearch').val()
+										}, function (data) {
+											$('#leftTocSearchResults').empty();
+
+											let leftTocUl = null;
+											let leftTocHeader = null;
+											for (var idx = 0; idx < data.length; idx++) {
+												if (leftTocHeader == null || leftTocHeader.text() !== data[idx].sectionTitle) {
+													leftTocHeader = $('<h3>');
+													leftTocHeader.text(data[idx].sectionTitle);
+													$('#leftTocSearchResults').append(leftTocHeader);
+													leftTocUl = $('<ul>');
+													$('#leftTocSearchResults').append(leftTocUl);
+												}
+												let nextLink = $('<a>', {
+													href: "/hapi-fhir/docs/" + data[idx].page + ".html"
+												});
+												nextLink.text(data[idx].title);
+
+												let nextLinkLi = $('<li>').append(nextLink);
+												leftTocUl.append(nextLinkLi);
+											}
+										}, 'json');
+									}
+								}
+
+								$('#button-ftsearch').keyup(function () {
+									delayFunction(updateSearchFunction, 500);
+								});
+
+								// Clear the search box if the page is reloaded
+								$(function () {
+									$('#button-ftsearch').val('');
+								});
+
+							</script>
+						</div>
+
+						<div id="leftTocView">
+							
+								<h3>
+									Welcome to HAPI FHIR
+								</h3>
+								<ul>
+									<li>
+										<a href="../introduction/table_of_contents.html">
+											<span class="pull-left">Table of Contents</span>
+											<span class="pull-right">1.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog.html">
+											<span class="pull-left">Changelog: 2021</span>
+											<span class="pull-right">1.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog_2020.html">
+											<span class="pull-left">Changelog: 2020</span>
+											<span class="pull-right">1.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog_2019.html">
+											<span class="pull-left">Changelog: 2019</span>
+											<span class="pull-right">1.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog_2018.html">
+											<span class="pull-left">Changelog: 2018</span>
+											<span class="pull-right">1.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog_2017.html">
+											<span class="pull-left">Changelog: 2017</span>
+											<span class="pull-right">1.5</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog_2016.html">
+											<span class="pull-left">Changelog: 2016</span>
+											<span class="pull-right">1.6</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog_2015.html">
+											<span class="pull-left">Changelog: 2015</span>
+											<span class="pull-right">1.7</span>
+										</a>
+									</li>
+									<li>
+										<a href="../introduction/changelog_2014.html">
+											<span class="pull-left">Changelog: 2014</span>
+											<span class="pull-right">1.8</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Getting Started
+								</h3>
+								<ul>
+									<li>
+										<a href="../getting_started/introduction.html">
+											<span class="pull-left">Introduction</span>
+											<span class="pull-right">2.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../getting_started/versions.html">
+											<span class="pull-left">FHIR and HAPI FHIR Versions</span>
+											<span class="pull-right">2.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../getting_started/modules.html">
+											<span class="pull-left">HAPI FHIR Modules</span>
+											<span class="pull-right">2.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../getting_started/downloading_and_importing.html">
+											<span class="pull-left">Downloading and Importing</span>
+											<span class="pull-right">2.3</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Working With The FHIR Model
+								</h3>
+								<ul>
+									<li>
+										<a href="../model/working_with_resources.html">
+											<span class="pull-left">Working With Resources</span>
+											<span class="pull-right">3.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../model/parsers.html">
+											<span class="pull-left">Parsing and Serializing</span>
+											<span class="pull-right">3.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../model/references.html">
+											<span class="pull-left">Resource References</span>
+											<span class="pull-right">3.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../model/profiles_and_extensions.html">
+											<span class="pull-left">Profiles and Extensions</span>
+											<span class="pull-right">3.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../model/converter.html">
+											<span class="pull-left">Version Converters</span>
+											<span class="pull-right">3.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../model/custom_structures.html">
+											<span class="pull-left">Custom Structures</span>
+											<span class="pull-right">3.5</span>
+										</a>
+									</li>
+									<li>
+										<a href="../model/narrative_generation.html">
+											<span class="pull-left">Narrative Generation</span>
+											<span class="pull-right">3.6</span>
+										</a>
+									</li>
+									<li>
+										<a href="../model/bundle_builder.html">
+											<span class="pull-left">Bundle Builder</span>
+											<span class="pull-right">3.7</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Client
+								</h3>
+								<ul>
+									<li>
+										<a href="../client/introduction.html">
+											<span class="pull-left">Introduction</span>
+											<span class="pull-right">4.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../client/get_started.html">
+											<span class="pull-left">Get Started ⚡</span>
+											<span class="pull-right">4.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../client/generic_client.html">
+											<span class="pull-left">Generic (Fluent) Client</span>
+											<span class="pull-right">4.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../client/annotation_client.html">
+											<span class="pull-left">Annotation Client</span>
+											<span class="pull-right">4.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../client/client_configuration.html">
+											<span class="pull-left">Client Configuration</span>
+											<span class="pull-right">4.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../client/examples.html">
+											<span class="pull-left">Client Examples</span>
+											<span class="pull-right">4.5</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Plain Server
+								</h3>
+								<ul>
+									<li>
+										<a href="../server_plain/server_types.html">
+											<span class="pull-left">REST Server Types</span>
+											<span class="pull-right">5.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/introduction.html">
+											<span class="pull-left">Plain Server Introduction</span>
+											<span class="pull-right">5.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/get_started.html">
+											<span class="pull-left">Get Started ⚡</span>
+											<span class="pull-right">5.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/resource_providers.html">
+											<span class="pull-left">Resource Providers and Plain Providers</span>
+											<span class="pull-right">5.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/rest_operations.html">
+											<span class="pull-left">REST Operations: Overview</span>
+											<span class="pull-right">5.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/rest_operations_search.html">
+											<span class="pull-left">REST Operations: Search</span>
+											<span class="pull-right">5.5</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/rest_operations_operations.html">
+											<span class="pull-left">REST Operations: Extended Operations</span>
+											<span class="pull-right">5.6</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/paging.html">
+											<span class="pull-left">Paging Search Results</span>
+											<span class="pull-right">5.7</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/web_testpage_overlay.html">
+											<span class="pull-left">Web Testpage Overlay</span>
+											<span class="pull-right">5.8</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/multitenancy.html">
+											<span class="pull-left">Multitenancy</span>
+											<span class="pull-right">5.9</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/jax_rs.html">
+											<span class="pull-left">JAX-RS Support</span>
+											<span class="pull-right">5.10</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/customizing_the_capabilitystatement.html">
+											<span class="pull-left">Customizing the CapabilityStatement</span>
+											<span class="pull-right">5.11</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_plain/openapi.html">
+											<span class="pull-left">OpenAPI / Swagger</span>
+											<span class="pull-right">5.12</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									JPA Server
+								</h3>
+								<ul>
+									<li>
+										<a href="../server_jpa/introduction.html">
+											<span class="pull-left">Introduction</span>
+											<span class="pull-right">6.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/get_started.html">
+											<span class="pull-left">Get Started ⚡</span>
+											<span class="pull-right">6.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/architecture.html">
+											<span class="pull-left">Architecture</span>
+											<span class="pull-right">6.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/schema.html">
+											<span class="pull-left">Database Schema</span>
+											<span class="pull-right">6.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/configuration.html">
+											<span class="pull-left">Configuration</span>
+											<span class="pull-right">6.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/search.html">
+											<span class="pull-left">Search</span>
+											<span class="pull-right">6.5</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/performance.html">
+											<span class="pull-left">Performance</span>
+											<span class="pull-right">6.6</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/upgrading.html">
+											<span class="pull-left">Upgrade Guide</span>
+											<span class="pull-right">6.7</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/diff.html">
+											<span class="pull-left">Diff Operation</span>
+											<span class="pull-right">6.8</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/lastn.html">
+											<span class="pull-left">LastN Operation</span>
+											<span class="pull-right">6.9</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/elastic.html">
+											<span class="pull-left">Lucene/Elasticsearch Indexing</span>
+											<span class="pull-right">6.10</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa/terminology.html">
+											<span class="pull-left">Terminology</span>
+											<span class="pull-right">6.11</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3 class="activechapter">
+									JPA Server: MDM
+								</h3>
+								<ul>
+									<li>
+										<a href="mdm.html">
+											<span class="pull-left">MDM Getting Started</span>
+											<span class="pull-right">7.0</span>
+										</a>
+									</li>
+									<li class="active-side">
+										<a href="mdm_rules.html">
+											<span class="pull-left">MDM Rules</span>
+											<span class="pull-right">7.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="mdm_eid.html">
+											<span class="pull-left">MDM Enterprise Identifiers</span>
+											<span class="pull-right">7.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="mdm_operations.html">
+											<span class="pull-left">MDM Operations</span>
+											<span class="pull-right">7.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="mdm_details.html">
+											<span class="pull-left">MDM Technical Details</span>
+											<span class="pull-right">7.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="mdm_expansion.html">
+											<span class="pull-left">MDM Search Expansion</span>
+											<span class="pull-right">7.5</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									JPA Server: CQL
+								</h3>
+								<ul>
+									<li>
+										<a href="../server_jpa_cql/cql.html">
+											<span class="pull-left">CQL Getting Started</span>
+											<span class="pull-right">8.0</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									JPA Server: Partitioning and Multitenancy
+								</h3>
+								<ul>
+									<li>
+										<a href="../server_jpa_partitioning/partitioning.html">
+											<span class="pull-left">Partitioning and Multitenancy</span>
+											<span class="pull-right">9.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_partitioning/partition_interceptor_examples.html">
+											<span class="pull-left">Partition Interceptor Examples</span>
+											<span class="pull-right">9.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_partitioning/partitioning_management_operations.html">
+											<span class="pull-left">Partitioning Management Operations</span>
+											<span class="pull-right">9.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../server_jpa_partitioning/enabling_in_hapi_fhir.html">
+											<span class="pull-left">Enabling Partitioning in HAPI FHIR</span>
+											<span class="pull-right">9.3</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Interceptors
+								</h3>
+								<ul>
+									<li>
+										<a href="../interceptors/interceptors.html">
+											<span class="pull-left">Interceptors Overview</span>
+											<span class="pull-right">10.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../interceptors/client_interceptors.html">
+											<span class="pull-left">Client Interceptors</span>
+											<span class="pull-right">10.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../interceptors/client_pointcuts.html">
+											<span class="pull-left">Client Pointcuts</span>
+											<span class="pull-right">10.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../interceptors/built_in_client_interceptors.html">
+											<span class="pull-left">Built-In Client Interceptors</span>
+											<span class="pull-right">10.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../interceptors/server_interceptors.html">
+											<span class="pull-left">Server Interceptors</span>
+											<span class="pull-right">10.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../interceptors/server_pointcuts.html">
+											<span class="pull-left">Server Pointcuts</span>
+											<span class="pull-right">10.5</span>
+										</a>
+									</li>
+									<li>
+										<a href="../interceptors/built_in_server_interceptors.html">
+											<span class="pull-left">Built-In Server Interceptors</span>
+											<span class="pull-right">10.6</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Security
+								</h3>
+								<ul>
+									<li>
+										<a href="../security/introduction.html">
+											<span class="pull-left">Introduction</span>
+											<span class="pull-right">11.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../security/authorization_interceptor.html">
+											<span class="pull-left">Authorization Interceptor</span>
+											<span class="pull-right">11.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../security/consent_interceptor.html">
+											<span class="pull-left">Consent Interceptor</span>
+											<span class="pull-right">11.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../security/search_narrowing_interceptor.html">
+											<span class="pull-left">Search Narrowing Interceptor</span>
+											<span class="pull-right">11.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../security/cors.html">
+											<span class="pull-left">CORS</span>
+											<span class="pull-right">11.4</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Validation
+								</h3>
+								<ul>
+									<li>
+										<a href="../validation/introduction.html">
+											<span class="pull-left">Introduction</span>
+											<span class="pull-right">12.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../validation/parser_error_handler.html">
+											<span class="pull-left">Parser Error Handler</span>
+											<span class="pull-right">12.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../validation/instance_validator.html">
+											<span class="pull-left">Instance Validator</span>
+											<span class="pull-right">12.2</span>
+										</a>
+									</li>
+									<li>
+										<a href="../validation/validation_support_modules.html">
+											<span class="pull-left">Validation Support Modules</span>
+											<span class="pull-right">12.3</span>
+										</a>
+									</li>
+									<li>
+										<a href="../validation/schema_validator.html">
+											<span class="pull-left">Schema/Schematron Validator</span>
+											<span class="pull-right">12.4</span>
+										</a>
+									</li>
+									<li>
+										<a href="../validation/repository_validating_interceptor.html">
+											<span class="pull-left">Repository Validating Interceptor</span>
+											<span class="pull-right">12.5</span>
+										</a>
+									</li>
+									<li>
+										<a href="../validation/examples.html">
+											<span class="pull-left">Validation Examples</span>
+											<span class="pull-right">12.6</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Android
+								</h3>
+								<ul>
+									<li>
+										<a href="../android/client.html">
+											<span class="pull-left">Android Client</span>
+											<span class="pull-right">13.0</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Tools
+								</h3>
+								<ul>
+									<li>
+										<a href="../tools/hapi_fhir_cli.html">
+											<span class="pull-left">Command Line Interface (CLI) Tool</span>
+											<span class="pull-right">14.0</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Contributing to HAPI FHIR
+								</h3>
+								<ul>
+									<li>
+										<a href="../contributing/hacking_guide.html">
+											<span class="pull-left">Hacking Guide</span>
+											<span class="pull-right">15.0</span>
+										</a>
+									</li>
+								</ul>
+							
+								<h3>
+									Appendix
+								</h3>
+								<ul>
+									<li>
+										<a href="../appendix/logging.html">
+											<span class="pull-left">Logging</span>
+											<span class="pull-right">16.0</span>
+										</a>
+									</li>
+									<li>
+										<a href="../appendix/faq.html">
+											<span class="pull-left">FAQ</span>
+											<span class="pull-right">16.1</span>
+										</a>
+									</li>
+									<li>
+										<a href="../appendix/javadocs.html">
+											<span class="pull-left">JavaDocs</span>
+											<span class="pull-right">16.2</span>
+										</a>
+									</li>
+								</ul>
+							
+						</div>
+						<div id="leftTocSearchResults">
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			
+			<div class="col-xs-12 col-md-9 primaryColumn noPageNav" id="tocscroll">
+
+				<!-- Pager -->
+				<div class="hide-sm-and-below"><div class="marg-btm-20 docs-inpage-nav-container">
+	<div class="docs-inpage-nav-row">
+		<span class="docs-inpage-nav-cell">
+			<a href="mdm.html" class="btn docs-inpage-nav-link">
+				<i class="fa fa-arrow-left"></i>
+				&nbsp;&nbsp;
+				7.0
+				&nbsp;&nbsp;
+				MDM Getting Started
+			</a>
+		</span>
+		<span class="docs-inpage-nav-cell">
+
+			<div class="dropdown">
+			  <button class="btn btn-outline-info dropdown-toggle" role="button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+				  7.1
+				  &nbsp;&nbsp;
+				  MDM Rules
+			  </button>
+			  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				  <li class="dropdown-header" style="text-align: center;">
+					  JPA Server: MDM
+				  </li>
+				  <li role="separator" class="divider"></li>
+				  
+					  <li>
+						  <a href="mdm.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  7.0
+							  </span>
+							  MDM Getting Started
+						  </a>
+					  </li>
+				  
+					  <li style="background-color: #F0F0F0;">
+						  <a href="mdm_rules.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  7.1
+							  </span>
+							  MDM Rules
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="mdm_eid.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  7.2
+							  </span>
+							  MDM Enterprise Identifiers
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="mdm_operations.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  7.3
+							  </span>
+							  MDM Operations
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="mdm_details.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  7.4
+							  </span>
+							  MDM Technical Details
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="mdm_expansion.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  7.5
+							  </span>
+							  MDM Search Expansion
+						  </a>
+					  </li>
+				  
+			  </div>
+			</div>
+		</span>
+		<span class="docs-inpage-nav-cell">
+			<a href="mdm_eid.html" class="btn docs-inpage-nav-link">
+				7.2
+				&nbsp;&nbsp;
+				MDM Enterprise Identifiers
+				&nbsp;&nbsp;
+				<i class="fa fa-arrow-right"></i>
+			</a>
+		</span>
+	</div>
+</div>
+</div>
+
+				<div class="hide-md-and-above mobile-header-links">
+					<a href="../introduction/table_of_contents.html" class="btn btn-primary">
+						<i class="fa fa-arrow-left"></i>
+						&nbsp;&nbsp;
+						Table of Contents
+					</a>
+					<p>MDM Rules</p>
+				</div>
+
+				<div class="docs-content">
+					<a name="rules"></a>
+<section id="section0"><h1 data-toc-text="Rules"><span class="helpHeaderSectionNumberBadge">7.1</span>Rules</h1><a href="mdm_rules.html#rules" class="helpSectionLink">&nbsp;</a>
+<p>HAPI MDM rules are defined in a single json document.</p>
+<p>Note that in all the following configuration, valid options for <code>resourceType</code> include any supported resource, such as <code>Organization</code>, <code>Patient</code>, <code>Practitioner</code>, and <code>*</code>. Use <code>*</code> if the criteria is identical across both resource types and you would like to apply it to all resources.</p>
+<p>Here is an example of a full HAPI MDM rules json document:</p>
+<pre><code class="language-json">{
+	&quot;version&quot;: &quot;1&quot;,
+   &quot;mdmTypes&quot; : [&quot;Organization&quot;, &quot;Patient&quot;, &quot;Practitioner&quot;],
+	&quot;candidateSearchParams&quot;: [
+		{
+			&quot;resourceType&quot;: &quot;Patient&quot;,
+			&quot;searchParams&quot;: [
+				&quot;phone&quot;
+			]
+		},
+		{
+			&quot;resourceType&quot;: &quot;Patient&quot;,
+			&quot;searchParams&quot;: [
+				&quot;birthdate&quot;
+			]
+		},
+		{
+			&quot;resourceType&quot;: &quot;*&quot;,
+			&quot;searchParams&quot;: [
+				&quot;identifier&quot;
+			]
+		}
+	],
+	&quot;candidateFilterSearchParams&quot;: [],
+	&quot;matchFields&quot;: [
+		{
+			&quot;name&quot;: &quot;birthday&quot;,
+			&quot;resourceType&quot;: &quot;Patient&quot;,
+			&quot;resourcePath&quot;: &quot;birthDate&quot;,
+			&quot;matcher&quot;: {
+				&quot;algorithm&quot;: &quot;STRING&quot;
+			}
+		},
+		{
+			&quot;name&quot;: &quot;phone&quot;,
+			&quot;resourceType&quot;: &quot;Patient&quot;,
+			&quot;resourcePath&quot;: &quot;telecom.value&quot;,
+			&quot;matcher&quot;: {
+				&quot;algorithm&quot;: &quot;STRING&quot;
+			}
+		},
+		{
+			&quot;name&quot;: &quot;firstname-meta&quot;,
+			&quot;resourceType&quot;: &quot;Patient&quot;,
+			&quot;fhirPath&quot;: &quot;name.given.first()&quot;,
+			&quot;matcher&quot;: {
+				&quot;algorithm&quot;: &quot;METAPHONE&quot;
+			}
+		},
+		{
+			&quot;name&quot;: &quot;lastname-meta&quot;,
+			&quot;resourceType&quot;: &quot;Patient&quot;,
+			&quot;resourcePath&quot;: &quot;name.family&quot;,
+			&quot;matcher&quot;: {
+				&quot;algorithm&quot;: &quot;METAPHONE&quot;
+			}
+		},
+		{
+			&quot;name&quot;: &quot;firstname-jaro&quot;,
+			&quot;resourceType&quot;: &quot;Patient&quot;,
+			&quot;resourcePath&quot;: &quot;name.given&quot;,
+			&quot;similarity&quot;: {
+				&quot;algorithm&quot;: &quot;JARO_WINKLER&quot;,
+				&quot;matchThreshold&quot;: 0.80
+			}
+		},
+		{
+			&quot;name&quot;: &quot;lastname-jaro&quot;,
+			&quot;resourceType&quot;: &quot;Patient&quot;,
+			&quot;resourcePath&quot;: &quot;name.family&quot;,
+			&quot;similarity&quot;: {
+				&quot;algorithm&quot;: &quot;JARO_WINKLER&quot;,
+				&quot;matchThreshold&quot;: 0.80
+			}
+		},
+		{
+			&quot;name&quot;: &quot;org-name&quot;,
+			&quot;resourceType&quot;: &quot;Organization&quot;,
+			&quot;resourcePath&quot;: &quot;name&quot;,
+			&quot;matcher&quot;: {
+				&quot;algorithm&quot;: &quot;STRING&quot;
+			}
+		}
+	],
+	&quot;matchResultMap&quot;: {
+		&quot;firstname-meta,lastname-meta,birthday&quot;: &quot;MATCH&quot;,
+		&quot;firstname-meta,lastname-meta,phone&quot;: &quot;MATCH&quot;,
+		&quot;firstname-jaro,lastname-jaro,birthday&quot;: &quot;POSSIBLE_MATCH&quot;,
+		&quot;firstname-jaro,lastname-jaro,phone&quot;: &quot;POSSIBLE_MATCH&quot;,
+		&quot;lastname-jaro,phone,birthday&quot;: &quot;POSSIBLE_MATCH&quot;,
+		&quot;firstname-jaro,phone,birthday&quot;: &quot;POSSIBLE_MATCH&quot;,
+        &quot;org-name&quot;: &quot;MATCH&quot;
+	}
+}
+</code></pre>
+<p>Here is a description of how each section of this document is configured.</p>
+<h3>candidateSearchParams</h3>
+<p>These define fields which must have at least one exact match before two resources are considered for matching.  This is like a list of &quot;pre-searches&quot; that find potential candidates for matches, to avoid the expensive operation of running a match score calculation on all resources in the system.  E.g. you may only wish to consider matching two Patients if they either share at least one identifier in common or have the same birthday or the same phone number. The HAPI FHIR server executes each of these searches separately and then takes the union of the results, so you can think of these as <code>OR</code> criteria that cast a wide net for potential candidates.  In some MDM systems, these &quot;pre-searches&quot; are called &quot;blocking&quot; searches (since they identify &quot;blocks&quot; of candidates that will be searched for matches).</p>
+<p>If a list of searchParams is specified in a given candidateSearchParams item, then these search parameters are treated as <code>AND</code> parameters. In the following candidateSearchParams definition, hapi-fhir will extract given name, family name and identifiers from the incoming Patient and perform two separate searches, first for all Patient resources that have the same given <code>AND</code> the same family name as the incoming Patient, and second for all Patient resources that share at least one identifier as the incoming Patient.  Note that if the incoming Patient was missing any of these searchParam values, then that search would be skipped.  E.g. if the incoming Patient had a given name but no family name, then only a search for matching identifiers would be performed.</p>
+<pre><code class="language-json">{
+    &quot;candidateSearchParams&quot; : [ 
+        {
+            &quot;resourceType&quot; : &quot;Patient&quot;,
+            &quot;searchParams&quot; : [&quot;given&quot;, &quot;family&quot;]
+        }, {
+            &quot;resourceType&quot; : &quot;Patient&quot;,
+            &quot;searchParam&quot; : &quot;identifier&quot;
+        } 
+  ]
+}
+</code></pre>
+<h3>candidateFilterSearchParams When searching for match candidates, only resources that match this filter are considered.  E.g. you may wish to only search for Patients for which active=true.</h3>
+<pre><code class="language-json">[ {
+    &quot;resourceType&quot; : &quot;Patient&quot;,
+    &quot;searchParam&quot; : &quot;active&quot;,
+    &quot;fixedValue&quot; : &quot;true&quot;
+} ]
+</code></pre>
+<p>For example, if the incoming patient looked like this:</p>
+<pre><code class="language-json">{
+  &quot;resourceType&quot;: &quot;Patient&quot;,
+  &quot;id&quot;: &quot;example&quot;,
+  &quot;identifier&quot;: [{
+      &quot;system&quot;: &quot;urn:oid:1.2.36.146.595.217.0.1&quot;,
+      &quot;value&quot;: &quot;12345&quot;
+    }],
+  &quot;name&quot;: [
+    {
+      &quot;family&quot;: &quot;Chalmers&quot;,
+      &quot;given&quot;: [
+        &quot;Peter&quot;,
+        &quot;James&quot;
+      ]
+    }
+  ]
+}
+</code></pre>
+<p>then the above <code>candidateSearchParams</code> and <code>candidateFilterSearchParams</code> would result in the following two consecutive searches for candidates:</p>
+<ul>
+<li><code>Patient?given=Peter,James&amp;family=Chalmers&amp;active=true</code></li>
+<li><code>Patient?identifier=urn:oid:1.2.36.146.595.217.0.1|12345&amp;active=true</code></li>
+</ul>
+<h3>matchFields</h3>
+<p>Once the match candidates have been found, they are then each compared to the incoming Patient resource.  This comparison is made across a list of <code>matchField</code>s.  Each matchField returns <code>true</code> or <code>false</code> indicating whether the candidate and the incoming Patient match on that field.   There are two types of matchFields: <code>matcher</code> and <code>similarity</code>.  <code>matcher</code> matchFields return a <code>true</code> or <code>false</code> directly, whereas <code>similarity</code> matchFields return a score between 0.0 (no match) and 1.0 (exact match) and this score is translated to a <code>true/false</code> via a <code>matchThreshold</code>.  E.g. if a <code>JARO_WINKLER</code> matchField is configured with a <code>matchThreshold</code> of 0.8 then that matchField will only return <code>true</code> if the <code>JARO_WINKLER</code> similarity evaluates to a score &gt;= 0.8.</p>
+<p>By default, all matchFields have <code>exact=false</code> which means that they will have all diacritical marks removed and all letters will be converted to upper case before matching.  <code>exact=true</code> can be added to any matchField to compare the strings as they are originally capitalized and accented.</p>
+<p>Here is a matcher matchField that uses the SOUNDEX matcher to determine whether two family names match.</p>
+<pre><code class="language-json">{
+	&quot;name&quot;: &quot;familyname-soundex&quot;, 
+   &quot;resourceType&quot;: &quot;*&quot;,
+	&quot;resourcePath&quot;: &quot;name.family&quot;,
+	&quot;matcher&quot;: {
+			&quot;algorithm&quot;: &quot;SOUNDEX&quot;
+	}
+}
+</code></pre>
+<p>Here is a matcher matchField that only matches when two family names are identical.</p>
+<pre><code class="language-json">{
+	&quot;name&quot;: &quot;familyname-exact&quot;,
+    &quot;resourceType&quot;: &quot;*&quot;,
+	&quot;resourcePath&quot;: &quot;name.family&quot;,
+	&quot;matcher&quot;: {
+			&quot;algorithm&quot;: &quot;STRING&quot;,
+			&quot;exact&quot;: true
+	}
+}
+</code></pre>
+<p>While it is often suitable to use the <code>resourcePath</code> field to indicate the location of the data to be matched, occasionally you will need more direct control over precisely which fields are matched. When performing string matching, the matcher will indiscriminately try to match all elements of the left resource to all elements of the right resource. For example, consider the following two patients and matcher.</p>
+<pre><code class="language-json">{
+   &quot;resourceType&quot;: &quot;Patient&quot;,
+   &quot;name&quot;: [{
+      &quot;given&quot;: [&quot;Frank&quot;, &quot;John&quot;]
+   }]
+}
+</code></pre>
+<pre><code class="language-json">{
+   &quot;resourceType&quot;: &quot;Patient&quot;,
+   &quot;name&quot;: [{
+      &quot;given&quot;: [&quot;John&quot;, &quot;Frank&quot;]
+   }]
+}
+</code></pre>
+<pre><code class="language-json">{
+   &quot;name&quot;: &quot;firstname-meta&quot;,
+   &quot;resourceType&quot;: &quot;Patient&quot;,
+   &quot;resourcePath&quot;: &quot;name.given&quot;,
+   &quot;matcher&quot;: {
+      &quot;algorithm&quot;: &quot;METAPHONE&quot;
+   }
+}
+</code></pre>
+<p>In this example, these two patients would match, as the matcher will compare all elements of <code>[&quot;John&quot;, &quot;Frank&quot;]</code> to all elements of <code>[&quot;Frank&quot;, &quot;John&quot;]</code> and find that there are matches. This is when you would want to use a FHIRPath matcher, as FHIRPath expressions give you more direct control. This following example shows a matcher that would cause these two patient's not to match to each other.</p>
+<pre><code class="language-json">{
+   &quot;name&quot;: &quot;firstname-meta-fhirpath&quot;,
+   &quot;resourceType&quot;: &quot;Patient&quot;,
+   &quot;fhirPath&quot;: &quot;name.given[0]&quot;,
+   &quot;matcher&quot;: {
+      &quot;algorithm&quot;: &quot;METAPHONE&quot;
+   }
+}
+</code></pre>
+<p>Since FHIRPath expressions support indexing it is possible to directly indicate that you would only like to compare the first element of each resource.</p>
+<p>Special identifier matching is also available if you need to match on a particular identifier system:</p>
+<pre><code class="language-json">{
+	&quot;name&quot;: &quot;identifier-ssn&quot;,
+    &quot;resourceType&quot;: &quot;*&quot;,
+	&quot;resourcePath&quot;: &quot;identifier&quot;,
+	&quot;matcher&quot;: {
+			&quot;algorithm&quot;: &quot;IDENTIFIER&quot;,
+			&quot;identifierSystem&quot;: &quot;http://hl7.org/fhir/sid/us-ssn&quot;
+	}
+}
+</code></pre>
+<p>Here is a similarity matchField that matches when two given names match with a JARO_WINKLER threshold &gt;= 0.8.</p>
+<pre><code class="language-json">{
+	&quot;name&quot;: &quot;firstname-jaro&quot;,
+	&quot;resourceType&quot;: &quot;*&quot;,
+	&quot;resourcePath&quot;: &quot;name.given&quot;,
+	&quot;similarity&quot;: {
+		&quot;algorithm&quot;: &quot;JARO_WINKLER&quot;,
+		&quot;matchThreshold&quot;: 0.80
+	}
+}
+</code></pre>
+<p>The following algorithms are currently supported:</p>
+<table class="table table-striped table-condensed">
+    <thead>
+        <tr>
+            <th>Algorithm</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Example</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>CAVERPHONE1</td>
+            <td>matcher</td>
+            <td>
+              <a href="https://commons.apache.org/proper/commons-codec/apidocs/org/apache/commons/codec/language/Caverphone1.html">Apache Caverphone1</a>          
+            </td>
+            <td>Gail = Gael, Gail != Gale, Thomas != Tom</td>
+        </tr>
+        <tr>
+            <td>CAVERPHONE2</td>
+            <td>matcher</td>
+            <td>
+              <a href="https://commons.apache.org/proper/commons-codec/apidocs/org/apache/commons/codec/language/Caverphone2.html">Apache Caverphone2</a>          
+            </td>
+            <td>Gail = Gael, Gail = Gale, Thomas != Tom</td>
+        </tr>
+        <tr>
+            <td>COLOGNE</td>
+            <td>matcher</td>
+            <td>
+              <a href="https://commons.apache.org/proper/commons-codec/apidocs/org/apache/commons/codec/language/ColognePhonetic.html">Apache Cologne Phonetic</a>          
+            </td>
+            <td></td>
+        </tr>        
+        <tr>
+            <td>DOUBLE_METAPHONE</td>
+            <td>matcher</td>
+            <td>
+              <a href="https://commons.apache.org/proper/commons-codec/apidocs/org/apache/commons/codec/language/DoubleMetaphone.html">Apache Double Metaphone</a>          
+            </td>
+            <td>Dury = Durie, Allsop = Allsob, Smith != Schmidt</td>
+        </tr>
+        <tr>
+            <td>MATCH_RATING_APPROACH</td>
+            <td>matcher</td>
+            <td>
+              <a href="https://commons.apache.org/proper/commons-codec/apidocs/org/apache/commons/codec/language/MatchRatingApproachEncoder.html">Apache Match Rating Approach Encoder</a>          
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>METAPHONE</td>
+            <td>matcher</td>
+            <td>
+              <a href="https://commons.apache.org/proper/commons-codec/apidocs/org/apache/commons/codec/language/Metaphone.html">Apache Metaphone</a>          
+            </td>
+            <td>Dury = Durie, Allsop != Allsob, Smith != Schmidt</td>
+        </tr>
+        <tr>
+            <td>NYSIIS</td>
+            <td>matcher</td>
+            <td>
+              <a href="https://commons.apache.org/proper/commons-codec/apidocs/org/apache/commons/codec/language/Nysiis.html">Apache Nysiis</a>          
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>REFINED_SOUNDEX</td>
+            <td>matcher</td>
+            <td>
+              <a href="https://commons.apache.org/proper/commons-codec/apidocs/org/apache/commons/codec/language/RefinedSoundex.html">Apache Refined Soundex</a>          
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>SOUNDEX</td>
+            <td>matcher</td>
+            <td>
+              <a href="https://commons.apache.org/proper/commons-codec/apidocs/org/apache/commons/codec/language/Soundex.html">Apache Soundex</a>          
+            </td>
+            <td>Jon = John, Thomas != Tom</td>
+        </tr>
+        <tr>
+            <td>STRING</td>
+            <td>matcher</td>
+            <td>
+               Match the values as strings.  This matcher should be used with tokens (e.g. gender).
+            </td>
+            <td>MCTAVISH = McTavish when exact = false, MCTAVISH != McTavish when exact = true</td>
+        </tr>
+        <tr>
+            <td>SUBSTRING</td>
+            <td>matcher</td>
+            <td>
+               True if one string starts with the other.
+            </td>
+            <td>Bill = Billy, Egbert = Bert</td>
+        </tr>    
+        <tr>
+            <td>DATE</td>
+            <td>matcher</td>
+            <td>
+               Reduce the precision of the dates to the lowest precision of the two, then compare them as strings.
+            </td>
+            <td>2019-12,Month = 2019-12-19,Day</td>
+        </tr>
+        <tr>
+            <td>NUMERIC</td>
+            <td>matcher</td>
+            <td>
+               Remove all non-numeric characters from the string before comparing.
+            </td>
+            <td>4169671111 = (416) 967-1111</td>
+        </tr>
+        <tr>
+            <td>NAME_ANY_ORDER</td>
+            <td>matcher</td>
+            <td>
+               Match names as strings in any order
+            </td>
+            <td>John Henry = Henry JOHN when exact = false</td>
+        </tr>        
+        <tr>
+            <td>NAME_FIRST_AND_LAST</td>
+            <td>matcher</td>
+            <td>
+               Match names as strings in any order
+            </td>
+            <td>John Henry = John HENRY when exact=false, John Henry != Henry John</td>
+        </tr>     
+				<tr>
+            <td>IDENTIFIER</td>
+            <td>matcher</td>
+            <td>
+               Matches when the system and value of the identifier are identical.
+            </td>
+            <td>If an optional "identifierSystem" is provided, then the identifiers only match when they belong to that system</td>
+        </tr>     
+        <tr>
+            <td>EXTENSION_ANY_ORDER</td>
+            <td>matcher</td>
+            <td>
+               Matches extensions of resources in any order. Matches are made if both resources share at least one extensions that have the same URL and value.
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>EMPTY_FIELD</td>
+            <td>matcher</td>
+            <td>
+               Matches an empty field.
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>JARO_WINKLER</td>
+            <td>similarity</td>
+            <td>
+              <a href="https://github.com/tdebatty/java-string-similarity#jaro-winkler">tdebatty Jaro Winkler</a>          
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>COSINE</td>
+            <td>similarity</td>
+            <td>
+              <a href="https://github.com/tdebatty/java-string-similarity#cosine-similarity">tdebatty Cosine Similarity</a>          
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>JACCARD</td>
+            <td>similarity</td>
+            <td>
+              <a href="https://github.com/tdebatty/java-string-similarity#jaccard-index">tdebatty Jaccard Index</a>          
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>LEVENSCHTEIN</td>
+            <td>similarity</td>
+            <td>
+              <a href="https://github.com/tdebatty/java-string-similarity#normalized-levenshtein">tdebatty Normalized Levenshtein</a>          
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>SORENSEN_DICE</td>
+            <td>similarity</td>
+            <td>
+              <a href="https://github.com/tdebatty/java-string-similarity#sorensen-dice-coefficient">tdebatty Sorensen-Dice coefficient</a>          
+            </td>
+            <td></td>
+        </tr>
+     </tbody>
+</table>
+<h3>matchResultMap</h3>
+<p>These entries convert combinations of successful matchFields into an MDM Match Result for overall matching of a given pair of resources.  MATCH results are evaluated take precedence over POSSIBLE_MATCH results.  If the incoming resource matches ALL of the named matchFields listed, then a new match link is created with the assigned matchResult (<code>MATCH</code> or <code>POSSIBLE_MATCH</code>).</p>
+<pre><code class="language-json">{
+	&quot;matchResultMap&quot;: {
+		&quot;firstname-meta,lastname-meta,birthday&quot;: &quot;MATCH&quot;,
+		&quot;firstname-jaro,lastname-jaro,birthday&quot;: &quot;POSSIBLE_MATCH&quot;
+	}
+}
+</code></pre>
+<h3>eidSystem</h3>
+<p>The external EID system that the HAPI MDM system should expect to see on incoming Patient resources. Must be a valid URI.  See <a href="mdm_eid.html">MDM EID</a> for details on how EIDs are managed by HAPI MDM.</p>
+</section>
+
+
+				</div>
+
+				<div class="hide-sm-and-below"><div class="marg-btm-20 docs-inpage-nav-container">
+	<div class="docs-inpage-nav-row">
+		<span class="docs-inpage-nav-cell">
+			<a href="mdm.html" class="btn docs-inpage-nav-link">
+				<i class="fa fa-arrow-left"></i>
+				&nbsp;&nbsp;
+				7.0
+				&nbsp;&nbsp;
+				MDM Getting Started
+			</a>
+		</span>
+		<span class="docs-inpage-nav-cell">
+
+			<div class="dropdown">
+			  <button class="btn btn-outline-info dropdown-toggle" role="button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+				  7.1
+				  &nbsp;&nbsp;
+				  MDM Rules
+			  </button>
+			  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				  <li class="dropdown-header" style="text-align: center;">
+					  JPA Server: MDM
+				  </li>
+				  <li role="separator" class="divider"></li>
+				  
+					  <li>
+						  <a href="mdm.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  7.0
+							  </span>
+							  MDM Getting Started
+						  </a>
+					  </li>
+				  
+					  <li style="background-color: #F0F0F0;">
+						  <a href="mdm_rules.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  7.1
+							  </span>
+							  MDM Rules
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="mdm_eid.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  7.2
+							  </span>
+							  MDM Enterprise Identifiers
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="mdm_operations.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  7.3
+							  </span>
+							  MDM Operations
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="mdm_details.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  7.4
+							  </span>
+							  MDM Technical Details
+						  </a>
+					  </li>
+				  
+					  <li>
+						  <a href="mdm_expansion.html" class="dropdown-item">
+							  <span style="width: 30px; display: inline-block;">
+								  7.5
+							  </span>
+							  MDM Search Expansion
+						  </a>
+					  </li>
+				  
+			  </div>
+			</div>
+		</span>
+		<span class="docs-inpage-nav-cell">
+			<a href="mdm_eid.html" class="btn docs-inpage-nav-link">
+				7.2
+				&nbsp;&nbsp;
+				MDM Enterprise Identifiers
+				&nbsp;&nbsp;
+				<i class="fa fa-arrow-right"></i>
+			</a>
+		</span>
+	</div>
+</div>
+</div>
+				
+
+	<!-- footer -->
+	<footer class="page-footer">
+		<div class="container-fluid text-center text-md-left">
+			<hr class="bottom-hr">
+			<div class="row pt-3 pb-3">
+				<div class="col-md-3 text-center">
+					<img src="../../images/logos/raccoon-forwards.png" alt="raccoon logo without text" width="100">
+				</div>
+				<div class="col-md-2">
+					<p class="footer-heading">HAPI HAPI</p>
+					<ul class="list-unstyled">
+						<li><a href="https://hapifhir.io/hapi-fhir/">Home</a></li>
+						<li><a href="../getting_started/downloading_and_importing.html">Download</a></li>
+						<li><a href="../introduction/changelog.html">Changelog</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/license.html">License</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/blog/">News</a></li>
+					</ul>
+					<p class="footer-heading">TEST SERVER</p>
+					<ul class="list-unstyled">
+						<li><a href="http://hapi.fhir.org/" target="_blank">Public Test Server</a></li>
+					</ul>
+					<p class="footer-heading">SUPPORT</p>
+					<ul class="list-unstyled">
+						<li><a href="https://smilecdr.com/" target="_blank">Smile CDR</a></li>
+					</ul>
+				</div>
+				<div class="col-md-2">
+					<p class="footer-heading">USING HAPI</p>
+					<ul class="list-unstyled">
+						<li><a href="../index.html">Documentation</a></li>
+						<li><a href="#">Command Line Tool (cli)</a></li>
+					</ul>
+					<p class="footer-heading">STARTER PROJECTS</p>
+					<ul class="list-unstyled">
+						<li><a href="https://github.com/FirelyTeam/fhirstarters/tree/master/java/hapi-fhirstarters-client-skeleton">Client</a></li>
+						<li><a href="https://github.com/FirelyTeam/fhirstarters/tree/master/java/hapi-fhirstarters-rest-server-skeleton">Plain Server</a></li>
+						<li><a href="https://github.com/hapifhir/hapi-fhir-jpaserver-starter">JPA Server</a></li>
+					</ul>
+				</div>
+				<div class="col-md-2">
+					<p class="footer-heading">JAVADOCS</p>
+					<ul class="list-unstyled">
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/">Core API</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-structures-dstu2/">Model API (DSTU2)</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-structures-dstu3/">Model API (DSTU3)</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-structures-r4/">Model API (R4)</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-structures-r5/">Model API (R5)</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-client/">Client API</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-server/">Plain Server - API</a></li>
+                  <li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-server-mdm/">Plain Server - MDM API</a></li>
+                  <li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-server-openapi/">Plain Server - OpenAPI</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-storage/">JPA Server - API</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-jpaserver-model/">JPA Server - Model</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-jpaserver-searchparam/">JPA Server - Search Param Support</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-jpaserver-subscription/">JPA Server - Subscription</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-jpaserver-base/">JPA Server - Base</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-validation/">Validation API</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-converter/">Version Converter API</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-jaxrsserver-base/">Server API (JAX-RS)</a></li>
+					</ul>
+				</div>
+				<div class="col-md-3">
+					<p class="footer-heading">GET HELP</p>
+					<ul class="list-unstyled">
+						<li><a href="https://github.com/jamesagnew/hapi-fhir/wiki/Getting-Help" target="_blank">How to Ask for Help (read this first!)</a></li>
+						<li><a href="https://groups.google.com/d/forum/hapi-fhir" target="_blank">Google Group (Ask Questions)</a></li>
+						<li><a href="https://github.com/jamesagnew/hapi-fhir/issues" target="_blank">Issue Tracker (Report Bugs/Request Features)</a></li>
+						<li><a href="https://chat.fhir.org/" target="_blank">FHIR.org Chat (Live Chat with FHIR Implementors)</a></li>
+						<li><a href="../appendix/faq.html">Frequently Asked Questions (FAQ)</a></li>
+					</ul>
+					<p class="footer-heading">CONTRIBUTE</p>
+					<ul class="list-unstyled">
+						<li><a href="../contributing/hacking_guide.html">Guide to Hacking HAPI</a></li>
+						<li><a href="https://hapifhir.io/hapi-fhir/contributors.html">Contributors</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<!-- footer copyright -->
+		<div class="footer-copyright text-center py-3">
+			<p>Updated: 2021-11-23T14:49:28.319Z — Made with <i style="color: #FF6600;" class="fas fa-heart"></i> in <a href="https://www.cbc.ca/news/canada/toronto/raccoon-city-wildlife-in-toronto-1.2742231"><img src="https://hapifhir.io/hapi-fhir/images/icons/raccoon.svg" alt="Raccoon" width="20"></a>
+		</div>
+
+	</footer>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-1395874-5"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-1395874-5');
+	</script>
+
+
+			</div>
+
+		</div>
+
+	</div>
+
+
+<script type="application/javascript">
+
+	$(function () {
+
+		/*
+		 * Build the TOC links on the right hand side by
+		 * scanning all of the sections in the documentation
+		 */
+		const sections = [];
+		const navLinks = [];
+		var nav = $('<ul class="nav flex-column">');
+		$('#toc').append(nav);
+
+		$('#tocscroll section').each(function () {
+			sections.push($(this));
+			let sectionName = $(this).find('h1').first().attr('data-toc-text');
+			let sectionId = $(this).prevAll('a').attr('name');
+			let navLink = $('<a class="nav-link" href="#' + sectionId + '">' + sectionName + '</a>');
+			navLinks.push(navLink);
+			nav.append($('<li class="nav-item">').append(navLink));
+		});
+
+		/*
+		 * Update the active link on the right hand side TOC when the
+		 * user scrolls up and down the page. Create a function for this,
+		 * then call the function once and register it to call again
+		 * any time the user scrolls
+		 */
+		function updateTocScroll() {
+			const sectionOffset = $('#tocscroll').offset().top;
+			let visible = false;
+			for (var idx = 0; idx < sections.length; idx++) {
+				var sectionTop = sections[idx].offset().top - sectionOffset + 20;
+				if (sectionTop >= 0 && !visible || (idx == sections.length -1 && !visible)) {
+					navLinks[idx].addClass('active');
+					visible = true;
+				} else {
+					navLinks[idx].removeClass('active');
+				}
+			}
+
+		}
+
+		$('#tocscroll').scroll(updateTocScroll);
+		updateTocScroll();
+
+		/*
+	    * When the page first loads, automatically scroll the left docs TOC
+	    * scroller to the actively displayed page.
+	    */
+		var activetop = $('.activechapter').offset().top - $('#tocscroll').offset().top - 30;
+		if (activetop < 100) {
+			activetop = 0;
+		}
+		$('#navcolumn').scrollTop(activetop);
+
+		function updateNavScroll() {
+			if ($('#navcolumn').scrollTop() < 100) {
+				$('.button-scroll-up-to-search').fadeOut(500);
+			} else {
+				$('.button-scroll-up-to-search').fadeIn(500);
+			}
+		}
+
+		updateNavScroll();
+		$('#navcolumn').scroll(updateNavScroll);
+
+	});
+</script>
+
+
+
+<script type="application/javascript">
+	function hover(element) {
+		element.setAttribute('src', '../../../images/icons/link-grey.html');
+	}
+
+	function unhover(element) {
+		element.setAttribute('src', '../../../images/icons/smiley-grey.html');
+	}
+
+   new ClipboardJS('.clipboardCopyBtn');
+
+</script>
+</body>
+
+
+<!-- Mirrored from hapifhir.io/hapi-fhir/docs/server_jpa_mdm/mdm_rules.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 02 Dec 2021 00:00:34 GMT -->
+</html>
+
